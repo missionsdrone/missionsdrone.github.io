@@ -1,431 +1,769 @@
 {
 "updated": "2026-11-19",
-"note": "Adresses publiées par les préfectures pour les déclarations de vol drone. À vérifier avant envoi.",
+"note": "Sources : liste DGAC « Aéronefs télépilotés : contacts dans les préfectures » (25/04/2025), sites des préfectures, retours d'utilisateurs. À vérifier avant envoi.",
 "departements": {
 "01": {
 "prefecture": "Ain",
-"site": "https://www.ain.gouv.fr/"
+"site": "https://www.ain.gouv.fr/",
+"email": "pref-manifestations-aeriennes@ain.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "02": {
 "prefecture": "Aisne",
-"site": "https://www.aisne.gouv.fr/"
+"site": "https://www.aisne.gouv.fr/",
+"email": "pref-bureau-reglementation@aisne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "03": {
 "prefecture": "Allier",
-"site": "https://www.allier.gouv.fr/"
+"site": "https://www.allier.gouv.fr/",
+"email": "pref-declaration-drones@allier.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "04": {
 "prefecture": "Alpes-de-Haute-Provence",
-"site": "https://www.alpes-de-haute-provence.gouv.fr/"
+"site": "https://www.alpes-de-haute-provence.gouv.fr/",
+"email": "pref-declaration-drones@alpes-de-haute-provence.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "05": {
 "prefecture": "Hautes-Alpes",
-"site": "https://www.hautes-alpes.gouv.fr/"
+"site": "https://www.hautes-alpes.gouv.fr/",
+"email": "pref-declaration-drones@hautes-alpes.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "06": {
 "prefecture": "Alpes-Maritimes",
 "site": "https://www.alpes-maritimes.gouv.fr/",
 "email": "pref-aeronautique@alpes-maritimes.gouv.fr",
-"source": "https://www.alpes-maritimes.gouv.fr/Demarches/Autres-demarches/Legislation-aerienne/Drones"
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "07": {
 "prefecture": "Ardèche",
-"site": "https://www.ardeche.gouv.fr/"
+"site": "https://www.ardeche.gouv.fr/",
+"email": "pref-elections@ardeche.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "08": {
 "prefecture": "Ardennes",
-"site": "https://www.ardennes.gouv.fr/"
+"site": "https://www.ardennes.gouv.fr/",
+"email": "pref-drones@ardennes.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "09": {
 "prefecture": "Ariège",
-"site": "https://www.ariege.gouv.fr/"
+"site": "https://www.ariege.gouv.fr/",
+"email": "pref-drones@ariege.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "10": {
 "prefecture": "Aube",
-"site": "https://www.aube.gouv.fr/"
+"site": "https://www.aube.gouv.fr/",
+"email": "pref-declaration-drones@aube.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "11": {
 "prefecture": "Aude",
-"site": "https://www.aude.gouv.fr/"
+"site": "https://www.aude.gouv.fr/",
+"email": "pref-drones@aude.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "12": {
 "prefecture": "Aveyron",
-"site": "https://www.aveyron.gouv.fr/"
+"site": "https://www.aveyron.gouv.fr/",
+"email": "pref-declaration-drones@aveyron.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "13": {
 "prefecture": "Bouches-du-Rhône",
-"site": "https://www.bouches-du-rhone.gouv.fr/"
+"site": "https://www.bouches-du-rhone.gouv.fr/",
+"email": "pref-autorisations-aeriennes@bouches-du-rhone.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "14": {
 "prefecture": "Calvados",
-"site": "https://www.calvados.gouv.fr/"
+"site": "https://www.calvados.gouv.fr/",
+"email": "pref-drones@calvados.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "15": {
 "prefecture": "Cantal",
-"site": "https://www.cantal.gouv.fr/"
+"site": "https://www.cantal.gouv.fr/",
+"email": "pref-declaration-drones@cantal.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "16": {
 "prefecture": "Charente",
-"site": "https://www.charente.gouv.fr/"
+"site": "https://www.charente.gouv.fr/",
+"email": "pref-reglementation@charente.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "17": {
 "prefecture": "Charente-Maritime",
-"site": "https://www.charente-maritime.gouv.fr/"
+"site": "https://www.charente-maritime.gouv.fr/",
+"email": "pref-manifestations-aeriennes@charente-maritime.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "18": {
 "prefecture": "Cher",
-"site": "https://www.cher.gouv.fr/"
+"site": "https://www.cher.gouv.fr/",
+"email": "pref-drones@cher.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "19": {
 "prefecture": "Corrèze",
-"site": "https://www.correze.gouv.fr/"
+"site": "https://www.correze.gouv.fr/",
+"email": "pref-declaration-drones@correze.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "21": {
 "prefecture": "Côte-d'Or",
-"site": "https://www.cote-dor.gouv.fr/"
+"site": "https://www.cote-dor.gouv.fr/",
+"email": "pref-drone@cote-dor.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "22": {
 "prefecture": "Côtes-d'Armor",
-"site": "https://www.cotes-darmor.gouv.fr"
+"site": "https://www.cotes-darmor.gouv.fr",
+"email": "pref-policedelair@cotes-darmor.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "23": {
 "prefecture": "Creuse",
-"site": "https://www.creuse.gouv.fr/"
+"site": "https://www.creuse.gouv.fr/",
+"email": "pref-travail-aerien@creuse.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "24": {
 "prefecture": "Dordogne",
-"site": "https://www.dordogne.gouv.fr/"
+"site": "https://www.dordogne.gouv.fr/",
+"email": "pref-aeronautique@dordogne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "25": {
 "prefecture": "Doubs",
-"site": "https://www.doubs.gouv.fr/"
+"site": "https://www.doubs.gouv.fr/",
+"email": "pref-polices-administratives@doubs.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "26": {
 "prefecture": "Drôme",
-"site": "https://www.drome.gouv.fr/"
+"site": "https://www.drome.gouv.fr/",
+"email": "pref-declaration-drones@drome.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "27": {
 "prefecture": "Eure",
-"site": "https://www.eure.gouv.fr/"
+"site": "https://www.eure.gouv.fr/",
+"email": "pref-aerien@eure.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "28": {
 "prefecture": "Eure-et-Loir",
-"site": "https://www.eure-et-loir.gouv.fr/"
+"site": "https://www.eure-et-loir.gouv.fr/",
+"email": "pref-manifestations-aeriennes@eure-et-loir.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "29": {
 "prefecture": "Finistère",
-"site": "https://www.finistere.gouv.fr/"
+"site": "https://www.finistere.gouv.fr/",
+"email": "sp-brest-activites-aeriennes@finistere.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "30": {
 "prefecture": "Gard",
 "site": "https://www.gard.gouv.fr/",
 "email": "pref-declaration-drones@gard.gouv.fr",
-"source": "https://www.gard.gouv.fr/Demarches/Activites-aeriennes/Aeronefs-sans-equipage-a-bord-drones"
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "31": {
 "prefecture": "Haute-Garonne",
-"site": "https://www.haute-garonne.gouv.fr/"
+"site": "https://www.haute-garonne.gouv.fr/",
+"email": "pref-declaration-drones@haute-garonne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "32": {
 "prefecture": "Gers",
-"site": "https://www.gers.gouv.fr/"
+"site": "https://www.gers.gouv.fr/",
+"email": "pref-drones@gers.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "33": {
 "prefecture": "Gironde",
 "site": "https://www.gironde.gouv.fr/",
-"email": "pref-declaration-drones@gironde.gouv.fr",
-"source": "https://www.gironde.gouv.fr/Demarches/Activite-aerienne-Drone"
+"email": "sp-arcachon@gironde.gouv.fr",
+"source": "https://www.gironde.gouv.fr/Services-de-l-Etat/Prefecture-et-sous-prefectures/Les-sous-prefectures/Sous-prefectures",
+"sourceLabel": "Sous-préfecture d'Arcachon – contact de la Gironde pour les activités aériennes (liste DGAC janvier 2026), confirmé par un utilisateur",
+"alt": "pref-declaration-drones@gironde.gouv.fr",
+"service": "Sous-préfecture d'Arcachon (activités aériennes de la Gironde)"
 },
 "34": {
 "prefecture": "Hérault",
 "site": "https://www.herault.gouv.fr",
-"email": "prefdrones@herault.gouv.fr",
-"source": "https://www.herault.gouv.fr/content/download/18796/142150/file/D%C3%A9claration%20en%20pr%C3%A9fecture.pdf"
+"email": "pref-drones@herault.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"alt": "prefdrones@herault.gouv.fr",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "35": {
 "prefecture": "Ille-et-Vilaine",
-"site": "https://www.ille-et-vilaine.gouv.fr"
+"site": "https://www.ille-et-vilaine.gouv.fr",
+"email": "pref-drones@ille-et-vilaine.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "36": {
 "prefecture": "Indre",
-"site": "https://www.indre.gouv.fr/"
+"site": "https://www.indre.gouv.fr/",
+"email": "pref-defense-protection-civile@indre.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "37": {
 "prefecture": "Indre-et-Loire",
-"site": "https://www.indre-et-loire.gouv.fr/"
+"site": "https://www.indre-et-loire.gouv.fr/",
+"email": "pref-drones@indre-et-loire.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "38": {
 "prefecture": "Isère",
 "site": "https://www.isere.gouv.fr",
 "email": "pref-declaration-drones@isere.gouv.fr",
-"source": "https://www.isere.gouv.fr/Demarches/Activites-aeriennes/Drones-aeronefs-sans-equipage-a-bord"
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "39": {
 "prefecture": "Jura",
-"site": "https://www.jura.gouv.fr/"
+"site": "https://www.jura.gouv.fr/",
+"email": "pref-declaration-drones@jura.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "40": {
 "prefecture": "Landes",
-"site": "https://www.landes.gouv.fr/"
+"site": "https://www.landes.gouv.fr/",
+"email": "pref-drones@landes.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "41": {
 "prefecture": "Loir-et-Cher",
-"site": "https://www.loir-et-cher.gouv.fr/"
+"site": "https://www.loir-et-cher.gouv.fr/",
+"email": "pref-bpas@loir-et-cher.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "42": {
 "prefecture": "Loire",
-"site": "https://www.loire.gouv.fr/"
+"site": "https://www.loire.gouv.fr/",
+"email": "pref-declaration-drones@loire.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "43": {
 "prefecture": "Haute-Loire",
-"site": "https://www.haute-loire.gouv.fr/"
+"site": "https://www.haute-loire.gouv.fr/",
+"email": "pref-drones@haute-loire.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "44": {
 "prefecture": "Loire-Atlantique",
-"site": "https://www.loire-atlantique.gouv.fr/"
+"site": "https://www.loire-atlantique.gouv.fr/",
+"email": "pref-drones@loire-atlantique.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "45": {
 "prefecture": "Loiret",
-"site": "https://www.loiret.gouv.fr/"
+"site": "https://www.loiret.gouv.fr/",
+"email": "pref-manif-aerienne@loiret.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "46": {
 "prefecture": "Lot",
-"site": "https://www.lot.gouv.fr/"
+"site": "https://www.lot.gouv.fr/",
+"email": "pref-drones@lot.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "47": {
 "prefecture": "Lot-et-Garonne",
-"site": "https://www.lot-et-garonne.gouv.fr/"
+"site": "https://www.lot-et-garonne.gouv.fr/",
+"email": "pref-domaineaerien@lot-et-garonne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "48": {
 "prefecture": "Lozère",
-"site": "https://www.lozere.gouv.fr/"
+"site": "https://www.lozere.gouv.fr/",
+"email": "pref-declaration-drones@lozere.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "49": {
 "prefecture": "Maine-et-Loire",
 "site": "https://www.maine-et-loire.gouv.fr/",
 "email": "pref-drones@maine-et-loire.gouv.fr",
-"source": "https://www.maine-et-loire.gouv.fr/Demarches/Professions-reglementees/Survol-par-drones"
+"source": "https://www.maine-et-loire.gouv.fr/Demarches/Professions-reglementees/Survol-par-drones",
+"alt": "pref-ide-reglementation-generale@maine-et-loire.gouv.fr",
+"sourceLabel": "Site de la préfecture (consulté en novembre 2026)"
 },
 "50": {
 "prefecture": "Manche",
-"site": "https://www.manche.gouv.fr/"
+"site": "https://www.manche.gouv.fr/",
+"email": "pref-manifestations-aeriennes@manche.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "51": {
 "prefecture": "Marne",
-"site": "https://www.marne.gouv.fr/"
+"site": "https://www.marne.gouv.fr/",
+"email": "pref-drones@marne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "52": {
 "prefecture": "Haute-Marne",
-"site": "https://www.haute-marne.gouv.fr/"
+"site": "https://www.haute-marne.gouv.fr/",
+"email": "pref-declaration-drones@haute-marne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "53": {
 "prefecture": "Mayenne",
-"site": "https://www.mayenne.gouv.fr/"
+"site": "https://www.mayenne.gouv.fr/",
+"email": "pref-reglementation-generale@mayenne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "54": {
 "prefecture": "Meurthe-et-Moselle",
-"site": "https://www.meurthe-et-moselle.gouv.fr/"
+"site": "https://www.meurthe-et-moselle.gouv.fr/",
+"email": "pref-declaration-drones@meurthe-et-moselle.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "55": {
 "prefecture": "Meuse",
-"site": "https://www.meuse.gouv.fr/"
+"site": "https://www.meuse.gouv.fr/",
+"email": "pref-polices-administratives@meuse.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "56": {
 "prefecture": "Morbihan",
-"site": "https://www.morbihan.gouv.fr/"
+"site": "https://www.morbihan.gouv.fr/",
+"email": "pref-brvc@morbihan.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "57": {
 "prefecture": "Moselle",
-"site": "https://www.moselle.gouv.fr/"
+"site": "https://www.moselle.gouv.fr/",
+"email": "pref-manifestations-aeriennes@moselle.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "58": {
 "prefecture": "Nièvre",
-"site": "https://www.nievre.gouv.fr/"
+"site": "https://www.nievre.gouv.fr/",
+"email": "pref-manifestations-sportives@nievre.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "59": {
 "prefecture": "Nord",
-"site": "https://www.nord.gouv.fr/"
+"site": "https://www.nord.gouv.fr/",
+"email": "pref-drones@nord.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "60": {
 "prefecture": "Oise",
-"site": "https://www.oise.gouv.fr/"
+"site": "https://www.oise.gouv.fr/",
+"email": "pref-reglementation@oise.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "61": {
 "prefecture": "Orne",
-"site": "https://www.orne.gouv.fr/"
+"site": "https://www.orne.gouv.fr/",
+"email": "ddt-aviation-civile@orne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "62": {
 "prefecture": "Pas-de-Calais",
-"site": "https://www.pas-de-calais.gouv.fr/"
+"site": "https://www.pas-de-calais.gouv.fr/",
+"email": "pref-drones@pas-de-calais.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "63": {
 "prefecture": "Puy-de-Dôme",
-"site": "https://www.puy-de-dome.gouv.fr/"
+"site": "https://www.puy-de-dome.gouv.fr/",
+"email": "pref-manif-sport-63@puy-de-dome.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "64": {
 "prefecture": "Pyrénées-Atlantiques",
-"site": "https://www.pyrenees-atlantiques.gouv.fr/"
+"site": "https://www.pyrenees-atlantiques.gouv.fr/",
+"email": "pref-declaration-drones@pyrenees-atlantiques.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "65": {
 "prefecture": "Hautes-Pyrénées",
-"site": "https://www.hautes-pyrenees.gouv.fr/"
+"site": "https://www.hautes-pyrenees.gouv.fr/",
+"email": "pref-drones@hautes-pyrenees.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "66": {
 "prefecture": "Pyrénées-Orientales",
-"site": "https://www.pyrenees-orientales.gouv.fr/"
+"site": "https://www.pyrenees-orientales.gouv.fr/",
+"email": "pref-declaration-drones@pyrenees-orientales.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "67": {
 "prefecture": "Bas-Rhin",
-"site": "https://www.bas-rhin.gouv.fr/"
+"site": "https://www.bas-rhin.gouv.fr/",
+"email": "pref-drones@bas-rhin.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "68": {
 "prefecture": "Haut-Rhin",
 "site": "https://www.haut-rhin.gouv.fr/",
 "email": "pref-declaration-drone@haut-rhin.gouv.fr",
-"source": "https://www.haut-rhin.gouv.fr/Demarches/Autres-demarches/Drones"
+"source": "https://www.haut-rhin.gouv.fr/Demarches/Autres-demarches/Drones",
+"alt": "pref-declaration-drones@haut-rhin.gouv.fr",
+"sourceLabel": "Site de la préfecture (consulté en novembre 2026)"
 },
 "69": {
 "prefecture": "Rhône",
-"site": "https://www.rhone.gouv.fr/"
+"site": "https://www.rhone.gouv.fr/",
+"email": "pref-manifestationsportive@rhone.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "70": {
 "prefecture": "Haute-Saône",
 "site": "https://www.haute-saone.gouv.fr/",
 "email": "pref-declaration-drones@haute-saone.gouv.fr",
-"source": "https://www.haute-saone.gouv.fr/index.php/Demarches/Domaine-aerien/Drones-aeronefs-telepilotes/Drones-aeronefs-telepilotes"
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "71": {
 "prefecture": "Saône-et-Loire",
-"site": "https://www.saone-et-loire.gouv.fr/"
+"site": "https://www.saone-et-loire.gouv.fr/",
+"email": "pref-defense-protection-civile@saone-et-loire.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "72": {
 "prefecture": "Sarthe",
-"site": "https://www.sarthe.gouv.fr/"
+"site": "https://www.sarthe.gouv.fr/",
+"email": "pref-epreuves-sportives@sarthe.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "73": {
 "prefecture": "Savoie",
-"site": "https://www.savoie.gouv.fr/"
+"site": "https://www.savoie.gouv.fr/",
+"email": "pref-drone@savoie.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "74": {
 "prefecture": "Haute-Savoie",
-"site": "https://www.haute-savoie.gouv.fr/"
+"site": "https://www.haute-savoie.gouv.fr/",
+"email": "pref-declaration-drones@haute-savoie.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "75": {
 "prefecture": "Préfecture de police (Paris)",
 "site": "https://demarche.numerique.gouv.fr/commencer/survol-drone-paris",
-"online": true
+"online": true,
+"email": "pp-cabinet-sdc-bvp-circul@interieur.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)",
+"service": "Préfecture de police – bureau de la voie publique"
 },
 "76": {
 "prefecture": "Seine-Maritime",
-"site": "https://www.seine-maritime.gouv.fr/"
+"site": "https://www.seine-maritime.gouv.fr/",
+"email": "pref-rouen-aerien@seine-maritime.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "77": {
 "prefecture": "Seine-et-Marne",
-"site": "https://www.seine-et-marne.gouv.fr/"
+"site": "https://www.seine-et-marne.gouv.fr/",
+"email": "pref-drones@seine-et-marne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "78": {
 "prefecture": "Yvelines",
-"site": "https://www.yvelines.gouv.fr/"
+"site": "https://www.yvelines.gouv.fr/",
+"email": "pref-police-aerienne@yvelines.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "79": {
 "prefecture": "Deux-Sèvres",
-"site": "https://www.deux-sevres.gouv.fr/"
+"site": "https://www.deux-sevres.gouv.fr/",
+"email": "pref-manifestations-aeriennes@deux-sevres.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "80": {
 "prefecture": "Somme",
-"site": "https://www.somme.gouv.fr/"
+"site": "https://www.somme.gouv.fr/",
+"email": "pref-declaration-drones@somme.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "81": {
 "prefecture": "Tarn",
-"site": "https://www.tarn.gouv.fr/"
+"site": "https://www.tarn.gouv.fr/",
+"email": "pref-epreuves-sportives@tarn.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "82": {
 "prefecture": "Tarn-et-Garonne",
-"site": "https://www.tarn-et-garonne.gouv.fr/"
+"site": "https://www.tarn-et-garonne.gouv.fr/",
+"email": "pref-declaration-drones@tarn-et-garonne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "83": {
 "prefecture": "Var",
-"site": "https://www.var.gouv.fr"
+"site": "https://www.var.gouv.fr",
+"email": "pref-aeronautique@var.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "84": {
 "prefecture": "Vaucluse",
-"site": "https://www.vaucluse.gouv.fr/"
+"site": "https://www.vaucluse.gouv.fr/",
+"email": "pref-declaration-drones@vaucluse.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "85": {
 "prefecture": "Vendée",
-"site": "https://www.vendee.gouv.fr/"
+"site": "https://www.vendee.gouv.fr/",
+"email": "emmanuel.poisblaud@vendee.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "86": {
 "prefecture": "Vienne",
-"site": "https://www.vienne.gouv.fr"
+"site": "https://www.vienne.gouv.fr",
+"email": "pref-aerien@vienne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "87": {
 "prefecture": "Haute-Vienne",
-"site": "https://www.haute-vienne.gouv.fr/"
+"site": "https://www.haute-vienne.gouv.fr/",
+"email": "pref-aerien@haute-vienne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "88": {
 "prefecture": "Vosges",
-"site": "https://www.vosges.gouv.fr/"
+"site": "https://www.vosges.gouv.fr/",
+"email": "pref-drones@vosges.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "89": {
 "prefecture": "Yonne",
-"site": "https://www.yonne.gouv.fr/"
+"site": "https://www.yonne.gouv.fr/",
+"email": "pref-pole-securite-publique@yonne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "90": {
 "prefecture": "Territoire de Belfort",
-"site": "https://www.territoire-de-belfort.gouv.fr/"
+"site": "https://www.territoire-de-belfort.gouv.fr/",
+"email": "pref-declaration-drones@territoire-de-belfort.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "91": {
 "prefecture": "Essonne",
-"site": "https://www.essonne.gouv.fr/"
+"site": "https://www.essonne.gouv.fr/",
+"email": "pref-reglementation-etampes@essonne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "92": {
 "prefecture": "Hauts-de-Seine",
 "site": "https://www.hauts-de-seine.gouv.fr/",
 "email": "pref-survol@hauts-de-seine.gouv.fr",
-"source": "https://www.hauts-de-seine.gouv.fr/Demarches/Activites-reglementees-police-administrative-et-manifestations/Activites-aeriennes/Drones"
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "93": {
 "prefecture": "Seine-Saint-Denis",
-"site": "https://www.seine-saint-denis.gouv.fr/"
+"site": "https://www.seine-saint-denis.gouv.fr/",
+"email": "pref-manifvp-aerien@seine-saint-denis.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "94": {
 "prefecture": "Val-de-Marne",
-"site": "https://www.val-de-marne.gouv.fr/"
+"site": "https://www.val-de-marne.gouv.fr/",
+"email": "pref-police-administrative@val-de-marne.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "95": {
 "prefecture": "Val-d'Oise",
-"site": "https://www.val-doise.gouv.fr"
+"site": "https://www.val-doise.gouv.fr",
+"email": "pref-police-aerienne@val-doise.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "2A": {
 "prefecture": "Corse-du-Sud",
 "site": "https://www.corse-du-sud.gouv.fr/",
 "email": "pref-demande-survol@corse-du-sud.gouv.fr",
-"source": "https://www.corse-du-sud.gouv.fr/index.php/Demarches/Autres-demarches/Demandes-de-survol-par-drone/Demarches-prealables-au-vol-d-un-aeronef-telepilote-drone"
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "2B": {
 "prefecture": "Haute-Corse",
-"site": "https://www.haute-corse.gouv.fr/"
+"site": "https://www.haute-corse.gouv.fr/",
+"email": "pref-declaration-drones@haute-corse.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "971": {
 "prefecture": "Guadeloupe",
-"site": "https://www.guadeloupe.gouv.fr/"
+"site": "https://www.guadeloupe.gouv.fr/",
+"email": "police-administrative@guadeloupe.pref.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "972": {
 "prefecture": "Martinique",
-"site": "https://www.martinique.gouv.fr/"
+"site": "https://www.martinique.gouv.fr/",
+"email": "reglementation@martinique.pref.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "973": {
 "prefecture": "Guyane",
-"site": "https://www.guyane.gouv.fr/"
+"site": "https://www.guyane.gouv.fr/",
+"email": "emzd@guyane.pref.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "974": {
 "prefecture": "La Réunion",
-"site": "https://www.reunion.gouv.fr/"
+"site": "https://www.reunion.gouv.fr/",
+"email": "drones@reunion.pref.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 },
 "976": {
 "prefecture": "Mayotte",
-"site": "https://www.mayotte.gouv.fr/"
+"site": "https://www.mayotte.gouv.fr/",
+"email": "defense-protection-civile@mayotte.pref.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
+},
+"975": {
+"prefecture": "Saint-Pierre-et-Miquelon",
+"site": "",
+"email": "cabinet@spm975.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
+},
+"977": {
+"prefecture": "Saint-Barthélémy",
+"site": "",
+"email": "reglementation@saint-barth-saint-martin.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
+},
+"978": {
+"prefecture": "Saint-Martin",
+"site": "",
+"email": "reglementation@saint-barth-saint-martin.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
+},
+"986": {
+"prefecture": "Wallis et Futuna",
+"site": "",
+"email": "webmestre@wallis-et-futuna.pref.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
+},
+"987": {
+"prefecture": "Polynésie Française",
+"site": "",
+"email": "cab-polesecurite@polynesie-francaise.pref.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
+},
+"988": {
+"prefecture": "Nouvelle-Calédonie",
+"site": "",
+"email": "ordrepublic988@nouvelle-caledonie.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
+},
+"989": {
+"prefecture": "Ile de Clipperton",
+"site": "",
+"email": "cab-polesecurite@polynesie-francaise.pref.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones en préfecture (25/04/2025)"
 }
 }
 }

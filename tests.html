@@ -12,7 +12,7 @@
 (async () => {
   const out = document.getElementById('out'); let ok = 0, ko = 0;
   const t = (name, cond, info = '') => { const li = document.createElement('li'); li.className = cond ? 'ok' : 'ko'; li.textContent = (cond ? '✔ ' : '✘ ') + name + (cond ? '' : ' — ' + info); out.appendChild(li); cond ? ok++ : ko++; };
-  await Promise.all([Regulation.aipReady, Regulation.ctrReady]);
+  await Promise.all([Regulation.aipReady, Regulation.ctrReady, Regulation.prefReady]);
 
   // Préavis : 10 jours ouvrables pleins (hors dimanches et fériés, sans le jour d'envoi ni le 1er jour de vol)
   let n = Regulation.notice('2026-12-04', '69', '2026-11-18');
@@ -70,6 +70,11 @@
   C = run({ category: 'A2', takeoff: 'client' }, { restrictions: agglo });
   t('Décollage chez le client : pas de mairie', !C.some(c => c.actions.some(a => a.template === 'mairie')));
   t('Chaque contrainte à traiter indique comment la lever', run({ category: 'A2', maxHeight: 60, zone: turf.circle([4.93, 45.715], 0.05) }, { restrictions: agglo }).filter(c => c.level === 'bad' || c.level === 'warn').every(c => c.fix));
+
+  // Annuaire des préfectures (liste DGAC)
+  t('Adresse « drones » connue pour au moins 100 départements', Object.values(Regulation.PREFS ? Regulation.PREFS().departements : {}).filter(x => x.email).length >= 100);
+  t('Gironde : sous-préfecture d\'Arcachon', (Regulation.prefDrone('33') || {}).email === 'sp-arcachon@gironde.gouv.fr');
+  t('Isère : adresse dédiée drones', (Regulation.prefDrone('38') || {}).email === 'pref-declaration-drones@isere.gouv.fr');
 
   // Certificats détectés par leur date de validité (sans n° d'attestation)
   t('A1/A3 reconnu avec la seule date de validité', Fleet.certs({ a1a3Exp: '2031-01-25' }).a1a3Ok);

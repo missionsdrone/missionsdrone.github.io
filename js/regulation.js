@@ -219,7 +219,7 @@ const Regulation = (() => {
         if (sub) { c.name = sub.service; c.website = sub.source || c.website; }
         if (saved) { c.email = saved.email; c.emailSource = 'votre annuaire'; c.drones = true; if (saved.service) c.name = saved.service; }
         else if (sub && sub.email) { c.email = sub.email; c.emailSource = sub.service; c.drones = true; }
-        else if (pd && pd.email) { c.email = pd.email; c.emailSource = 'site de la préfecture'; c.drones = true; c.website = pd.source || c.website; }
+        else if (pd && pd.email) { c.email = pd.email; c.emailSource = pd.sourceLabel || 'site de la préfecture'; c.drones = true; c.website = pd.source || c.website; c.altEmail = pd.alt || ''; if (pd.service) c.name = pd.service; }
         else { c.genericEmail = c.email; c.email = ''; c.website = (pd && pd.site ? pd.site.replace(/\/$/, '') + '/content/search?SearchText=drone' : c.website); }
         out.push(c);
       }
@@ -520,5 +520,5 @@ const Regulation = (() => {
     return C.sort((a, b) => order[a.level] - order[b.level]);
   }
 
-  return { LINKS, NATIONAL_CONTACTS, CATEGORIES, SIA, airac, whenErrors, aipInfo, aipReady, aipStale, prefReady, prefDrone, prefSaved, ctrName, ctrReady, ctrsAt, CTRS: () => CTRS, MIL_CTR, AIPDIR: () => AIPDIR, fetchAirspaces, notice, fetchRestrictions, fetchSensitive, fetchCommune, fetchAdminContacts, fetchWeather, buildConstraints, parseLimit };
+  return { LINKS, NATIONAL_CONTACTS, CATEGORIES, SIA, airac, whenErrors, aipInfo, aipReady, aipStale, prefReady, prefDrone, prefSaved, PREFS: () => PREFS, ctrName, ctrReady, ctrsAt, CTRS: () => CTRS, MIL_CTR, AIPDIR: () => AIPDIR, fetchAirspaces, notice, fetchRestrictions, fetchSensitive, fetchCommune, fetchAdminContacts, fetchWeather, buildConstraints, parseLimit };
 })();
