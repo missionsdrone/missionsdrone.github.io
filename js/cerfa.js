@@ -270,6 +270,7 @@ const Cerfa = (() => {
       <h3>4. Mail à la préfecture</h3>
       <div class="fields" style="display:grid;gap:10px"><label>Destinataire${pref.email ? ` <span class="legend">(adresse « drones » – source : ${esc(pref.emailSource || 'préfecture')} – vérifiez avant envoi)</span>` : ''}<input id="dxTo" value="${esc(pref.email || '')}" placeholder="Adresse « drones » de la préfecture"></label>
       <label>Objet<input id="dxSubj"></label><label>Message<textarea id="dxBody" style="min-height:220px"></textarea></label></div>
+      ${pref.email && pref.altEmail ? `<p class="legend">Autre adresse connue pour ce département : <a href="#" data-alt="${esc(pref.altEmail)}">${esc(pref.altEmail)}</a> (cliquer pour l'utiliser). N'envoyez le dossier qu'à une seule adresse.</p>` : ''}
       ${pref.email ? '' : `<div class="alert">⚠️ L'adresse « drones » de cette préfecture n'est pas encore connue. <a href="${esc(pref.website || '#')}" target="_blank" rel="noopener">Ouvrir le site de la préfecture (recherche « drone »)</a>, copiez l'adresse indiquée dans la rubrique Drones / Activités aériennes et collez-la ci-dessus : elle sera mémorisée pour vos prochaines missions dans ce département.${pref.genericEmail ? ` <br>Adresse générale (accueil, à éviter) : ${esc(pref.genericEmail)}` : ''}</div>`}
       <div class="row" style="justify-content:space-between;margin-top:14px">
         <div class="row"><button class="btn" id="dxPdf">👁 Aperçu du Cerfa</button><button class="btn" id="dxPlan">🗺 Plan de zone</button></div>
@@ -345,6 +346,7 @@ ${[op.phone, op.mobile, op.email].filter(Boolean).join(' – ')}`;
       renderPieces(); defaultMail(); check();
       f.oninput = f.onchange = () => { check(); if (!edited) defaultMail(); };
       UI.$('#dxTo', root).oninput = check;
+      root.querySelectorAll('[data-alt]').forEach(a => a.onclick = (e) => { e.preventDefault(); UI.$('#dxTo', root).value = a.dataset.alt; check(); });
       UI.$('#dxPieces', root).onchange = (e) => {
         if (e.target.dataset.piece) { m.pieces[e.target.dataset.piece] = e.target.value; }
         if (e.target.dataset.up) { const file = e.target.files[0]; if (file) extra[e.target.dataset.up] = file; }
