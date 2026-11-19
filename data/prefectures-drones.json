@@ -1,0 +1,431 @@
+{
+"updated": "2026-11-19",
+"note": "Adresses publiées par les préfectures pour les déclarations de vol drone. À vérifier avant envoi.",
+"departements": {
+"01": {
+"prefecture": "Ain",
+"site": "https://www.ain.gouv.fr/"
+},
+"02": {
+"prefecture": "Aisne",
+"site": "https://www.aisne.gouv.fr/"
+},
+"03": {
+"prefecture": "Allier",
+"site": "https://www.allier.gouv.fr/"
+},
+"04": {
+"prefecture": "Alpes-de-Haute-Provence",
+"site": "https://www.alpes-de-haute-provence.gouv.fr/"
+},
+"05": {
+"prefecture": "Hautes-Alpes",
+"site": "https://www.hautes-alpes.gouv.fr/"
+},
+"06": {
+"prefecture": "Alpes-Maritimes",
+"site": "https://www.alpes-maritimes.gouv.fr/",
+"email": "pref-aeronautique@alpes-maritimes.gouv.fr",
+"source": "https://www.alpes-maritimes.gouv.fr/Demarches/Autres-demarches/Legislation-aerienne/Drones"
+},
+"07": {
+"prefecture": "Ardèche",
+"site": "https://www.ardeche.gouv.fr/"
+},
+"08": {
+"prefecture": "Ardennes",
+"site": "https://www.ardennes.gouv.fr/"
+},
+"09": {
+"prefecture": "Ariège",
+"site": "https://www.ariege.gouv.fr/"
+},
+"10": {
+"prefecture": "Aube",
+"site": "https://www.aube.gouv.fr/"
+},
+"11": {
+"prefecture": "Aude",
+"site": "https://www.aude.gouv.fr/"
+},
+"12": {
+"prefecture": "Aveyron",
+"site": "https://www.aveyron.gouv.fr/"
+},
+"13": {
+"prefecture": "Bouches-du-Rhône",
+"site": "https://www.bouches-du-rhone.gouv.fr/"
+},
+"14": {
+"prefecture": "Calvados",
+"site": "https://www.calvados.gouv.fr/"
+},
+"15": {
+"prefecture": "Cantal",
+"site": "https://www.cantal.gouv.fr/"
+},
+"16": {
+"prefecture": "Charente",
+"site": "https://www.charente.gouv.fr/"
+},
+"17": {
+"prefecture": "Charente-Maritime",
+"site": "https://www.charente-maritime.gouv.fr/"
+},
+"18": {
+"prefecture": "Cher",
+"site": "https://www.cher.gouv.fr/"
+},
+"19": {
+"prefecture": "Corrèze",
+"site": "https://www.correze.gouv.fr/"
+},
+"21": {
+"prefecture": "Côte-d'Or",
+"site": "https://www.cote-dor.gouv.fr/"
+},
+"22": {
+"prefecture": "Côtes-d'Armor",
+"site": "https://www.cotes-darmor.gouv.fr"
+},
+"23": {
+"prefecture": "Creuse",
+"site": "https://www.creuse.gouv.fr/"
+},
+"24": {
+"prefecture": "Dordogne",
+"site": "https://www.dordogne.gouv.fr/"
+},
+"25": {
+"prefecture": "Doubs",
+"site": "https://www.doubs.gouv.fr/"
+},
+"26": {
+"prefecture": "Drôme",
+"site": "https://www.drome.gouv.fr/"
+},
+"27": {
+"prefecture": "Eure",
+"site": "https://www.eure.gouv.fr/"
+},
+"28": {
+"prefecture": "Eure-et-Loir",
+"site": "https://www.eure-et-loir.gouv.fr/"
+},
+"29": {
+"prefecture": "Finistère",
+"site": "https://www.finistere.gouv.fr/"
+},
+"30": {
+"prefecture": "Gard",
+"site": "https://www.gard.gouv.fr/",
+"email": "pref-declaration-drones@gard.gouv.fr",
+"source": "https://www.gard.gouv.fr/Demarches/Activites-aeriennes/Aeronefs-sans-equipage-a-bord-drones"
+},
+"31": {
+"prefecture": "Haute-Garonne",
+"site": "https://www.haute-garonne.gouv.fr/"
+},
+"32": {
+"prefecture": "Gers",
+"site": "https://www.gers.gouv.fr/"
+},
+"33": {
+"prefecture": "Gironde",
+"site": "https://www.gironde.gouv.fr/",
+"email": "pref-declaration-drones@gironde.gouv.fr",
+"source": "https://www.gironde.gouv.fr/Demarches/Activite-aerienne-Drone"
+},
+"34": {
+"prefecture": "Hérault",
+"site": "https://www.herault.gouv.fr",
+"email": "prefdrones@herault.gouv.fr",
+"source": "https://www.herault.gouv.fr/content/download/18796/142150/file/D%C3%A9claration%20en%20pr%C3%A9fecture.pdf"
+},
+"35": {
+"prefecture": "Ille-et-Vilaine",
+"site": "https://www.ille-et-vilaine.gouv.fr"
+},
+"36": {
+"prefecture": "Indre",
+"site": "https://www.indre.gouv.fr/"
+},
+"37": {
+"prefecture": "Indre-et-Loire",
+"site": "https://www.indre-et-loire.gouv.fr/"
+},
+"38": {
+"prefecture": "Isère",
+"site": "https://www.isere.gouv.fr",
+"email": "pref-declaration-drones@isere.gouv.fr",
+"source": "https://www.isere.gouv.fr/Demarches/Activites-aeriennes/Drones-aeronefs-sans-equipage-a-bord"
+},
+"39": {
+"prefecture": "Jura",
+"site": "https://www.jura.gouv.fr/"
+},
+"40": {
+"prefecture": "Landes",
+"site": "https://www.landes.gouv.fr/"
+},
+"41": {
+"prefecture": "Loir-et-Cher",
+"site": "https://www.loir-et-cher.gouv.fr/"
+},
+"42": {
+"prefecture": "Loire",
+"site": "https://www.loire.gouv.fr/"
+},
+"43": {
+"prefecture": "Haute-Loire",
+"site": "https://www.haute-loire.gouv.fr/"
+},
+"44": {
+"prefecture": "Loire-Atlantique",
+"site": "https://www.loire-atlantique.gouv.fr/"
+},
+"45": {
+"prefecture": "Loiret",
+"site": "https://www.loiret.gouv.fr/"
+},
+"46": {
+"prefecture": "Lot",
+"site": "https://www.lot.gouv.fr/"
+},
+"47": {
+"prefecture": "Lot-et-Garonne",
+"site": "https://www.lot-et-garonne.gouv.fr/"
+},
+"48": {
+"prefecture": "Lozère",
+"site": "https://www.lozere.gouv.fr/"
+},
+"49": {
+"prefecture": "Maine-et-Loire",
+"site": "https://www.maine-et-loire.gouv.fr/",
+"email": "pref-drones@maine-et-loire.gouv.fr",
+"source": "https://www.maine-et-loire.gouv.fr/Demarches/Professions-reglementees/Survol-par-drones"
+},
+"50": {
+"prefecture": "Manche",
+"site": "https://www.manche.gouv.fr/"
+},
+"51": {
+"prefecture": "Marne",
+"site": "https://www.marne.gouv.fr/"
+},
+"52": {
+"prefecture": "Haute-Marne",
+"site": "https://www.haute-marne.gouv.fr/"
+},
+"53": {
+"prefecture": "Mayenne",
+"site": "https://www.mayenne.gouv.fr/"
+},
+"54": {
+"prefecture": "Meurthe-et-Moselle",
+"site": "https://www.meurthe-et-moselle.gouv.fr/"
+},
+"55": {
+"prefecture": "Meuse",
+"site": "https://www.meuse.gouv.fr/"
+},
+"56": {
+"prefecture": "Morbihan",
+"site": "https://www.morbihan.gouv.fr/"
+},
+"57": {
+"prefecture": "Moselle",
+"site": "https://www.moselle.gouv.fr/"
+},
+"58": {
+"prefecture": "Nièvre",
+"site": "https://www.nievre.gouv.fr/"
+},
+"59": {
+"prefecture": "Nord",
+"site": "https://www.nord.gouv.fr/"
+},
+"60": {
+"prefecture": "Oise",
+"site": "https://www.oise.gouv.fr/"
+},
+"61": {
+"prefecture": "Orne",
+"site": "https://www.orne.gouv.fr/"
+},
+"62": {
+"prefecture": "Pas-de-Calais",
+"site": "https://www.pas-de-calais.gouv.fr/"
+},
+"63": {
+"prefecture": "Puy-de-Dôme",
+"site": "https://www.puy-de-dome.gouv.fr/"
+},
+"64": {
+"prefecture": "Pyrénées-Atlantiques",
+"site": "https://www.pyrenees-atlantiques.gouv.fr/"
+},
+"65": {
+"prefecture": "Hautes-Pyrénées",
+"site": "https://www.hautes-pyrenees.gouv.fr/"
+},
+"66": {
+"prefecture": "Pyrénées-Orientales",
+"site": "https://www.pyrenees-orientales.gouv.fr/"
+},
+"67": {
+"prefecture": "Bas-Rhin",
+"site": "https://www.bas-rhin.gouv.fr/"
+},
+"68": {
+"prefecture": "Haut-Rhin",
+"site": "https://www.haut-rhin.gouv.fr/",
+"email": "pref-declaration-drone@haut-rhin.gouv.fr",
+"source": "https://www.haut-rhin.gouv.fr/Demarches/Autres-demarches/Drones"
+},
+"69": {
+"prefecture": "Rhône",
+"site": "https://www.rhone.gouv.fr/"
+},
+"70": {
+"prefecture": "Haute-Saône",
+"site": "https://www.haute-saone.gouv.fr/",
+"email": "pref-declaration-drones@haute-saone.gouv.fr",
+"source": "https://www.haute-saone.gouv.fr/index.php/Demarches/Domaine-aerien/Drones-aeronefs-telepilotes/Drones-aeronefs-telepilotes"
+},
+"71": {
+"prefecture": "Saône-et-Loire",
+"site": "https://www.saone-et-loire.gouv.fr/"
+},
+"72": {
+"prefecture": "Sarthe",
+"site": "https://www.sarthe.gouv.fr/"
+},
+"73": {
+"prefecture": "Savoie",
+"site": "https://www.savoie.gouv.fr/"
+},
+"74": {
+"prefecture": "Haute-Savoie",
+"site": "https://www.haute-savoie.gouv.fr/"
+},
+"75": {
+"prefecture": "Préfecture de police (Paris)",
+"site": "https://demarche.numerique.gouv.fr/commencer/survol-drone-paris",
+"online": true
+},
+"76": {
+"prefecture": "Seine-Maritime",
+"site": "https://www.seine-maritime.gouv.fr/"
+},
+"77": {
+"prefecture": "Seine-et-Marne",
+"site": "https://www.seine-et-marne.gouv.fr/"
+},
+"78": {
+"prefecture": "Yvelines",
+"site": "https://www.yvelines.gouv.fr/"
+},
+"79": {
+"prefecture": "Deux-Sèvres",
+"site": "https://www.deux-sevres.gouv.fr/"
+},
+"80": {
+"prefecture": "Somme",
+"site": "https://www.somme.gouv.fr/"
+},
+"81": {
+"prefecture": "Tarn",
+"site": "https://www.tarn.gouv.fr/"
+},
+"82": {
+"prefecture": "Tarn-et-Garonne",
+"site": "https://www.tarn-et-garonne.gouv.fr/"
+},
+"83": {
+"prefecture": "Var",
+"site": "https://www.var.gouv.fr"
+},
+"84": {
+"prefecture": "Vaucluse",
+"site": "https://www.vaucluse.gouv.fr/"
+},
+"85": {
+"prefecture": "Vendée",
+"site": "https://www.vendee.gouv.fr/"
+},
+"86": {
+"prefecture": "Vienne",
+"site": "https://www.vienne.gouv.fr"
+},
+"87": {
+"prefecture": "Haute-Vienne",
+"site": "https://www.haute-vienne.gouv.fr/"
+},
+"88": {
+"prefecture": "Vosges",
+"site": "https://www.vosges.gouv.fr/"
+},
+"89": {
+"prefecture": "Yonne",
+"site": "https://www.yonne.gouv.fr/"
+},
+"90": {
+"prefecture": "Territoire de Belfort",
+"site": "https://www.territoire-de-belfort.gouv.fr/"
+},
+"91": {
+"prefecture": "Essonne",
+"site": "https://www.essonne.gouv.fr/"
+},
+"92": {
+"prefecture": "Hauts-de-Seine",
+"site": "https://www.hauts-de-seine.gouv.fr/",
+"email": "pref-survol@hauts-de-seine.gouv.fr",
+"source": "https://www.hauts-de-seine.gouv.fr/Demarches/Activites-reglementees-police-administrative-et-manifestations/Activites-aeriennes/Drones"
+},
+"93": {
+"prefecture": "Seine-Saint-Denis",
+"site": "https://www.seine-saint-denis.gouv.fr/"
+},
+"94": {
+"prefecture": "Val-de-Marne",
+"site": "https://www.val-de-marne.gouv.fr/"
+},
+"95": {
+"prefecture": "Val-d'Oise",
+"site": "https://www.val-doise.gouv.fr"
+},
+"2A": {
+"prefecture": "Corse-du-Sud",
+"site": "https://www.corse-du-sud.gouv.fr/",
+"email": "pref-demande-survol@corse-du-sud.gouv.fr",
+"source": "https://www.corse-du-sud.gouv.fr/index.php/Demarches/Autres-demarches/Demandes-de-survol-par-drone/Demarches-prealables-au-vol-d-un-aeronef-telepilote-drone"
+},
+"2B": {
+"prefecture": "Haute-Corse",
+"site": "https://www.haute-corse.gouv.fr/"
+},
+"971": {
+"prefecture": "Guadeloupe",
+"site": "https://www.guadeloupe.gouv.fr/"
+},
+"972": {
+"prefecture": "Martinique",
+"site": "https://www.martinique.gouv.fr/"
+},
+"973": {
+"prefecture": "Guyane",
+"site": "https://www.guyane.gouv.fr/"
+},
+"974": {
+"prefecture": "La Réunion",
+"site": "https://www.reunion.gouv.fr/"
+},
+"976": {
+"prefecture": "Mayotte",
+"site": "https://www.mayotte.gouv.fr/"
+}
+}
+}

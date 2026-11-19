@@ -1,0 +1,2731 @@
+{
+"airac": "2026-10-29",
+"source": "SIA – eAIP France (licence ouverte)",
+"aerodromes": {
+"LFAC": {
+"name": "CALAIS DUNKERQUE",
+"admin": "EDEIS AEROPORT DE CALAIS",
+"otherEmails": [
+"calais.aeroport@edeis.com",
+"sslia.calais@edeis.com"
+],
+"phones": [
+"03 52 44 04 20",
+"03 21 35 22 66"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFAQ": {
+"name": "ALBERT BRAY",
+"admin": "RAAP",
+"emails": [
+"info@aeroportamienspotez.fr"
+],
+"phones": [
+"03 22 74 38 10"
+],
+"web": "https://aeroportamienspotez.fr",
+"airspaces": [
+"CTR ALBERT BRAY"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFAT": {
+"name": "LE TOUQUET ELIZABETH II",
+"admin": "REGIE PUBLIQUE AILE II",
+"emails": [
+"contact@aeroport-letouquet.com"
+],
+"phones": [
+"03 21 05 03 99"
+],
+"airspaces": [
+"CTR LE TOUQUET"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"03 21 06 62 84"
+],
+"military": false,
+"heliport": false
+},
+"LFAV": {
+"name": "VALENCIENNES DENAIN",
+"admin": "SYNDICAT MIXTE AEROPORT DU VALENCIENNOIS - CHARLES NUNGESSER",
+"bestEmail": "afis@valenciennes-aeroport.fr",
+"otherEmails": [
+"afis@valenciennes-aeroport.fr"
+],
+"phones": [
+"03 27 21 03 66",
+"03 27 21 03 34"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFAY": {
+"name": "AMIENS-GLISY",
+"admin": "COMMUNAUTE AGGLO AMIENS METROPOLE",
+"phones": [
+"03 22 22 59 82"
+],
+"military": false,
+"heliport": false
+},
+"LFBA": {
+"name": "AGEN LA GARENNE",
+"admin": "SYNDICAT MIXTE POUR L'AERODROME DEPARTEMENTAL (SMAD)",
+"emails": [
+"escale@aeroport-agen.fr"
+],
+"phones": [
+"05 53 77 00 88"
+],
+"airspaces": [
+"CTR AGEN LA GARENNE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFBC": {
+"name": "CAZAUX",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"emails": [
+"ba120.dv.fct@intradef.gouv.fr"
+],
+"bestEmail": "ba120.dv.fct@intradef.gouv.fr",
+"phones": [
+"05 40 51 06 02",
+"05 56 22 99 11",
+"05 40 51 05 63"
+],
+"airspaces": [
+"CTR CAZAUX"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFBD": {
+"name": "BORDEAUX MERIGNAC",
+"admin": "SA-ADBM",
+"bestEmail": "sna-so-fap-bf@aviation-civile.gouv.fr",
+"otherEmails": [
+"coordinateur_piste@bordeaux.aeroport.fr",
+"environnement@bordeaux.aeroport.fr",
+"lfbd@aviavip.com",
+"sna-so-fap-bf@aviation-civile.gouv.fr"
+],
+"airspaces": [
+"CTR BORDEAUX MERIGNAC"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFBE": {
+"name": "BERGERAC DORDOGNE PERIGORD",
+"admin": "EGC AERO",
+"emails": [
+"aeroport-bergerac@bergerac.aeroport.fr"
+],
+"bestEmail": "egcops@bergerac.aeroport.fr",
+"otherEmails": [
+"aircd@orange.fr",
+"egcops@bergerac.aeroport.fr"
+],
+"phones": [
+"05 53 22 25 25",
+"05 53 24 35 43"
+],
+"airspaces": [
+"CTR BERGERAC"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"05 53 63 53 55"
+],
+"military": false,
+"heliport": false
+},
+"LFBF": {
+"name": "TOULOUSE FRANCAZAL",
+"admin": "SOCIETE D'EXPLOITATION DE TOULOUSE FRANCAZAL AEROPORT",
+"emails": [
+"afis.francazal@edeis.com"
+],
+"bestEmail": "1rtp-boi.off-operations.fct@intradef.gouv.fr",
+"otherEmails": [
+"1rtp-boi.off-operations.fct@intradef.gouv.fr",
+"1rtp.boi-ops-conduite.fct@intradef.gouv.fr",
+"sslia.francazal@edeis.com"
+],
+"phones": [
+"05 34 51 24 30"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false,
+"drone": [
+"et sportive, AD prohibited to light and sport aviation training flights, AD réservé aux ACFT munis de radio, AD reserved for radio-equipped ACFT, Vols d'aéronefs sans équipage à bord autorisés (protocole avec l'exploitant). Unmanned ACFT flights authorized (AD operator's agreement mandatory). Aire de lavage avion sur ligne de stationnement 6D. Airplane washing area on apron line 6D. 23.2 RADIOCOMMUNICATION 23.2 RADIOCOMMUNICATION Aéronefs non équipés en 8.33 kHz : 8.33 kHz no"
+]
+},
+"LFBG": {
+"name": "COGNAC CHATEAUBERNARD",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"phones": [
+"05 79 20 03 01",
+"05 79 20 03 00",
+"05 79 20 03 73"
+],
+"airspaces": [
+"CTR COGNAC"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFBH": {
+"name": "LA ROCHELLE ILE DE RE",
+"admin": "SM LRH RCO",
+"otherEmails": [
+"avitailleur@larochelle.aeroport.fr",
+"contact@star-atlantique.fr"
+],
+"phones": [
+"05 46 42 86 71",
+"05 46 00 04 84"
+],
+"airspaces": [
+"CTR LA ROCHELLE ILE DE RE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"05 46 00 13 92"
+],
+"military": false,
+"heliport": false
+},
+"LFBI": {
+"name": "POITIERS BIARD",
+"admin": "SEALAPB",
+"emails": [
+"trafic@poitiers.aeroport.fr"
+],
+"phones": [
+"05 49 30 04 40",
+"05 49 58 81 72",
+"05 49 30 04 45"
+],
+"airspaces": [
+"CTR POITIERS BIARD"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"05 49 41 94 30"
+],
+"military": false,
+"heliport": false
+},
+"LFBK": {
+"name": "MONTLUCON GUERET",
+"admin": "SOCIETE DE GESTION DE L'AERODROME DE MONTLUCON GUERET",
+"emails": [
+"direction@gemilisaero.com"
+],
+"bestEmail": "afis-lfbk@gemilisaero.com",
+"otherEmails": [
+"afis-lfbk@gemilisaero.com",
+"bureaudepisteLFBK@gemilisaero.com"
+],
+"phones": [
+"05 55 65 73 30"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFBL": {
+"name": "LIMOGES BELLEGARDE",
+"admin": "CCI DE LIMOGES",
+"otherEmails": [
+"trafic@limoges.cci.fr"
+],
+"phones": [
+"05 55 43 30 30",
+"05 55 45 15 15",
+"05 55 43 30 40"
+],
+"airspaces": [
+"CTR LIMOGES BELLEGARDE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"05 55 48 40 37"
+],
+"military": false,
+"heliport": false
+},
+"LFBM": {
+"name": "MONT DE MARSAN",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"emails": [
+"ba118-ops-esca-secops.contact.fct@intradef.gouv.fr",
+"ba118.esca-bia.fct@intradef.gouv.fr"
+],
+"bestEmail": "ba118-ops-esca-secops.contact.fct@intradef.gouv.fr",
+"phones": [
+"05 33 94 02 00",
+"05 33 94 05 58",
+"05 58 05 49 19"
+],
+"airspaces": [
+"CTR MARSAN"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFBN": {
+"name": "NIORT MARAIS POITEVIN",
+"admin": "MAIRIE DE LA VILLE DE NIORT",
+"emails": [
+"olivier.dupont@mairie-niort.fr"
+],
+"bestEmail": "olivier.dupont@mairie-niort.fr",
+"phones": [
+"05 49 24 37 22",
+"06 15 92 37 63",
+"06 86 27 86 01"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFBO": {
+"name": "TOULOUSE BLAGNAC",
+"admin": "ATB",
+"otherEmails": [
+"CEP@TOULOUSE.AEROPORT.FR",
+"LFBO@aviavip.com",
+"cep@toulouse.aeroport.fr",
+"superviseur-APOC@toulouse.aeroport.fr"
+],
+"airspaces": [
+"CTR BLAGNAC"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFBP": {
+"name": "PAU PYRENEES",
+"admin": "SEA AIR'PY.",
+"otherEmails": [
+"airbppuf@outlook.fr",
+"trafic@pau.aeroport.fr"
+],
+"phones": [
+"05 59 33 33 00",
+"05 59 33 33 05"
+],
+"airspaces": [
+"CTR PAU-PYRENEES"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFBR": {
+"name": "MURET LHERM",
+"admin": "VILLE DE MURET",
+"phones": [
+"05 61 51 95 95"
+],
+"airspaces": [
+"RMZ MURET 1",
+"RMZ MURET 2"
+],
+"airspaceClass": "G",
+"service": "TWR",
+"atsPhones": [
+"05 34 46 08 36"
+],
+"military": false,
+"heliport": false
+},
+"LFBS": {
+"name": "BISCARROSSE PARENTIS",
+"admin": "COMMUNAUTE DE COMMUNES DES GRANDS LACS",
+"emails": [
+"aerodrome@ccgrandslacs.fr"
+],
+"otherEmails": [
+"gt.aeroservices@gmail.com"
+],
+"phones": [
+"05 58 78 54 63"
+],
+"airspaces": [
+"RMZ BISCARROSSE"
+],
+"airspaceClass": "G",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFBT": {
+"name": "TARBES LOURDES PYRENEES",
+"admin": "SPLAR-TLP",
+"emails": [
+"ops.tarbes-lourdes@aeroports-laregion.fr"
+],
+"bestEmail": "sna-so-pyrenees-ctl-ld@aviation-civile.gouv.fr",
+"otherEmails": [
+"lde.gpo-a@wfscorp.com",
+"ncabarrou@wfscorp.com",
+"sna-so-pyrenees-ctl-ld@aviation-civile.gouv.fr",
+"vip.tarbes-lourdes@aeroports-laregion.fr"
+],
+"phones": [
+"+33 5 62 32 92 22"
+],
+"airspaces": [
+"CTR LOURDES"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"+33 5 62 32 62 68"
+],
+"military": false,
+"heliport": false
+},
+"LFBU": {
+"name": "ANGOULEME BRIE CHAMPNIERS",
+"admin": "SYNDICAT MIXTE DES AEROPORTS DE CHARENTE",
+"emails": [
+"operations@angouleme.aeroport.fr"
+],
+"bestEmail": "operations@angouleme.aeroport.fr",
+"phones": [
+"05 45 69 88 09",
+"05 45 69 47 12",
+"05 45 69 47 01"
+],
+"airspaces": [
+"RMZ ANGOULEME"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"atsPhones": [
+"05 25 67 00 03"
+],
+"military": false,
+"heliport": false
+},
+"LFBX": {
+"name": "PERIGUEUX BASSILLAC",
+"admin": "SAS EDEIS AEROPORT DE PERIGUEUX-BASSILLAC",
+"emails": [
+"carole.lehair@edeis.com",
+"perigueux.afis@edeis.com"
+],
+"bestEmail": "perigueux.afis@edeis.com",
+"phones": [
+"+33 5 53 02 79 75",
+"+33 7 86 62 00 62",
+"+33 6 08 82 98 68"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFBY": {
+"name": "DAX SEYRESSE",
+"admin": "MINISTERE DES ARMEES (ALAT)",
+"bestEmail": "begn-bops-drone.resp.fct@intradef.gouv.fr",
+"otherEmails": [
+"begn-bops-drone.resp.fct@intradef.gouv.fr",
+"bnia.bordeaux@aviation-civile.gouv.fr"
+],
+"phones": [
+"05 58 35 92 58",
+"05 58 35 93 31",
+"05 58 35 93 10"
+],
+"service": "TWR",
+"military": false,
+"heliport": false,
+"drone": [
+"d des OPS : 05.58.35.93. 31 ou 05.58.35. 93.87. Use by external defence aircraft possible after permission from OPS : 05.58.35.93. 31 or 05.58.35. 93.87. DRONES : Pour toutes demandes d’autorisation de vol dans les zones LF-R 40, la rédaction d’une lettre d’accord est obligatoire. begn-bops-drone.resp.fct@intradef.gouv.fr DRONES: For all applications for authorization to fly in LF-R 40 zones, the drafting of a letter of agreement is mandatory. begn-bops-drone.resp.fct@intradef.gouv.",
+"05.58.35. 93.87. DRONES : Pour toutes demandes d’autorisation de vol dans les zones LF-R 40, la rédaction d’une lettre d’accord est obligatoire. begn-bops-drone.resp.fct@intradef.gouv.fr DRONES: For all applications for authorization to fly in LF-R 40 zones, the drafting of a letter of agreement is mandatory. begn-bops-drone.resp.fct@intradef.gouv.fr Le délai de traitement est de 3 semaines minimum (à condition que le dossier soit complet). The processing time is at least 3 weeks (pro"
+]
+},
+"LFBZ": {
+"name": "BIARRITZ PAYS BASQUE",
+"admin": "AEROPORT DE BIARRITZ - PAYS BASQUE",
+"otherEmails": [
+"aviationgenerale@biarritz.aeroport.fr",
+"cep@biarritz.aeroport.fr"
+],
+"phones": [
+"05 59 43 83 83"
+],
+"airspaces": [
+"CTR BIARRITZ"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"05 59 22 43 72"
+],
+"military": false,
+"heliport": false
+},
+"LFCC": {
+"name": "CAHORS LALBENQUE",
+"admin": "SYNDICAT MIXTE OUVERT DE CAHORS SUD (SMOCS)",
+"emails": [
+"afis@cahors-sud.fr"
+],
+"bestEmail": "afis@cahors-sud.fr",
+"otherEmails": [
+"exploitation@cahors-sud.fr",
+"j.deidda@icarius.fr",
+"restaurant.lecap180@orange.fr",
+"stephane.chaussard@aeroscd.fr"
+],
+"phones": [
+"05 65 21 52 12",
+"05 65 21 52 06"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFCI": {
+"name": "ALBI LE SEQUESTRE",
+"admin": "VILLE D'ALBI",
+"emails": [
+"twr@aerodrome-albi.fr"
+],
+"bestEmail": "twr@aerodrome-albi.fr",
+"phones": [
+"05 63 49 15 25"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFCK": {
+"name": "CASTRES MAZAMET",
+"admin": "CCI DU TARN",
+"bestEmail": "tour@aeroport81.fr",
+"otherEmails": [
+"tour@aeroport81.fr"
+],
+"phones": [
+"05 63 70 34 77"
+],
+"airspaces": [
+"RMZ CASTRES"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFCR": {
+"name": "RODEZ AVEYRON",
+"admin": "SAEML AIR 12",
+"emails": [
+"contact@aeroport-rodez.fr"
+],
+"phones": [
+"05 65 76 02 00"
+],
+"airspaces": [
+"CTR RODEZ"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"05 65 77 17 49"
+],
+"military": false,
+"heliport": false
+},
+"LFCY": {
+"name": "ROYAN MEDIS",
+"admin": "VILLE DE ROYAN",
+"otherEmails": [
+"aerodrome.royan@mairie-royan.fr"
+],
+"phones": [
+"05 46 39 56 56"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFDH": {
+"name": "AUCH GERS",
+"admin": "SYNDICAT MIXTE DE GESTION DE L'AEROPORT AUCH - GERS",
+"emails": [
+"contact@aeroportauch.com"
+],
+"bestEmail": "contact@aeroportauch.com",
+"phones": [
+"05 62 63 06 07"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFDJ": {
+"name": "PAMIERS LES PUJOLS",
+"admin": "SYNDICAT MIXTE DE L'AERODROME DE PAMIERS LES PUJOLS",
+"phones": [
+"05 61 02 09 09"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFDN": {
+"name": "ROCHEFORT CHARENTE MARITIME",
+"admin": "SYNDICAT MIXTE DES AEROPORTS DE LA ROCHELLE ET ROCHEFORT",
+"emails": [
+"rochefort@rochefort.aeroport.fr"
+],
+"bestEmail": "rochefort@rochefort.aeroport.fr",
+"phones": [
+"05 46 83 05 20"
+],
+"airspaces": [
+"RMZ ROCHEFORT"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFEC": {
+"name": "OUESSANT",
+"admin": "COMMUNE D'OUESSANT",
+"emails": [
+"mairie@ouessant.bzh"
+],
+"bestEmail": "mairie@ouessant.bzh",
+"otherEmails": [
+"aerodrome@ouessant.bzh",
+"contact@ot-ouessant.fr"
+],
+"phones": [
+"02 98 48 80 06"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFEV": {
+"name": "GRAY SAINT ADRIEN",
+"admin": "AEROCLUB DE GRAY ET DE SA REGION",
+"emails": [
+"aero.gray@free.fr"
+],
+"bestEmail": "aero.gray@free.fr",
+"otherEmails": [
+"gilbert.salfati@jgaviation.eu",
+"info@gray-lightaviation.com"
+],
+"phones": [
+"03 84 65 00 84",
+"06 43 36 64 57"
+],
+"web": "http://gray-aeroclub.fr",
+"military": false,
+"heliport": false
+},
+"LFEY": {
+"name": "ILE D'YEU",
+"admin": "CCI DE LA VENDEE",
+"otherEmails": [
+"yeu.aero@orange.fr"
+],
+"phones": [
+"02 51 45 32 84"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFFK": {
+"name": "FONTENAY LE COMTE",
+"admin": "MUNICIPALITE DE FONTENAY-LE-COMTE",
+"emails": [
+"c.cochard@ville-fontenaylecomte.fr"
+],
+"bestEmail": "c.cochard@ville-fontenaylecomte.fr",
+"otherEmails": [
+"LFFK@ville-fontenaylecomte.fr",
+"aeroclubflc@gmail.com",
+"contact@v-a-m.fr",
+"planeurclubsudvendee@orange.fr"
+],
+"phones": [
+"02 51 53 41 33",
+"06 48 18 35 90"
+],
+"military": false,
+"heliport": false
+},
+"LFGA": {
+"name": "COLMAR HOUSSEN",
+"admin": "SOCIETE DE L'AEROPORT DE COLMAR SAS (ADC)",
+"emails": [
+"contact@colmar.aeroport.fr"
+],
+"otherEmails": [
+"alsace.airmaintenance@orange.fr"
+],
+"phones": [
+"03 89 20 22 90"
+],
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFGJ": {
+"name": "DOLE TAVAUX",
+"admin": "EDEIS AEROPORT DOLE JURA",
+"bestEmail": "operations.dole@edeis.com",
+"otherEmails": [
+"operations.dole@edeis.com"
+],
+"phones": [
+"03 84 72 18 53",
+"03 84 72 04 26",
+"03 84 71 97 15"
+],
+"airspaces": [
+"CTR DOLE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFHP": {
+"name": "LE PUY LOUDES",
+"admin": "SMGAD LE PUY EN VELAY",
+"emails": [
+"exploitation@aerolepuy.fr"
+],
+"bestEmail": "afis@aerolepuy.fr",
+"otherEmails": [
+"afis@aerolepuy.fr"
+],
+"phones": [
+"04 71 08 61 87",
+"04 71 08 66 40"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFHV": {
+"name": "VILLEFRANCHE TARARE",
+"admin": "CCI DU BEAUJOLAIS DE LA REGION AUVERGNE RHONE ALPES",
+"emails": [
+"aerodrome@beaujolais.cci.fr"
+],
+"bestEmail": "aerodrome@beaujolais.cci.fr",
+"phones": [
+"04 74 62 73 17",
+"04 74 62 73 00"
+],
+"military": false,
+"heliport": false
+},
+"LFHY": {
+"name": "MOULINS MONTBEUGNY",
+"admin": "CCI DE L'ALLIER",
+"emails": [
+"aerodrome.moulins@wanadoo.fr"
+],
+"bestEmail": "aerodrome.moulins@wanadoo.fr",
+"otherEmails": [
+"info@ama.aero"
+],
+"phones": [
+"04 70 35 40 00"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFJL": {
+"name": "METZ NANCY LORRAINE",
+"admin": "EPMNL",
+"emails": [
+"ops@lorraineaeroport.com"
+],
+"bestEmail": "ops@lorraineaeroport.com",
+"phones": [
+"03 87 56 70 11"
+],
+"airspaces": [
+"CTR LORRAINE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFJR": {
+"name": "ANGERS MARCE",
+"admin": "EDEIS AEROPORT ANGERS",
+"emails": [
+"angers.aeroport@edeis.com"
+],
+"bestEmail": "afis.angers@edeis.com",
+"otherEmails": [
+"afis.angers@edeis.com",
+"contact@rjaviation.com",
+"maintenance@pixair-survey.com",
+"operations.angers@edeis.com"
+],
+"airspaces": [
+"RMZ ANGERS"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFJY": {
+"name": "CHAMBLEY",
+"admin": "SPL CHAMBLEY MADINE",
+"emails": [
+"e.mockels@lacmadine.com"
+],
+"bestEmail": "e.mockels@lacmadine.com",
+"otherEmails": [
+"helimeca@free.fr",
+"infos.usagers@lorraine.eu",
+"ld.maintenance.aviation@gmail.com"
+],
+"phones": [
+"03 76 08 06 91",
+"03 87 61 66 74"
+],
+"web": "https://chambleyplanetair.com",
+"military": false,
+"heliport": false
+},
+"LFKB": {
+"name": "BASTIA PORETTA",
+"admin": "CCI DE CORSE",
+"otherEmails": [
+"exploitation.bia@bastia.aeroport.fr",
+"ppr@satab.aero"
+],
+"airspaces": [
+"CTR BASTIA"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFKC": {
+"name": "CALVI SAINTE CATHERINE",
+"admin": "CCI DE CORSE",
+"otherEmails": [
+"agcly.casavia@casavia.fr",
+"casavia@casavia.fr",
+"exploitation@calvi.aeroport.fr"
+],
+"phones": [
+"04 95 65 88 88",
+"04 95 65 88 99"
+],
+"airspaces": [
+"CTR CALVI"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"04 95 65 82 49"
+],
+"military": false,
+"heliport": false
+},
+"LFKF": {
+"name": "FIGARI SUD CORSE",
+"admin": "CCI DE CORSE",
+"otherEmails": [
+"fsc.ppr@cci.corsica"
+],
+"phones": [
+"04 95 71 10 10",
+"04 95 71 10 00"
+],
+"airspaces": [
+"CTR FIGARI"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"04 95 71 10 99"
+],
+"military": false,
+"heliport": false
+},
+"LFKJ": {
+"name": "AJACCIO NAPOLEON BONAPARTE",
+"admin": "CCI DE CORSE",
+"otherEmails": [
+"ag.casavia@casavia.fr",
+"camposervices2a@gmail.com",
+"casavia.aja@wanadoo.fr",
+"cpo-aero@cci.corsica"
+],
+"phones": [
+"04 95 23 56 00",
+"04 95 23 56 19"
+],
+"airspaces": [
+"CTR AJACCIO"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFKS": {
+"name": "SOLENZARA",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"emails": [
+"ba126-semainebase-h24@intradef.gouv.fr"
+],
+"bestEmail": "cmc-solenzara-sect-ops.resp.fct@intradef.gouv.fr",
+"otherEmails": [
+"cmc-solenzara-sect-ops.resp.fct@intradef.gouv.fr"
+],
+"phones": [
+"04 20 61 84 84",
+"04 20 61 85 96",
+"04 20 61 84 43"
+],
+"airspaces": [
+"RMZ SOLENZARA"
+],
+"airspaceClass": "G",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFLA": {
+"name": "AUXERRE BRANCHES",
+"admin": "EDEIS AEROPORT D'AUXERRE",
+"emails": [
+"auxerre.operations@edeis.com",
+"nicolas.bregmestre@edeis.com"
+],
+"bestEmail": "auxerre.operations@edeis.com",
+"otherEmails": [
+"deltatangoaviation@gmail.com"
+],
+"phones": [
+"03 86 48 31 89",
+"03 86 48 04 03",
+"03 86 42 97 06"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFLB": {
+"name": "CHAMBERY AIX LES BAINS",
+"admin": "S.E.A.C.A",
+"emails": [
+"handling@chambery-airport.com",
+"sna-ce.calflb@aviation-civile.gouv.fr"
+],
+"bestEmail": "sna-ce.calflb@aviation-civile.gouv.fr",
+"otherEmails": [
+"hdqcoxh.scr@cohor.org",
+"slots@chambery-airport.com"
+],
+"airspaces": [
+"CTR CHAMBERY"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"04 85 44 09 66"
+],
+"military": false,
+"heliport": false
+},
+"LFLC": {
+"name": "CLERMONT FERRAND AUVERGNE",
+"admin": "SOCIETE EXPLOITATION AEROPORT CLERMONT-FERRAND AUVERGNE",
+"emails": [
+"fbo@aeroport-clermont.fr",
+"operations@aeroport-clermont.fr"
+],
+"bestEmail": "aia-clermont-ferrand-escale.dv.fct@intradef.gouv.fr",
+"otherEmails": [
+"AIA-CLERMONT-FERRAND.ACCUEIL.FCT@INTRADEF.GOUV.FR",
+"aia-clermont-ferrand-escale.dv.fct@intradef.gouv.fr",
+"avitaillement@aeroport-clermont.fr",
+"info@cfe-petit-clasquin.com"
+],
+"phones": [
+"+33 4 73 62 71 00",
+"+33 4 73 62 71 23",
+"+33 4 73 62 70 40"
+],
+"airspaces": [
+"CTR CLERMONT"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"04 73 62 74 38"
+],
+"military": false,
+"heliport": false
+},
+"LFLD": {
+"name": "BOURGES",
+"admin": "EDEIS AEROPORT BOURGES",
+"emails": [
+"bourges.aeroport@edeis.com"
+],
+"bestEmail": "afis.bourges@edeis.com",
+"otherEmails": [
+"afis.bourges@edeis.com"
+],
+"phones": [
+"02 48 20 55 64"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFLG": {
+"name": "GRENOBLE LE VERSOUD",
+"admin": "CCI DE GRENOBLE",
+"phones": [
+"04 76 28 25 84",
+"06 87 09 17 04"
+],
+"airspaces": [
+"RMZ LE VERSOUD"
+],
+"airspaceClass": "G",
+"service": "TWR",
+"atsPhones": [
+"04 85 88 10 17"
+],
+"military": false,
+"heliport": false
+},
+"LFLH": {
+"name": "CHALON CHAMPFORGEUIL",
+"admin": "EDEIS - AEROPORT DE CHALON-CHAMPFORGEUIL",
+"emails": [
+"chalon.aeroport@edeis.com"
+],
+"bestEmail": "chalon.aeroport@edeis.com",
+"phones": [
+"03 85 46 14 48",
+"03 85 46 47 56"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFLL": {
+"name": "LYON SAINT EXUPERY",
+"admin": "AEROPORTS DE LYON",
+"otherEmails": [
+"ccoresponsableexploitation@lyonaeroports.com",
+"fbo.lfll@lyonaeroports.com",
+"marie_f.memeteau@spaceaero.net",
+"space@spaceaero.net"
+],
+"phones": [
+"04 72 22 52 85"
+],
+"airspaces": [
+"CTR SAINT EXUPERY"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFLN": {
+"name": "SAINT YAN",
+"admin": "SYAB",
+"emails": [
+"rffs.lfln@aeroportsaintyan.fr"
+],
+"phones": [
+"03 85 70 96 43",
+"03 85 84 90 97"
+],
+"airspaces": [
+"CTR SAINT-YAN"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"03 85 26 60 78"
+],
+"military": false,
+"heliport": false
+},
+"LFLO": {
+"name": "ROANNE",
+"admin": "ROANNAIS AGGLOMERATION",
+"emails": [
+"aeroport@roannais-agglomeration.fr"
+],
+"bestEmail": "aeroport@roannais-agglomeration.fr",
+"otherEmails": [
+"roanne.aero@gmail.com"
+],
+"phones": [
+"04 77 66 85 77",
+"04 77 66 85 99"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFLP": {
+"name": "ANNECY MEYTHET",
+"admin": "SOCIETE D'EXPLOITATION DE L'AEROPORT D'ANNECY MEYTHET SEAAM",
+"emails": [
+"fbo@annecy-airport.com"
+],
+"otherEmails": [
+"contact@se-levage.com"
+],
+"phones": [
+"04 50 32 23 22",
+"04 50 27 39 83"
+],
+"web": "https://www.annecy-airport.com",
+"airspaces": [
+"CTR ANNECY"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFLS": {
+"name": "GRENOBLE ALPES ISERE",
+"admin": "SOCIETE D'EXPLOITATION DE L'AEROPORT DE GRENOBLE ISERE SEAGI",
+"emails": [
+"businessaviation@grenoble-airport.com",
+"ops@grenoble-airport.com"
+],
+"bestEmail": "ops@grenoble-airport.com",
+"phones": [
+"+33 4 76 65 48 48",
+"+33 4 76 65 55 35",
+"+33 4 76 93 49 43"
+],
+"web": "https://cy.myhandlingsoftware.com",
+"airspaces": [
+"CTR GRENOBLE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFLU": {
+"name": "VALENCE CHABEUIL",
+"admin": "SYNDICAT MIXTE DE L'AD DE VALENCE CHABEUIL",
+"emails": [
+"accueil@valenceaeroport.fr",
+"operations@valenceaeroport.fr"
+],
+"bestEmail": "operations@valenceaeroport.fr",
+"phones": [
+"04 75 85 26 26",
+"04 75 85 27 23"
+],
+"airspaces": [
+"RMZ VALENCE"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFLV": {
+"name": "VICHY CHARMEIL",
+"admin": "VICHY COMMUNAUTE",
+"emails": [
+"aeroport.vichy.charmeil@vichy-communaute.fr"
+],
+"bestEmail": "aeroport.vichy.charmeil@vichy-communaute.fr",
+"phones": [
+"04 70 32 47 15",
+"07 63 72 37 93"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFLW": {
+"name": "AURILLAC",
+"admin": "COMMUNAUTE D'AGGLOMERATION DU BASSIN D'AURILLAC",
+"emails": [
+"aeroport@aurillacagglo.fr",
+"aeroport@caba.fr"
+],
+"bestEmail": "aeroport@aurillacagglo.fr",
+"phones": [
+"04 71 64 50 00",
+"04 71 64 51 59"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFLX": {
+"name": "CHATEAUROUX DEOLS",
+"admin": "AEROPORT CHATEAUROUX CENTRE",
+"bestEmail": "ops@chateauroux-airport.com",
+"otherEmails": [
+"ops@chateauroux-airport.com"
+],
+"phones": [
+"02 54 60 53 53",
+"02 54 60 53 50"
+],
+"airspaces": [
+"CTR CHATEAUROUX DEOLS"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFLY": {
+"name": "LYON BRON",
+"admin": "AEROPORTS DE LYON (ADL)",
+"emails": [
+"Fbo.lfly@lyonaeroports.com"
+],
+"otherEmails": [
+"fbo.lfly@lyonaeroports.com"
+],
+"phones": [
+"04 78 26 81 09",
+"04 78 26 72 65"
+],
+"web": "https://businessaviation.lyonaeroports.com/fr/decouvrir-aeroport-lyon-bron",
+"airspaces": [
+"CTR BRON"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"04 82 90 48 32"
+],
+"military": false,
+"heliport": false
+},
+"LFMA": {
+"name": "AIX LES MILLES",
+"admin": "EDEIS AEROPORT AIX",
+"emails": [
+"aix.aeroport@edeis.com"
+],
+"phones": [
+"06 13 17 34 24"
+],
+"web": "https://cy.myhandlingsoftware.com",
+"airspaces": [
+"CTR AIX"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFMC": {
+"name": "LE LUC LE CANNET",
+"admin": "MINISTERE DES ARMEES (ALAT)",
+"emails": [
+"be-2rhc-operations.resp.fct@intradef.gouv.fr",
+"be-2rhc-ops-drones.resp.fct@intradef.gouv.fr",
+"begl-bia-chef.fct@intradef.gouv.fr",
+"begl-operations.resp.fct@intradef.gouv.fr",
+"begl-ops-drones.resp.fct@intradef.gouv.fr",
+"begl.chef-cont-aerodrome.fct@intradef.gouv.fr",
+"ealat-le-luc.bia-chef.fct@intradef.gouv.fr",
+"ealat-le-luc.cla-chef.fct@intradef.gouv.fr"
+],
+"bestEmail": "be-2rhc-ops-drones.resp.fct@intradef.gouv.fr",
+"phones": [
+"04 98 11 72 44",
+"04 98 11 73 55",
+"06 14 63 62 69"
+],
+"service": "TWR",
+"military": true,
+"heliport": false,
+"drone": [
+"il opérations (PPR) : be-2rhc-operations.resp.fct@intradef.gouv.fr Email opérations (PPR) : begl-operations.resp.fct@intradef.gouv.fr Email opérations (vol drone) : be-2rhc-ops-drones.resp.fct@intradef.gouv.fr Email opérations (vol drone) : begl-ops-drones.resp.fct@intradef.gouv.fr Email ATS : ealat-le-luc.cla-chef.fct@intradef.gouv.fr Email ATS : begl.chef-cont-aerodrome.fct@intradef.gouv.fr Email AIS : ealat-le-luc.bia-chef.fct@intradef.gouv.fr Email AIS : begl-bia-chef.fct@intra",
+"be-2rhc-operations.resp.fct@intradef.gouv.fr Email opérations (PPR) : begl-operations.resp.fct@intradef.gouv.fr Email opérations (vol drone) : be-2rhc-ops-drones.resp.fct@intradef.gouv.fr Email opérations (vol drone) : begl-ops-drones.resp.fct@intradef.gouv.fr Email ATS : ealat-le-luc.cla-chef.fct@intradef.gouv.fr Email ATS : begl.chef-cont-aerodrome.fct@intradef.gouv.fr Email AIS : ealat-le-luc.bia-chef.fct@intradef.gouv.fr Email AIS : begl-bia-chef.fct@intradef.gouv.fr DV Hors"
+]
+},
+"LFMD": {
+"name": "CANNES MANDELIEU",
+"admin": "AEROPORTS COTE D'AZUR (ACA)",
+"emails": [
+"operations-acm@cote-azur.aeroport.fr"
+],
+"bestEmail": "operations-acm@cote-azur.aeroport.fr",
+"airspaces": [
+"CTR CANNES"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"04 92 19 94 92"
+],
+"military": false,
+"heliport": false
+},
+"LFMH": {
+"name": "SAINT ETIENNE LOIRE",
+"admin": "SYNDICAT MIXTE AEROPORT SAINT ETIENNE LOIRE (SMASEL)",
+"emails": [
+"operations@saint-etienne.aeroport.fr"
+],
+"bestEmail": "operations@saint-etienne.aeroport.fr",
+"otherEmails": [
+"contact@loireaeromaintenance.com"
+],
+"phones": [
+"04 77 55 71 71"
+],
+"airspaces": [
+"CTR SAINT ETIENNE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"04 82 89 48 18"
+],
+"military": false,
+"heliport": false
+},
+"LFMI": {
+"name": "ISTRES LE TUBE",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"emails": [
+"ba125-gaa-bob.chef.fct@intradef.gouv.fr",
+"ba125.dv.fct@intradef.gouv.fr",
+"cmc-istres-so.chef.fct@intradef.gouv.fr",
+"cmc-istres.cdq.fct@intradef.gouv.fr",
+"cmc-istres.chef-operation.fct@intradef.gouv.fr",
+"dga-ev-istres.ccer-bgp.fct@intradef.gouv.fr",
+"dga-ev-istres.ccer-cdq.fct@intradef.gouv.fr"
+],
+"bestEmail": "ba125.dv.fct@intradef.gouv.fr",
+"phones": [
+"04 13 93 90 00",
+"04 42 56 13 49",
+"04 13 93 90 94"
+],
+"airspaces": [
+"CTR ISTRES"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFMK": {
+"name": "CARCASSONNE SALVAZA",
+"admin": "SPL AEROPORTUAIRE REGIONALE",
+"emails": [
+"operations.carcassonne@aeroports-laregion.fr"
+],
+"bestEmail": "operations.carcassonne@aeroports-laregion.fr",
+"airspaces": [
+"CTR CARCASSONNE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFML": {
+"name": "MARSEILLE PROVENCE",
+"admin": "SOCIETE AEROPORT MARSEILLE PROVENCE",
+"otherEmails": [
+"temps-reel.marseille@aviation-civile.gouv.fr"
+],
+"phones": [
+"04 42 14 21 12",
+"04 42 14 27 24",
+"04 42 14 21 25"
+],
+"airspaces": [
+"CTR PROVENCE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFMN": {
+"name": "NICE COTE D'AZUR",
+"admin": "SA AEROPORTS COTE D'AZUR (SA ACA)",
+"emails": [
+"CoordonnateurOP@cote-azur.aeroport.fr"
+],
+"otherEmails": [
+"apoc@cote-azur.aeroport.fr",
+"florence.augustyniak@johnmenzies.aero",
+"nce@signatureaviation.com",
+"nce@signatureflight.fr"
+],
+"airspaces": [
+"CTR NICE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFMO": {
+"name": "ORANGE CARITAT",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"emails": [
+"ba115-ops-esca-sob.chef.fct@intradef.gouv.fr",
+"ba115-ops-esca.c-ops.fct@intradef.gouv.fr",
+"ba115-ops.cdt.fct@intradef.gouv.fr"
+],
+"bestEmail": "ba115-ops-esca-sob.chef.fct@intradef.gouv.fr",
+"phones": [
+"04 13 97 03 00",
+"04 13 97 04 00",
+"04 13 97 04 15"
+],
+"airspaces": [
+"CTR ORANGE"
+],
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFMP": {
+"name": "PERPIGNAN RIVESALTES",
+"admin": "SPL AEROPORTUAIRE REGIONALE (SPLAR)",
+"emails": [
+"operations.perpignan@aeroports-laregion.fr"
+],
+"bestEmail": "operations.perpignan@aeroports-laregion.fr",
+"otherEmails": [
+"arelec66@wanadoo.fr",
+"contact@aerofutur-maintenance.fr",
+"technicaloffice@aerosmith66.com"
+],
+"phones": [
+"04 68 52 60 70",
+"04 68 52 60 73",
+"04 68 61 36 99"
+],
+"airspaces": [
+"CTR PERPIGNAN"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"04 68 63 75 12"
+],
+"military": false,
+"heliport": false
+},
+"LFMQ": {
+"name": "LE CASTELLET",
+"admin": "AIDC",
+"emails": [
+"operations@aeroportducastellet.com",
+"welcome@aeroportducastellet.com"
+],
+"bestEmail": "operations@aeroportducastellet.com",
+"otherEmails": [
+"direx@aeroportducastellet.com"
+],
+"phones": [
+"+33 4 94 98 39 99",
+"+33 4 94 98 39 35",
+"+33 4 94 98 27 10"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFMT": {
+"name": "MONTPELLIER MEDITERRANEE",
+"admin": "S.A. AEROPORT DE MONTPELLIER MEDITERRANEE",
+"bestEmail": "montpellier-subdivision-ctl@aviation-civile.gouv.fr",
+"otherEmails": [
+"montpellier-subdivision-ctl@aviation-civile.gouv.fr",
+"pce@montpellier.aeroport.fr"
+],
+"phones": [
+"08 25 83 00 03",
+"04 67 20 86 60",
+"04 67 20 85 13"
+],
+"airspaces": [
+"CTR MONTPELLIER"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"04 67 13 11 70"
+],
+"military": false,
+"heliport": false
+},
+"LFMU": {
+"name": "BEZIERS VIAS",
+"admin": "SYNDICAT MIXTE (SM) AEROPORT BEZIERS CAP D'AGDE",
+"emails": [
+"ops@beziers.aeroport.fr"
+],
+"bestEmail": "ops@beziers.aeroport.fr",
+"phones": [
+"06 03 20 65 12"
+],
+"airspaces": [
+"CTR BEZIERS"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFMV": {
+"name": "AVIGNON CAUMONT",
+"admin": "SOCIETE AEROPORT AVIGNON PROVENCE",
+"otherEmails": [
+"chateaurenard@fosselev.fr"
+],
+"phones": [
+"04 90 81 51 31",
+"04 90 84 17 23"
+],
+"airspaces": [
+"CTR AVIGNON"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"04 90 84 32 84"
+],
+"military": false,
+"heliport": false
+},
+"LFMY": {
+"name": "SALON DE PROVENCE",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"emails": [
+"ba701-ops.off-vols.fct@intradef.gouv.fr",
+"dv.ba701@gmail.com"
+],
+"bestEmail": "ba701-ops.off-vols.fct@intradef.gouv.fr",
+"otherEmails": [
+"ba701-gaa.off-vols.fct@intradef.gouv.fr",
+"cmoa.cdt.fct@intradef.gouv.fr",
+"cmoa.previ.fct@intradef.gouv.fr",
+"cmoa.trans.fct@intradef.gouv.fr"
+],
+"phones": [
+"04 13 93 80 00",
+"06 03 01 26 96",
+"04 90 17 81 99"
+],
+"airspaces": [
+"CTR SALON"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFNB": {
+"name": "MENDE BRENOUX",
+"admin": "COMMUNAUTE DE COMMUNES COEUR DE LOZERE",
+"phones": [
+"04 66 94 09 67"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFOA": {
+"name": "AVORD",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"phones": [
+"02 45 41 44 00",
+"02 48 68 40 54",
+"02 45 41 49 91"
+],
+"airspaces": [
+"CTR AVORD"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFOB": {
+"name": "BEAUVAIS TILLE",
+"admin": "BELLOVA",
+"phones": [
+"06 78 00 96 64",
+"06 46 71 83 82"
+],
+"airspaces": [
+"CTR BEAUVAIS"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"03 44 84 69 41",
+"03 44 84 69 41",
+"03 44 84 69 41"
+],
+"military": false,
+"heliport": false
+},
+"LFOE": {
+"name": "EVREUX FAUVILLE",
+"admin": "MINISTERE DES ARMEES",
+"phones": [
+"02 76 57 51 05",
+"02 77 63 32 09",
+"06 76 78 94 41"
+],
+"airspaces": [
+"CTR EVREUX"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFOH": {
+"name": "LE HAVRE OCTEVILLE",
+"admin": "Adresse /",
+"bestEmail": "operations@lehavre.aeroport.fr",
+"otherEmails": [
+"operations@lehavre.aeroport.fr"
+],
+"phones": [
+"02 35 54 65 00"
+],
+"airspaces": [
+"RMZ LE HAVRE"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFOJ": {
+"name": "ORLEANS BRICY",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"emails": [
+"ba123-ops-esca.cdu.fct@intradef.gouv.fr",
+"ba123.dv@intradef.gouv.fr"
+],
+"bestEmail": "ba123-ops-esca.cdu.fct@intradef.gouv.fr",
+"phones": [
+"02 45 40 77 99",
+"02 45 40 68 95",
+"02 38 42 66 61"
+],
+"airspaces": [
+"CTR BRICY"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFOK": {
+"name": "CHALONS VATRY",
+"admin": "EPGAV",
+"bestEmail": "ops@parisvatry.com",
+"otherEmails": [
+"ops@parisvatry.com",
+"ops@xcr-airport.com",
+"xcr@crystal.aero"
+],
+"phones": [
+"03 26 64 82 00",
+"03 26 64 82 30",
+"03 26 64 82 00"
+],
+"airspaces": [
+"CTR VATRY"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"03 26 26 15 67"
+],
+"military": false,
+"heliport": false
+},
+"LFOP": {
+"name": "ROUEN VALLEE DE SEINE",
+"admin": "SEARVS",
+"phones": [
+"02 35 79 41 02",
+"02 35 79 41 00",
+"02 35 79 41 01"
+],
+"airspaces": [
+"CTR ROUEN"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"02 35 80 80 34"
+],
+"military": false,
+"heliport": false
+},
+"LFOQ": {
+"name": "BLOIS LE BREUIL",
+"admin": "SEMOP AERODROME BLOIS LE BREUIL",
+"emails": [
+"aerodrome.blois-lebreuil@bloislebreuil.fr"
+],
+"bestEmail": "aerodrome.blois-lebreuil@bloislebreuil.fr",
+"phones": [
+"02 54 20 30 30",
+"02 54 33 10 71"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFOT": {
+"name": "TOURS VAL DE LOIRE",
+"admin": "EDEIS TOURS VAL DE LOIRE",
+"emails": [
+"tours.handling@edeis.com",
+"tours.information@edeis.com"
+],
+"otherEmails": [
+"pierre.marin@edeis.com"
+],
+"phones": [
+"02 47 49 37 03"
+],
+"web": "https://ap.myhandlingsoftware.com",
+"airspaces": [
+"CTR TOURS VAL DE LOIRE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFOU": {
+"name": "CHOLET LE PONTREAU",
+"admin": "CHOLET AGGLOMERATION",
+"emails": [
+"fboisard@choletagglomeration.fr"
+],
+"bestEmail": "fboisard@choletagglomeration.fr",
+"phones": [
+"02 41 62 12 22",
+"02 41 62 29 58"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFOV": {
+"name": "LAVAL ENTRAMMES",
+"admin": "SYNDICAT MIXTE DE L'AEROPORT DE LAVAL ET DE LA MAYENNE",
+"otherEmails": [
+"contact@aeroport-laval.fr",
+"contact@avialaval.fr"
+],
+"phones": [
+"02 43 53 71 30"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFOZ": {
+"name": "ORLEANS SAINT DENIS DE L'HOTEL",
+"admin": "SMAEDAOL",
+"emails": [
+"contact@orleans.aeroport.fr"
+],
+"bestEmail": "contact@orleans.aeroport.fr",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFPB": {
+"name": "PARIS LE BOURGET",
+"admin": "AEROPORTS DE PARIS",
+"bestEmail": "lfpg-ctl@aviation-civile.gouv.fr",
+"otherEmails": [
+"lfpg-ctl@aviation-civile.gouv.fr",
+"ppr-vfr-lfpb@aviation-civile.gouv.fr"
+],
+"phones": [
+"01 48 62 40 10"
+],
+"airspaces": [
+"CTR PARIS"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false,
+"drone": [
+"e minimum vectoring altitudes and lateral limits of associated areas are described in AD2 LFPB MVA01. 22.1.7 Vols spéciaux (missions photos, travail aérien, drones) 22.1.7 Special flights (scenic air-photos, air work, drones) Sur demande avec préavis minimum de 10 jours ouvrés au SNA-RP/CDG/SE/Subdivision Contrôle. E-mail : lfpg-ctl@aviation-civile.gouv.fr On request with minimum advance notice of 10 working days to the SNA-RP/CDG/SE/Subdivision Contrôle. E-mail : lfpg-ctl@aviation-civi",
+"areas are described in AD2 LFPB MVA01. 22.1.7 Vols spéciaux (missions photos, travail aérien, drones) 22.1.7 Special flights (scenic air-photos, air work, drones) Sur demande avec préavis minimum de 10 jours ouvrés au SNA-RP/CDG/SE/Subdivision Contrôle. E-mail : lfpg-ctl@aviation-civile.gouv.fr On request with minimum advance notice of 10 working days to the SNA-RP/CDG/SE/Subdivision Contrôle. E-mail : lfpg-ctl@aviation-civile.gouv.fr En complément, en cas de demande de mission drones"
+]
+},
+"LFPG": {
+"name": "PARIS CHARLES DE GAULLE",
+"admin": "DIRECTION DE L'AEROPORT DE PARIS CHARLES DE GAULLE",
+"bestEmail": "lfpg-ctl@aviation-civile.gouv.fr",
+"otherEmails": [
+"AH-REPS@geh.aero",
+"SNA-RP-CDG-SE-QDSE-Encadrement@aviation-civile.gouv.fr",
+"hdqcoxh@cohor.org",
+"huehrard@geh.aero"
+],
+"phones": [
+"01 48 62 02 59"
+],
+"airspaces": [
+"CTR PARIS"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false,
+"drone": [
+"VAC AD 2 LFPG APP 01. On routes to be used under conditions set described in VAC AD 2 LFPG APP 01. 22.9.1.3 Vols spéciaux (missions photo, travail aérien, drones) 22.9.1.3 Special flights (scenic air-photo, air work, drones) Sur demande avec préavis minimum de 10 jours ouvrés au SNA-RP/CDG/SE/Subdivision Contrôle. E-mail : lfpg-ctl@aviation-civile.gouv.fr Télécopie : 01 74 37 86 19 On request with minimum advance notice of 10 working days in the SNA-RP/CDG/SE/Subdivision Contrôle.",
+"t described in VAC AD 2 LFPG APP 01. 22.9.1.3 Vols spéciaux (missions photo, travail aérien, drones) 22.9.1.3 Special flights (scenic air-photo, air work, drones) Sur demande avec préavis minimum de 10 jours ouvrés au SNA-RP/CDG/SE/Subdivision Contrôle. E-mail : lfpg-ctl@aviation-civile.gouv.fr Télécopie : 01 74 37 86 19 On request with minimum advance notice of 10 working days in the SNA-RP/CDG/SE/Subdivision Contrôle. E-mail : lfpg-ctl@aviation-civile.gouv.fr FAX : 01 74 37 86 19"
+]
+},
+"LFPM": {
+"name": "MELUN VILLAROCHE",
+"admin": "SYMPAV",
+"emails": [
+"contact@sympav.com"
+],
+"phones": [
+"01 60 68 83 90",
+"01 60 68 88 93"
+],
+"airspaces": [
+"CTR MELUN",
+"RMZ MELUN"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"01 64 14 28 44"
+],
+"military": false,
+"heliport": false
+},
+"LFPN": {
+"name": "PARIS SACLAY VERSAILLES",
+"admin": "AEROPORTS DE PARIS",
+"emails": [
+"airportfees_lbg@adp.fr"
+],
+"phones": [
+"06 69 58 04 03",
+"01 49 75 74 61",
+"01 48 62 31 24"
+],
+"service": "TWR",
+"atsPhones": [
+"01 39 56 54 70"
+],
+"military": false,
+"heliport": false
+},
+"LFPO": {
+"name": "PARIS ORLY",
+"admin": "AEROPORTS DE PARIS",
+"bestEmail": "Ifpo-sub-ctl@aviation-civile.gouv.fr",
+"otherEmails": [
+"Ifpo-sub-ctl@aviation-civile.gouv.fr",
+"RPA_Terrain_ORLY@adp.fr",
+"crna-n-e-rpo-bf@aviation-civile.gouv.fr",
+"lfpo-sub-ctl@aviation-civile.gouv.fr"
+],
+"airspaces": [
+"CTR PARIS"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false,
+"drone": [
+"services ensure aircraft under their control remain clear of these areas. 23.7 AERONEFS SANS EQUIPAGE A BORD 23.7 UNMANNED AIRCRAFT Présence fréquente d’aéronefs sans équipage à bord dans la CTR. Ces aéronefs assurent leur propre séparation avec tout aéronef habité. Regular unmanned aircraft activity within the CTR. These aircraft maintain their own separation with any manned ACFT. 23.8 PREVENTION DU RISQUE ANIMALIER 23.8 WILDLIFE STRIKE PREVENTION Validité sur les pistes 07/"
+]
+},
+"LFPT": {
+"name": "PONTOISE CORMEILLES EN VEXIN",
+"admin": "GROUPE ADP - PARIS AEROPORT",
+"emails": [
+"airportfees_lbg@adp.fr"
+],
+"otherEmails": [
+"ameridair@ameridair.com",
+"pontoise.aero.maintenance@gmail.com"
+],
+"phones": [
+"06 69 58 04 03",
+"06 69 58 04 03",
+"01 49 75 74 61"
+],
+"web": "https://www.parisaeroport.fr/entreprises/services-aux-compagnies/tarifs/tarifs-redevances",
+"airspaces": [
+"CTR PONTOISE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"01 30 30 52 08"
+],
+"military": false,
+"heliport": false
+},
+"LFPV": {
+"name": "VILLACOUBLAY VELIZY",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"emails": [
+"ba107-ops.dv.fct@intradef.gouv.fr"
+],
+"bestEmail": "ba107-ops.dv.fct@intradef.gouv.fr",
+"phones": [
+"01 73 95 12 16",
+"01 45 07 30 84",
+"01 73 95 23 28"
+],
+"airspaces": [
+"CTR VILLACOUBLAY"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFQA": {
+"name": "REIMS PRUNAY",
+"admin": "EDEIS AEROPORT DE REIMS",
+"emails": [
+"reims.aeroport@edeis.com"
+],
+"bestEmail": "reims.aeroport@edeis.com",
+"phones": [
+"03 26 49 10 92"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFQB": {
+"name": "TROYES BARBEREY",
+"admin": "EDEIS",
+"emails": [
+"troyes.aeroport@edeis.com"
+],
+"bestEmail": "troyes.afis@edeis.com",
+"otherEmails": [
+"troyes.afis@edeis.com"
+],
+"phones": [
+"03 25 71 79 00"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFQE": {
+"name": "ETAIN ROUVRES",
+"admin": "MINISTERE DES ARMEES (ALAT)",
+"phones": [
+"03 29 87 82 01",
+"03 29 87 82 06",
+"03 29 87 82 51"
+],
+"airspaces": [
+"CTR ETAIN"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFQG": {
+"name": "NEVERS FOURCHAMBAULT",
+"admin": "SYNDICAT MIXTE DE L'AEROPORT DE NEVERS",
+"emails": [
+"contact@aeroportdenevers.fr"
+],
+"bestEmail": "contact@aeroportdenevers.fr",
+"phones": [
+"03 86 57 24 08"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFQM": {
+"name": "BESANCON LA VEZE",
+"admin": "SYNDICAT MIXTE DE L'AERODROME DE BESANCON LA VEZE.",
+"bestEmail": "afis@smablv.fr",
+"otherEmails": [
+"afis@smablv.fr"
+],
+"phones": [
+"03 81 83 15 32"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFQP": {
+"name": "PHALSBOURG BOURSCHEID",
+"admin": "MINISTERE DES ARMEES (ALAT)",
+"emails": [
+"bia.phalsbourg@yahoo.fr"
+],
+"phones": [
+"03 87 25 23 25",
+"03 87 25 21 63",
+"03 87 25 23 33"
+],
+"airspaces": [
+"CTR PHALSBOURG"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFQQ": {
+"name": "LILLE LESQUIN",
+"admin": "AEROPORT DE LILLE SAS",
+"otherEmails": [
+"ag@lille.aeroport.fr",
+"qse@lille.aeroport.fr"
+],
+"phones": [
+"03 20 49 68 33",
+"03 20 49 68 10"
+],
+"airspaces": [
+"CTR LILLE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"0320161954"
+],
+"military": false,
+"heliport": false
+},
+"LFQT": {
+"name": "MERVILLE CALONNE",
+"admin": "CC FLANDRE LYS",
+"emails": [
+"contact@cc-flandrelys.fr"
+],
+"phones": [
+"03 28 50 14 90",
+"03 28 48 01 95"
+],
+"airspaces": [
+"CTR MERVILLE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFRB": {
+"name": "BREST BRETAGNE",
+"admin": "S.A.S AEROPORTS DE BRETAGNE OUEST",
+"bestEmail": "sna-o-cca-lfrb-ld@aviation-civile.gouv.fr",
+"otherEmails": [
+"AVIATIONAFFAIRE@abh.bzh",
+"pce@brest.aeroport",
+"pce@brest.aeroport.bzh",
+"sna-o-cca-lfrb-ld@aviation-civile.gouv.fr"
+],
+"phones": [
+"02 98 32 86 00",
+"02 98 32 87 00"
+],
+"airspaces": [
+"CTR BRETAGNE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"02 98 32 02 02"
+],
+"military": false,
+"heliport": false
+},
+"LFRC": {
+"name": "CHERBOURG MANCHE",
+"admin": "EDEIS AEROPORT DE CHERBOURG",
+"emails": [
+"cherbourg.aeroport@edeis.com"
+],
+"bestEmail": "afis.cherbourg@edeis.com",
+"otherEmails": [
+"afis.cherbourg@edeis.com"
+],
+"phones": [
+"02 33 88 57 60"
+],
+"airspaces": [
+"RMZ CHERBOURG"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFRD": {
+"name": "DINARD PLEURTUIT SAINT MALO",
+"admin": "SEARD",
+"emails": [
+"contact@dinard.aeroport.fr"
+],
+"phones": [
+"+33 2 99 46 18 46"
+],
+"airspaces": [
+"CTR DINARD"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"02 99 16 81 50"
+],
+"military": false,
+"heliport": false
+},
+"LFRG": {
+"name": "DEAUVILLE NORMANDIE",
+"admin": "SEADN / SEALAR",
+"emails": [
+"operations@deauville.aeroport.fr"
+],
+"bestEmail": "sna-o-cca-lfrg-ld@aviation-civile.gouv.fr",
+"otherEmails": [
+"aerosgs@deauville.aeroport.fr",
+"leseigneur.levage@wanadoo.fr",
+"sna-o-cca-lfrg-ld@aviation-civile.gouv.fr"
+],
+"airspaces": [
+"CTR DEAUVILLE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"02 31 65 65 36"
+],
+"military": false,
+"heliport": false
+},
+"LFRH": {
+"name": "LORIENT LANN BIHOUE",
+"admin": "FNF LORIENT LANN-BIHOUE MARINE",
+"emails": [
+"bia.lbh@wanadoo.fr"
+],
+"otherEmails": [
+"trafic1.lorient@edeis.com"
+],
+"phones": [
+"02 97 12 90 25",
+"02 97 87 21 56",
+"02 97 12 90 00"
+],
+"airspaces": [
+"CTR LORIENT"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFRI": {
+"name": "LA ROCHE SUR YON LES AJONCS",
+"admin": "CCI DE LA VENDEE",
+"otherEmails": [
+"larochesuryon.aerodrome@vendee.cci.fr"
+],
+"phones": [
+"02 51 45 32 84"
+],
+"airspaces": [
+"RMZ LA ROCHE SUR YON"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFRJ": {
+"name": "LANDIVISIAU",
+"admin": "MINISTERE DES ARMEES",
+"emails": [
+"aero-landivisiau.oqclah24.fct@intradef.gouv.fr"
+],
+"phones": [
+"+33 2 98 24 26 32",
+"+33 2 98 24 21 06",
+"+33 2 98 24 26 32"
+],
+"airspaces": [
+"CTR LANDIVISIAU"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFRK": {
+"name": "CAEN CARPIQUET",
+"admin": "SOCIETE D'EXPLOITATION AEROPORTUAIRE CAEN-CARPIQUET (SEACC)",
+"emails": [
+"aerotrafic@caen.aeroport.fr"
+],
+"otherEmails": [
+"aerosgs@caen.aeroport.fr"
+],
+"phones": [
+"02 31 26 01 92"
+],
+"airspaces": [
+"CTR CAEN"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"02 31 08 42 80"
+],
+"military": false,
+"heliport": false
+},
+"LFRL": {
+"name": "LANVEOC POULMIC",
+"admin": "MINISTERE DES ARMEES (FNF)",
+"emails": [
+"aero-lanveoc.oqcla.fct@intradef.gouv.fr"
+],
+"phones": [
+"02 98 23 30 00",
+"02 98 23 30 11",
+"02 98 23 32 09"
+],
+"airspaces": [
+"CTR LANVEOC"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFRM": {
+"name": "LE MANS ARNAGE",
+"admin": "EDEIS AEROPORT LE MANS-ARNAGE",
+"emails": [
+"lemans.aeroport@edeis.com"
+],
+"bestEmail": "lemans.aeroport@edeis.com",
+"phones": [
+"02 43 84 00 43"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFRN": {
+"name": "RENNES SAINT JACQUES",
+"admin": "SEARD",
+"bestEmail": "escavat-rennes.ops.fct@intradef.gouv.fr",
+"otherEmails": [
+"escavat-rennes.ops.fct@intradef.gouv.fr",
+"ops@rennes.aeroport.fr"
+],
+"phones": [
+"+33 2 99 29 60 04",
+"+33 2 99 29 60 37"
+],
+"airspaces": [
+"CTR RENNES"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"02 99 67 72 50"
+],
+"military": false,
+"heliport": false
+},
+"LFRO": {
+"name": "LANNION",
+"admin": "SYNDICAT MIXTE DE L'AEROPORT DE LANNION COTE DE GRANIT ROSE",
+"bestEmail": "afis@lannion.aeroport.fr",
+"otherEmails": [
+"afis@lannion.aeroport.fr",
+"escale@lannion.aeroport.fr"
+],
+"phones": [
+"02 96 05 82 34",
+"02 96 05 82 23",
+"02 96 05 82 99"
+],
+"airspaces": [
+"RMZ LANNION"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFRQ": {
+"name": "QUIMPER PLUGUFFAN",
+"admin": "SOGEAQC",
+"emails": [
+"operation@quimper.aeroport.bzh"
+],
+"bestEmail": "operation@quimper.aeroport.bzh",
+"phones": [
+"02 98 00 45 09"
+],
+"airspaces": [
+"CTR QUIMPER"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFRS": {
+"name": "NANTES ATLANTIQUE",
+"admin": "AEROPORT DU GRAND OUEST (AGO)",
+"bestEmail": "sna-o-e-ct-ld@aviation-civile.gouv.fr",
+"otherEmails": [
+"lfrs@aviavip.com",
+"slots@cohor.org",
+"sna-o-e-ct-ld@aviation-civile.gouv.fr"
+],
+"phones": [
+"02 40 84 81 53"
+],
+"airspaces": [
+"CTR NANTES"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"02 40 05 12 74"
+],
+"military": false,
+"heliport": false
+},
+"LFRT": {
+"name": "SAINT BRIEUC ARMOR",
+"admin": "SYNDICAT MIXTE AEROPORT DE ST BRIEUC ARMOR",
+"emails": [
+"operations@aeroport-saint-brieuc.fr"
+],
+"bestEmail": "operations@aeroport-saint-brieuc.fr",
+"otherEmails": [
+"tour@aeroport-saint-brieuc.fr"
+],
+"phones": [
+"02 96 94 95 00",
+"02 96 94 91 32"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFRU": {
+"name": "MORLAIX PLOUJEAN",
+"admin": "CCI FINISTERE - DELEGATION DE MORLAIX",
+"emails": [
+"aeroport.morlaix@finistere.cci.fr"
+],
+"bestEmail": "tour.morlaix@finistere.cci.fr",
+"otherEmails": [
+"tour.morlaix@finistere.cci.fr"
+],
+"phones": [
+"02 98 62 76 70"
+],
+"airspaces": [
+"RMZ MORLAIX"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFRV": {
+"name": "VANNES GOLFE DU MORBIHAN",
+"admin": "SEALAV",
+"emails": [
+"operations@vannes.aeroport.fr"
+],
+"bestEmail": "afis@vannes.aeroport.fr",
+"otherEmails": [
+"afis@vannes.aeroport.fr"
+],
+"phones": [
+"02 97 60 78 79"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFRZ": {
+"name": "SAINT NAZAIRE MONTOIR",
+"admin": "AEROPORT DU GRAND OUEST (AGO)",
+"emails": [
+"operations.snr@nantes.aeroport.fr"
+],
+"bestEmail": "operations.snr@nantes.aeroport.fr",
+"otherEmails": [
+"nteleaderssliasnr@nantes.aeroport.fr"
+],
+"phones": [
+"02 40 90 02 13",
+"06 16 92 09 66",
+"02 40 84 81 53"
+],
+"airspaces": [
+"CTR SAINT NAZAIRE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFSB": {
+"name": "BALE-MULHOUSE",
+"admin": "ETABLISSEMENT PUBLIC FRANCO-SUISSE AD BALE-MULHOUSE",
+"otherEmails": [
+"dm.bsl@cgs-ltd.com",
+"fbo@airservicebasel.com",
+"ppr-lfsb@euroairport.com",
+"slots@cohor.org"
+],
+"airspaces": [
+"CTR BALE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFSD": {
+"name": "DIJON-LONGVIC",
+"admin": "SYNDICAT MIXTE AEROPORT DIJON LONGVIC",
+"bestEmail": "operations.dijon@edeis.com",
+"otherEmails": [
+"operations.dijon@edeis.com"
+],
+"phones": [
+"06 37 63 54 51",
+"03 80 65 27 80"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFSG": {
+"name": "EPINAL MIRECOURT",
+"admin": "SOCIETE D'EXPLOITATION DE L'AEROPORT D'EPINAL MIRECOURT",
+"emails": [
+"aeroport@epinal-mirecourt.aeroport.fr",
+"direction@epinal-mirecourt.aeroport.fr"
+],
+"bestEmail": "afis@epinal-mirecourt.aeroport.fr",
+"otherEmails": [
+"afis@epinal-mirecourt.aeroport.fr"
+],
+"phones": [
+"03 29 37 01 99"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFSI": {
+"name": "SAINT DIZIER ROBINSON",
+"admin": "MINISTERE DES ARMEES",
+"phones": [
+"03 51 73 10 43",
+"03 25 07 80 15",
+"03 51 73 20 35"
+],
+"airspaces": [
+"CTR SAINT DIZIER"
+],
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFSL": {
+"name": "BRIVE SOUILLAC",
+"admin": "REGIE PERSONNALISEE DE L'AEROPORT BRIVE-SOUILLAC",
+"emails": [
+"ops@aeroport-brive-vallee-dordogne.com"
+],
+"bestEmail": "ops@aeroport-brive-vallee-dordogne.com",
+"phones": [
+"05 55 22 40 00"
+],
+"airspaces": [
+"CTR BRIVE"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFSM": {
+"name": "MONTBELIARD COURCELLES",
+"admin": "SYNDICAT MIXTE DE L'AERODROME DU PAYS DE MONTBELIARD",
+"bestEmail": "afis@aerodrome-montbeliard.fr",
+"otherEmails": [
+"afis@aerodrome-montbeliard.fr",
+"j.rota@thevenin-ducrot.fr"
+],
+"phones": [
+"03 81 90 71 50"
+],
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFSN": {
+"name": "NANCY ESSEY",
+"admin": "SASU GRAND AEROPOLE NANCY",
+"emails": [
+"operations@aeroport-nancy-tomblaine.fr"
+],
+"bestEmail": "afis@aeroport-nancy-tomblaine.fr",
+"otherEmails": [
+"afis@aeroport-nancy-tomblaine.fr"
+],
+"phones": [
+"03 83 21 56 90",
+"03 83 29 06 19"
+],
+"airspaces": [
+"RMZ NANCY ESSEY"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFSO": {
+"name": "NANCY OCHEY",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"emails": [
+"ba133-ops.dv@intradef.gouv.fr"
+],
+"bestEmail": "ba133-ops.dv@intradef.gouv.fr",
+"phones": [
+"03 57 80 67 00",
+"03 83 52 78 62",
+"03 83 52 64 46"
+],
+"airspaces": [
+"CTR OCHEY"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false
+},
+"LFST": {
+"name": "STRASBOURG ENTZHEIM",
+"admin": "SOCIETE DE L'AEROPORT STRASBOURG-ENTZHEIM",
+"airspaces": [
+"CTR STRASBOURG"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"atsPhones": [
+"03 88 59 94 16"
+],
+"military": false,
+"heliport": false
+},
+"LFSX": {
+"name": "LUXEUIL SAINT SAUVEUR",
+"admin": "MINISTERE DES ARMEES (FAF)",
+"phones": [
+"03 70 56 10 00",
+"03 70 56 11 00",
+"03 70 56 12 05"
+],
+"airspaces": [
+"CTR LUXEUIL"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFTH": {
+"name": "HYERES LE PALYVESTRE",
+"admin": "MINISTERE DES ARMEES (FNF)",
+"emails": [
+"Fbo@toulon-hyeres.aeroport.fr",
+"aero-hyeres.bdv-gestion.fct@intradef.gouv.fr",
+"traficops@toulon-hyeres.aeroport.fr"
+],
+"bestEmail": "traficops@toulon-hyeres.aeroport.fr",
+"otherEmails": [
+"aero-hyeres.oqcla.fct@intradef.gouv.fr",
+"ban-hyeres.controleur-cdq.fct@def.gouv.fr",
+"fbo@toulon-hyeres.aeroport.fr"
+],
+"phones": [
+"04 94 00 83 83",
+"04 94 38 20 00",
+"04 22 44 43 07"
+],
+"web": "https://cy.myhandlingsoftware.com",
+"airspaces": [
+"CTR HYERES"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": true,
+"heliport": false,
+"drone": [
+"D 2 LFTH.AD 2.23 Renseignements supplémentaires Additional information - Vols d’ACFT télépilotés non habités dans les CTR et CTA (AEM NR 9525) Vols de drones dans la CTR et CTA et activité de parachutage. Information connue des services ATS. - UAV flights in CTR and CTA (AEM NR 9525) and airdropping activity. Information given by ATS. AERODROMES AERODROMES L'aérodrome d'Hyères-le-Palyvestre est un terrain mixte ou l’activité militaire est prioritaire. L'aérodrome de Cuers"
+]
+},
+"LFTW": {
+"name": "NIMES GARONS",
+"admin": "EDEIS AEROPORT NIMES",
+"emails": [
+"nimes.ops@edeis.com"
+],
+"bestEmail": "nimes.ops@edeis.com",
+"airspaces": [
+"CTR GARONS"
+],
+"airspaceClass": "D",
+"service": "TWR",
+"military": false,
+"heliport": false
+},
+"LFTZ": {
+"name": "LA MOLE",
+"admin": "S.A AEROPORT DU GOLFE DE SAINT-TROPEZ",
+"emails": [
+"operations@sainttropez.aeroport.fr"
+],
+"bestEmail": "operations@sainttropez.aeroport.fr",
+"phones": [
+"04 94 54 76 40",
+"04 94 49 57 71"
+],
+"airspaces": [
+"RMZ LA MOLE"
+],
+"airspaceClass": "G",
+"service": "AFIS",
+"military": false,
+"heliport": false
+},
+"LFWF": {
+"name": "BREST CENTRE HOSPITALIER LA CAVALE BLANCHE",
+"phones": [
+"02 98 22 33 33",
+"02 98 22 33 33"
+],
+"military": false,
+"heliport": true
+},
+"LFWM": {
+"name": "COLMAR HOPITAL PASTEUR",
+"phones": [
+"03 89 12 45 09",
+"03 89 12 44 48",
+"03 89 12 45 09"
+],
+"military": false,
+"heliport": true
+}
+}
+}

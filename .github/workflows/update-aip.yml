@@ -1,0 +1,27 @@
+# Met à jour chaque jour (si un nouveau cycle AIRAC est paru) les données AIP du site,
+# puis publie le commit : l'hébergement (GitHub Pages, Netlify…) se redéploie tout seul.
+name: Mise à jour AIP
+on:
+  schedule:
+    - cron: '17 5 * * *'   # tous les jours à 05:17 UTC
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Mettre à jour les données AIP
+        run: python3 tools/update_aip.py
+      - name: Publier si changement
+        run: |
+          if git diff --quiet -- data/; then echo "Rien à publier"; exit 0; fi
+          git config user.name "aip-bot"
+          git config user.email "aip-bot@users.noreply.github.com"
+          git add data/
+          git commit -m "Données AIP : cycle $(python3 -c "import json;print(json.load(open('data/aip-aerodromes.json'))['airac'])")"
+          git push

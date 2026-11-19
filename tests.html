@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Tests – logique réglementaire</title>
+<meta name="robots" content="noindex">
+<style>body{font-family:system-ui,sans-serif;margin:20px;background:#fff;color:#1b2333}li.ok{color:#15803d}li.ko{color:#b91c1c;font-weight:600}#sum{font-size:20px;font-weight:700}</style></head>
+<body><h1>Tests automatiques</h1><p id="sum">⏳ En cours…</p><ul id="out"></ul>
+<div id="view" hidden></div><div id="modal" hidden><div id="modalBody"></div></div><div id="toast" hidden></div>
+<script src="lib/turf.min.js"></script><script src="lib/pdf-lib.min.js"></script>
+<script>window.OSD_STORE_KEY = 'osd-tests';</script>
+<script src="js/config.js"></script><script src="js/store.js"></script><script src="js/ui.js"></script><script src="js/fleet.js"></script>
+<script src="js/regulation.js"></script><script src="js/documents.js"></script><script src="js/cerfa.js"></script><script src="js/logbook.js"></script>
+<script>
+(async () => {
+  const out = document.getElementById('out'); let ok = 0, ko = 0;
+  const t = (name, cond, info = '') => { const li = document.createElement('li'); li.className = cond ? 'ok' : 'ko'; li.textContent = (cond ? '✔ ' : '✘ ') + name + (cond ? '' : ' — ' + info); out.appendChild(li); cond ? ok++ : ko++; };
+  await Promise.all([Regulation.aipReady, Regulation.ctrReady]);
+
+  // Préavis : 10 jours ouvrables pleins (hors dimanches et fériés, sans le jour d'envoi ni le 1er jour de vol)
+  let n = Regulation.notice('2026-12-04', '69', '2026-11-18');
+  t('Préavis 18/11 → 04/12 : 13 jours ouvrables pleins', n.full === 13, JSON.stringify(n));
+  t('Dernier jour d\'envoi pour un vol le 04/12/2026 = 22/11', n.latest === '2026-11-22', n.latest);
+  n = Regulation.notice('2026-11-21', '69', '2026-11-18');
+  t('Préavis 3 jours → insuffisant', n.ok === false && n.full === 2, JSON.stringify(n));
+  n = Regulation.notice('2026-05-26', '69', '2026-05-11');
+  t('Fériés 2026 exclus (Ascension 14/05, lundi de Pentecôte 25/05)', n.full === 10, JSON.stringify(n));
+  n = Regulation.notice('2026-04-10', '67', '2026-03-31');
+  t('Alsace-Moselle : Vendredi saint exclu', n.full === 6, JSON.stringify(n));
+  t('Préavis maximal d\'un mois signalé', Regulation.notice('2027-02-01', '69', '2026-11-18').tooEarly === true);
+
+  // Cycles AIRAC
+  t('AIRAC au 27/11/2026 = 26/11/2026', Regulation.airac(new Date(2026, 10, 27)).iso === '2026-11-26');
+  t('AIRAC au 28/10/2026 = 01/10/2026', Regulation.airac(new Date(2026, 9, 28)).iso === '2026-10-01');
+  t('Dossier eAIP du 26/11/2026', Regulation.airac(new Date(2026, 10, 27)).folder === 'eAIP_26_NOV_2026');
+
+  // CTR issues de l'AIP
+  const at = (lon, lat) => Regulation.ctrsAt(turf.circle([lon, lat], 0.05)).map(f => f.properties.name);
+  t('Point à Bron → CTR BRON', at(4.93, 45.715).includes('CTR BRON'), at(4.93, 45.715));
+  t('Point à Cazaux → CTR CAZAUX', at(-1.10, 44.50).includes('CTR CAZAUX'), at(-1.10, 44.50));
+  t('Paris centre → CTR PARIS', at(2.35, 48.85).some(n => /PARIS/.test(n)), at(2.35, 48.85));
+  t('Campagne creusoise → aucune CTR', at(2.0, 46.1).length === 0, at(2.0, 46.1));
+  t('Annuaire AIP chargé (≥ 100 terrains)', Object.keys(Regulation.AIPDIR().aerodromes).length >= 100);
+  t('Cazaux : adresse des opérations de la base', (Regulation.aipInfo('LFBC') || {}).bestEmail === 'ba120.dv.fct@intradef.gouv.fr');
+  t('Bron : pas d\'adresse commerciale proposée', !(Regulation.aipInfo('LFLY') || {}).bestEmail);
+
+  // Règles par scénario
+  const agglo = [{ properties: { limite: 'Vol interdit *', remarque: 'Évolution interdite en espace public en agglomération sauf conformément à l\'arrêté Espace.' } }];
+  const run = (m, extra = {}) => Regulation.buildConstraints(Object.assign({ date: '2026-12-20', maxHeight: 40, vlos: 'VLOS', takeoff: 'client', zone: turf.circle([2.0, 46.1], 0.05) }, m), Object.assign({ restrictions: [], sensitive: [], commune: { codeDepartement: '23' } }, extra));
+  const has = (C, re, lvl) => C.some(c => re.test(c.title) && (!lvl || c.level === lvl));
+  let C = run({ category: 'A2' }, { restrictions: agglo });
+  t('A2 en agglomération : déclaration préfecture, pas d\'interdiction', has(C, /Zone peuplée/) && !has(C, /A2/, 'bad'));
+  t('Une seule contrainte « zone peuplée » (pas de doublon)', C.filter(c => /agglom|peuplée/i.test(c.title)).length === 1, C.map(c => c.title));
+  C = run({ category: 'A3' }, { restrictions: agglo });
+  t('A3 en agglomération : bloquant', C.some(c => /A3 incompatible/.test(c.title) && c.blocking));
+  C = run({ category: 'A2', maxHeight: 40, zone: turf.circle([4.93, 45.715], 0.05) });
+  t('CTR civile à 40 m en ouverte : pas d\'accord', has(C, /CTR BRON : vol possible/, 'info'));
+  C = run({ category: 'A2', maxHeight: 60, zone: turf.circle([4.93, 45.715], 0.05) });
+  t('CTR civile à 60 m en ouverte : accord nécessaire', has(C, /CTR BRON : accord/, 'warn'));
+  t('Démarche CTR civile : courrier ATC vers LFLY', C.some(c => c.actions.some(a => a.template === 'atc' && a.target && a.target.icao === 'LFLY')));
+  C = run({ category: 'A2', maxHeight: 20, zone: turf.circle([-1.10, 44.50], 0.05) });
+  t('CTR militaire (Cazaux) en ouverte : interdit, bloquant', C.some(c => /CAZAUX/.test(c.title) && c.level === 'bad' && c.blocking));
+  C = run({ category: 'STS-01', maxHeight: 20, zone: turf.circle([-1.10, 44.50], 0.05) });
+  t('CTR militaire en STS-01 : accord, non bloquant', C.some(c => /CAZAUX/.test(c.title) && c.level === 'warn') && !C.some(c => c.blocking));
+  C = run({ category: 'A2', maxHeight: 150 });
+  t('Hauteur > 120 m : bloquant', has(C, /120 m/, 'bad'));
+  C = run({ category: 'A2', vlos: 'BVLOS' });
+  t('Vol hors vue : notification AlphaTango', has(C, /hors vue/, 'warn'));
+  C = run({ category: 'A2', startTime: '19:00', endTime: '20:00' }, { weather: { daily: { sunrise: ['2026-12-20T08:30'], sunset: ['2026-12-20T17:00'] } } });
+  t('Vol de nuit : dérogation', has(C, /nuit/, 'bad'));
+  C = run({ category: 'A2', takeoff: 'public' }, { restrictions: agglo });
+  t('Décollage sur la voie publique : mairie', C.some(c => c.actions.some(a => a.template === 'mairie')));
+  C = run({ category: 'A2', takeoff: 'client' }, { restrictions: agglo });
+  t('Décollage chez le client : pas de mairie', !C.some(c => c.actions.some(a => a.template === 'mairie')));
+  t('Chaque contrainte à traiter indique comment la lever', run({ category: 'A2', maxHeight: 60, zone: turf.circle([4.93, 45.715], 0.05) }, { restrictions: agglo }).filter(c => c.level === 'bad' || c.level === 'warn').every(c => c.fix));
+
+  // Cerfa officiel
+  Store.setOperator({ legalType: 'morale', company: 'Test SARL', siret: '1', address: 'a', zip: '69000', city: 'Lyon', email: 'a@b.c', mobile: '06', managerLastName: 'N', managerFirstName: 'P', managerBirth: 'x', managerRole: 'Gérant', managerAddress: 'a', managerEmail: 'a@b.c', insurer: 'X' });
+  const p = Store.upsert('pilots', { firstName: 'A', lastName: 'B', phone: '06', email: 'p@b.c', birthDate: '1990-01-01', birthPlace: 'Lyon', address: 'a', independent: 'Oui' });
+  const d = Store.upsert('drones', { maker: 'M', model: 'X', serial: 'S', mtom: 500, classMark: 'C1' });
+  const m = { category: 'A1', date: '2026-12-20', startTime: '10:00', endTime: '11:00', purpose: 'test', client: 'c', address: '1 rue X 69000 Lyon', maxHeight: 50, maxDistance: 100, hoursReason: 'r', siteDescription: 'd', pilotId: p.id, droneId: d.id, zone: turf.circle([4.85, 45.75], 0.05), analysis: { restrictions: [agglo[0].properties] } };
+  const ctx = { commune: { nom: 'Lyon', codeDepartement: '69', codesPostaux: ['69000'] }, restrictions: agglo };
+  t('Cerfa : aucun champ obligatoire manquant', Cerfa.build(m, ctx).missing.length === 0, JSON.stringify(Cerfa.build(m, ctx).missing));
+  t('Cerfa : champ manquant détecté (objet de mission)', Cerfa.build({ ...m, purpose: '' }, ctx).missing.some(x => /Objet/.test(x.label)));
+  const pdf = await PDFLib.PDFDocument.load(await (await Cerfa.fillPdf(m, ctx)).arrayBuffer());
+  const f = pdf.getForm();
+  t('PDF : raison sociale remplie', f.getTextField('Raison sociale ou dénomination').getText() === 'Test SARL');
+  t('PDF : sous-catégorie A1 cochée', f.getCheckBox('Souscatégorie A1').isChecked());
+  t('PDF : « en agglomération » coché', f.getCheckBox('Site n 1').isChecked());
+  t('PDF : masse en kg (0,5)', f.getTextField('Texte64').getText() === '0,5');
+  localStorage.removeItem('osd-tests');
+
+  document.getElementById('sum').textContent = ko ? `❌ ${ko} échec(s), ${ok} réussite(s)` : `✅ ${ok} tests réussis`;
+  document.title = ko ? 'ÉCHEC' : 'OK';
+})().catch(e => { document.getElementById('sum').textContent = '❌ Erreur : ' + e.message; console.error(e); });
+</script></body></html>
