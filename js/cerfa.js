@@ -166,7 +166,7 @@ const Cerfa = (() => {
     const area = turf.area(m.zone);
     g.fillText(`Centre : ${cc[1].toFixed(5)} N, ${cc[0].toFixed(5)} E  -  Surface : ${area > 10000 ? (area / 10000).toFixed(2) + ' ha' : Math.round(area) + ' m²'}  -  Hauteur max : ${m.maxHeight || '?'} m  -  Éloignement max : ${m.maxDistance || '?'} m`, 20, H - 60);
     g.fillText(`Date : ${fr(m.date)} ${m.startTime || ''}-${m.endTime || ''}  -  Fond : Plan IGN + restrictions UAS (DGAC/IGN)  -  Zone d'évolution en bleu`, 20, H - 34);
-    return new Promise(res => cv.toBlob(res, 'image/png'));
+    return new Promise(res => cv.toBlob(res, 'image/jpeg', 0.82));
   }
 
   /* ---------- E-mail .eml avec pièces jointes ---------- */
@@ -184,6 +184,29 @@ const Cerfa = (() => {
     }
     return new Blob([out + `--${B}--\r\n`], { type: 'message/rfc822' });
   }
+
+  /* ---------- Allègement des pièces jointes ---------- */
+  const LIMIT = 7 * 1024 * 1024; // ≈ 9,5 Mo une fois encodé : sous la limite courante des messageries de l'État (10 Mo)
+  async function shrinkImage(blob, name) {
+    if (!/^image\/(jpe?g|png|webp|bmp)/.test(blob.type) || blob.size < 400 * 1024) return { blob, name };
+    try {
+      const bmp = await createImageBitmap(blob); const k = Math.min(1, 1800 / Math.max(bmp.width, bmp.height));
+      const cv = document.createElement('canvas'); cv.width = Math.round(bmp.width * k); cv.height = Math.round(bmp.height * k);
+      const g = cv.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, cv.width, cv.height); g.drawImage(bmp, 0, 0, cv.width, cv.height);
+      const out = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.8));
+      return out && out.size < blob.size ? { blob: out, name: name.replace(/\.\w+$/, '') + '.jpg' } : { blob, name };
+    } catch (e) { return { blob, name }; }
+  }
+  // Répartit les fichiers en envois de moins de LIMIT (le Cerfa et le plan restent dans le 1er envoi)
+  function splitBatches(files) {
+    const batches = [[]]; let size = 0;
+    for (const f of files) {
+      if (size + f.blob.size > LIMIT && batches[batches.length - 1].length) { batches.push([]); size = 0; }
+      batches[batches.length - 1].push(f); size += f.blob.size;
+    }
+    return batches;
+  }
+  const mo = (n) => (n / 1048576).toFixed(1).replace('.', ',') + ' Mo';
 
   /* ---------- Pièces justificatives requises (notice §7) ---------- */
   function requiredPieces(m) {
@@ -216,8 +239,9 @@ const Cerfa = (() => {
     // Mémorise l'adresse « drones » saisie pour ce département (annuaire personnel)
     const rememberPref = (email) => {
       if (!dep || !/@/.test(email) || email === pref.email) return;
-      const ex = Store.all('contacts').find(c => c.type === 'Préfecture' && c.dep === dep && c.drones);
-      Store.upsert('contacts', Object.assign(ex || {}, { name: `${pref.name || 'Préfecture'} – déclarations drones`, type: 'Préfecture', email, dep, drones: true, area: dep, website: pref.website || '' }));
+      const arr = pref.arr || '';
+      const ex = Store.all('contacts').find(c => c.type === 'Préfecture' && c.dep === dep && c.drones && (c.arr || '') === arr);
+      Store.upsert('contacts', Object.assign(ex || {}, { name: `${pref.name || 'Préfecture'} – déclarations drones`, service: pref.name, type: 'Préfecture', email, dep, arr, drones: true, area: dep + (arr ? ' (arr. ' + arr + ')' : ''), website: pref.website || '' }));
     };
     const nt = Regulation.notice(m.date, ctx.commune && ctx.commune.codeDepartement);
     const docs = Store.all('docs');
@@ -251,6 +275,7 @@ const Cerfa = (() => {
         <div class="row"><button class="btn" id="dxPdf">👁 Aperçu du Cerfa</button><button class="btn" id="dxPlan">🗺 Plan de zone</button></div>
         <div class="row"><button class="btn" id="dxSep" disabled>⬇ Pièces + ouvrir la messagerie</button><button class="btn primary" id="dxEml" disabled>✉️ Télécharger le mail prêt à envoyer (.eml)</button></div></div>
       <p class="legend" id="dxState" style="text-align:right"></p>
+      <p class="legend" id="dxSize">📦 <button type="button" class="btn sm" id="dxSizeBtn">Calculer la taille du dossier</button> (calculée aussi à l'envoi ; au-delà de ${mo(LIMIT)}, le dossier est découpé en plusieurs mails).</p>
       <p class="legend">Le fichier .eml s'ouvre dans Outlook, Apple Mail ou Thunderbird avec toutes les pièces jointes. Alternative : déclaration en ligne sur <a href="https://alphatango.aviation-civile.gouv.fr/" target="_blank" rel="noopener">AlphaTango</a>.</p>`, (root) => {
       const f = UI.$('#dxf', root);
       if (f.elements.endDate) f.elements.endDate.min = m.date || '';
@@ -330,21 +355,37 @@ ${[op.phone, op.mobile, op.email].filter(Boolean).join(' – ')}`;
       UI.$('#dxPdf', root).onclick = async () => { try { open(await fillPdf(m, ctx)); } catch (e) { console.error(e); UI.toast('Erreur lors du remplissage du PDF'); } };
       UI.$('#dxPlan', root).onclick = async () => { const b = await renderPlan(m); b ? open(b) : UI.toast('Aucune zone'); };
       const collect = async () => {
-        const files = [{ name: `Cerfa_15476-04_${slug}.pdf`, blob: await fillPdf(m, ctx) }, { name: `Plan_zone_${slug}.png`, blob: await renderPlan(m) }];
+        const files = [{ name: `Cerfa_15476-04_${slug}.pdf`, blob: await fillPdf(m, ctx) }, { name: `Plan_zone_${slug}.jpg`, blob: await renderPlan(m) }];
         for (const pc of pieces) {
           if (extra[pc.key]) files.push({ name: pc.key + '_' + extra[pc.key].name, blob: extra[pc.key] });
           else { const dc = Store.get('docs', m.pieces[pc.key]); const b = dc && await Store.getFile(dc.fileId); if (b) files.push({ name: pc.key + '_' + (dc.fileName || 'document'), blob: b }); }
         }
+        for (let i = 0; i < files.length; i++) files[i] = Object.assign(files[i], await shrinkImage(files[i].blob, files[i].name));
         return files;
       };
+      // Taille du dossier et conseils
+      const sizeInfo = async () => {
+        const files = await collect(); const total = files.reduce((s, f) => s + f.blob.size, 0); const heavy = files.filter(f => f.blob.size > 2 * 1048576);
+        const n = splitBatches(files).length;
+        UI.$('#dxSize', root).innerHTML = `📦 Taille du dossier : <b>${mo(total)}</b> (${files.length} fichiers, images allégées automatiquement). ` + (n > 1
+          ? `<span class="field-warn">Trop lourd pour un seul mail : il sera découpé en <b>${n} mails</b> de moins de ${mo(LIMIT)} (« envoi 1/${n} »…). Autre solution : <a href="https://francetransfert.numerique.gouv.fr/" target="_blank" rel="noopener">France Transfert</a>, le service gratuit de l'État pour envoyer de gros fichiers à une adresse en .gouv.fr.</span>`
+          : '✅ Taille compatible avec les messageries de l\'État.') +
+          (heavy.length ? `<br><span class="field-warn">Fichiers lourds : ${heavy.map(f => esc(f.name) + ' (' + mo(f.blob.size) + ')').join(', ')}. Pour un PDF scanné, réenregistrez-le en qualité « standard » (environ 150 dpi) : il passera souvent sous 1 Mo.</span>` : '');
+        return files;
+      };
+      UI.$('#dxSizeBtn', root).onclick = () => sizeInfo();
       UI.$('#dxEml', root).onclick = async () => {
         if (!check()) return; UI.toast('Préparation du mail…');
-        const files = await collect();
-        const eml = await buildEml({ to: UI.$('#dxTo', root).value.trim(), subject: subj.value, body: body.value, files });
-        UI.download(`Declaration_prefecture_${safeName(slug)}.eml`, eml, 'message/rfc822');
+        const files = await sizeInfo(); const batches = splitBatches(files), n = batches.length;
+        for (let i = 0; i < n; i++) {
+          const part = n > 1 ? ` (envoi ${i + 1}/${n})` : '';
+          const note = n > 1 ? (i === 0 ? `\n\n[Dossier envoyé en ${n} messages en raison de la taille des pièces jointes : merci de les considérer ensemble.]` : `\n\n[Suite du dossier – pièces jointes ${i + 1}/${n} : ${batches[i].map(f => f.name).join(', ')}]`) : '';
+          const eml = await buildEml({ to: UI.$('#dxTo', root).value.trim(), subject: subj.value + part, body: (i === 0 ? body.value : `Madame, Monsieur,\n\nSuite de notre déclaration préalable « ${subj.value} ».`) + note, files: batches[i] });
+          UI.download(`Declaration_prefecture_${safeName(slug)}${n > 1 ? '_' + (i + 1) + 'sur' + n : ''}.eml`, eml, 'message/rfc822');
+        }
         rememberPref(UI.$('#dxTo', root).value.trim());
         m.steps = m.steps || {}; m.steps.prefecture = m.steps.prefecture === 'Accordé' ? 'Accordé' : 'Prêt à envoyer'; onSave && onSave();
-        UI.toast('Mail prêt : ouvrez le fichier .eml puis cliquez sur Envoyer');
+        UI.toast(n > 1 ? `${n} mails prêts : ouvrez chaque fichier .eml puis cliquez sur Envoyer` : 'Mail prêt : ouvrez le fichier .eml puis cliquez sur Envoyer');
       };
       UI.$('#dxSep', root).onclick = async () => {
         if (!check()) return;

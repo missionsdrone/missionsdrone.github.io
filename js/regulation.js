@@ -58,7 +58,8 @@ const Regulation = (() => {
   const prefReady = fetch('data/prefectures-drones.json').then(r => r.json()).then(d => (PREFS = d)).catch(() => PREFS);
   const prefDrone = (dep) => (dep && PREFS.departements[dep]) || null;
   // Adresse mémorisée par l'utilisateur pour ce département (prioritaire)
-  const prefSaved = (dep) => Store.all('contacts').find(c => c.type === 'Préfecture' && c.email && c.dep === dep && c.drones);
+  // Adresse mémorisée : d'abord pour l'arrondissement exact, sinon pour le département
+  const prefSaved = (dep, arr) => { const L = Store.all('contacts').filter(c => c.type === 'Préfecture' && c.email && c.dep === dep && c.drones); return L.find(c => arr && c.arr === arr) || L.find(c => !c.arr); };
   let CTRS = { features: [] };
   const ctrReady = fetch('data/aip-ctr.geojson').then(r => r.json()).then(d => (CTRS = d)).catch(() => CTRS);
   const ctrsAt = (zone) => { const seen = new Set(); return CTRS.features.filter(f => { try { if (seen.has(f.properties.name) || !turf.booleanIntersects(f, zone)) return false; seen.add(f.properties.name); return true; } catch (e) { return false; } }); };
@@ -182,7 +183,9 @@ const Regulation = (() => {
       const p = r.features && r.features[0] && r.features[0].properties;
       if (p && p.citycode) {
         const [dep, depName] = (p.context || '').split(',').map(s => s.trim());
-        return { nom: p.city, code: p.citycode, codeDepartement: dep || p.citycode.slice(0, 2), departement: { nom: depName || dep }, codesPostaux: [p.postcode], address: p.label, district: p.district };
+        let arr = '';
+        try { const c = await ign('BDTOPO_V3:commune', `code_insee='${p.citycode}'`, 'code_insee_de_l_arrondissement', 1); arr = c[0] ? c[0].properties.code_insee_de_l_arrondissement : ''; } catch (e) { }
+        return { nom: p.city, code: p.citycode, codeDepartement: dep || p.citycode.slice(0, 2), departement: { nom: depName || dep }, codesPostaux: [p.postcode], address: p.label, district: p.district, arr };
       }
     } catch (e) { /* repli */ }
     const r = await fetchJSON(`https://geo.api.gouv.fr/communes?lat=${lat}&lon=${lon}&fields=nom,code,codeDepartement,departement,codesPostaux`, { timeout: 15000 });
@@ -210,9 +213,12 @@ const Regulation = (() => {
     else {
       const pref = prefs.find(r => /^Préfecture - /i.test(r.nom)) || prefs.find(r => /^Préfecture/i.test(r.nom) && !/région/i.test(r.nom));
       if (pref) {
-        const c = norm(pref, 'Préfecture'), pd = prefDrone(dep), saved = prefSaved(dep);
-        c.dep = dep;
-        if (saved) { c.email = saved.email; c.emailSource = 'votre annuaire'; c.drones = true; }
+        const c = norm(pref, 'Préfecture'), pd = prefDrone(dep), arr = commune.arr, saved = prefSaved(dep, arr);
+        const sub = pd && pd.arrondissements && pd.arrondissements[arr];
+        c.dep = dep; c.arr = sub ? arr : '';
+        if (sub) { c.name = sub.service; c.website = sub.source || c.website; }
+        if (saved) { c.email = saved.email; c.emailSource = 'votre annuaire'; c.drones = true; if (saved.service) c.name = saved.service; }
+        else if (sub && sub.email) { c.email = sub.email; c.emailSource = sub.service; c.drones = true; }
         else if (pd && pd.email) { c.email = pd.email; c.emailSource = 'site de la préfecture'; c.drones = true; c.website = pd.source || c.website; }
         else { c.genericEmail = c.email; c.email = ''; c.website = (pd && pd.site ? pd.site.replace(/\/$/, '') + '/content/search?SearchText=drone' : c.website); }
         out.push(c);
