@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Missions Drone – Préparation de vols drone gratuite</title>
+<meta name="description" content="Préparez vos vols de drone gratuitement : zones de restriction, CTR, contraintes réglementaires, déclaration préfecture Cerfa 15476*04 préremplie, courriers aux organismes, carnet de vol.">
+<meta name="theme-color" content="#2563eb">
+<meta property="og:title" content="Missions Drone – Préparation de vols drone gratuite">
+<meta property="og:description" content="Contraintes réglementaires, CTR, Cerfa préfecture prérempli et courriers aux organismes, sans abonnement.">
+<meta property="og:image" content="icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://missionsdrone.github.io/">
+<link rel="canonical" href="https://missionsdrone.github.io/">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="lib/leaflet/leaflet.css">
+<link rel="stylesheet" href="lib/geoman/leaflet-geoman.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#view">Aller au contenu</a>
+<aside class="sidebar" aria-label="Navigation principale">
+  <div class="brand"><img class="logo" src="icons/icon.svg" alt=""><div><b data-app-name>Missions Drone</b><small>Préparation de vols — gratuit</small></div></div>
+  <nav id="nav">
+    <a href="#/dashboard" data-route="dashboard">📊 Tableau de bord</a>
+    <a href="#/missions" data-route="missions">🗺️ Missions</a>
+    <a href="#/guide" data-route="guide">📘 Guide express</a>
+    <a href="#/pilots" data-route="pilots">🧑‍✈️ Télépilotes</a>
+    <a href="#/drones" data-route="drones">🚁 Drones</a>
+    <a href="#/logbook" data-route="logbook">📒 Carnet de vol</a>
+    <a href="#/docs" data-route="docs">📁 Documentation</a>
+    <a href="#/contacts" data-route="contacts">📇 Contacts</a>
+    <a href="#/settings" data-route="settings">⚙️ Exploitant</a>
+  </nav>
+  <div class="sidebar-foot">Vos données restent dans ce navigateur.<br><a href="#/settings">Sauvegarder / restaurer</a> · <a href="#/about">À propos et mentions légales</a></div>
+</aside>
+<button class="menu-btn" id="menuBtn" aria-label="Ouvrir le menu">☰</button>
+<main id="view" tabindex="-1"></main>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true"><div class="modal-box"><button class="modal-close" id="modalClose" aria-label="Fermer">×</button><div id="modalBody"></div></div></div>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<noscript><p style="padding:20px">Ce site nécessite JavaScript.</p></noscript>
+
+<script src="lib/leaflet/leaflet.js"></script>
+<script src="lib/geoman/leaflet-geoman.js"></script>
+<script src="lib/turf.min.js"></script>
+<script src="lib/pdf-lib.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/fleet.js"></script>
+<script src="js/regulation.js"></script>
+<script src="js/documents.js"></script>
+<script src="js/cerfa.js"></script>
+<script src="js/mission.js"></script>
+<script src="js/logbook.js"></script>
+<script src="js/guide.js"></script>
+<script src="js/about.js"></script>
+<script src="js/onboarding.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

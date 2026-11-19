@@ -1,0 +1,6 @@
+Bibliothèques tierces incluses dans ce site
+- Leaflet 1.9.4 — BSD 2-Clause — © Volodymyr Agafonkin, CloudMade — https://leafletjs.com
+- Leaflet-Geoman Free 2.17.0 — MIT — © Sumit Kumar, Geoman.io — https://geoman.io
+- Turf.js 6.5.0 — MIT — © Morgan Herlocker et contributeurs — https://turfjs.org
+- pdf-lib 1.17.1 — MIT — © Andrew Dillon — https://pdf-lib.js.org
+Les textes complets des licences sont disponibles sur les sites des projets.
