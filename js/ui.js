@@ -25,13 +25,20 @@ const UI = {
   /* Formulaire générique à partir d'une description de champs */
   formFields(fields, obj = {}) {
     return fields.map(f => {
+      if (f.type === 'section') return `<div class="full form-section">${f.l}${f.hint ? `<span class="legend"> — ${f.hint}</span>` : ''}</div>`;
       const v = obj[f.k] ?? f.def ?? '';
-      const cls = f.full ? 'full' : '';
-      if (f.type === 'select') return `<label class="${cls}">${f.l}<select name="${f.k}">${f.opts.map(o => { const [val, lab] = Array.isArray(o) ? o : [o, o]; return `<option value="${UI.esc(val)}" ${String(v) === String(val) ? 'selected' : ''}>${UI.esc(lab)}</option>`; }).join('')}</select></label>`;
-      if (f.type === 'textarea') return `<label class="${cls || 'full'}">${f.l}<textarea name="${f.k}">${UI.esc(v)}</textarea></label>`;
-      if (f.type === 'checkbox') return `<label class="check ${cls}"><input type="checkbox" name="${f.k}" ${v ? 'checked' : ''}> ${f.l}</label>`;
-      return `<label class="${cls}">${f.l}<input type="${f.type || 'text'}" name="${f.k}" value="${UI.esc(v)}" ${f.ph ? `placeholder="${UI.esc(f.ph)}"` : ''} ${f.step ? `step="${f.step}"` : ''}></label>`;
+      const cls = (f.full ? 'full' : '') + (f.showIf ? ' cond' : '');
+      const hint = f.hint ? `<span class="hint">${f.hint}</span>` : '';
+      if (f.type === 'select') return `<label class="${cls}" data-k="${f.k}">${f.l}${hint}<select name="${f.k}">${f.opts.map(o => { const [val, lab] = Array.isArray(o) ? o : [o, o]; return `<option value="${UI.esc(val)}" ${String(v) === String(val) ? 'selected' : ''}>${UI.esc(lab)}</option>`; }).join('')}</select></label>`;
+      if (f.type === 'textarea') return `<label class="${cls || 'full'}" data-k="${f.k}">${f.l}${hint}<textarea name="${f.k}">${UI.esc(v)}</textarea></label>`;
+      if (f.type === 'checkbox') return `<label class="check ${cls}" data-k="${f.k}"><input type="checkbox" name="${f.k}" ${v ? 'checked' : ''}> ${f.l}${hint}</label>`;
+      return `<label class="${cls}" data-k="${f.k}">${f.l}${hint}<input type="${f.type || 'text'}" name="${f.k}" value="${UI.esc(v)}" ${f.ph ? `placeholder="${UI.esc(f.ph)}"` : ''} ${f.step ? `step="${f.step}"` : ''}></label>`;
     }).join('');
+  },
+  /* Affiche / masque les champs conditionnels (showIf: (valeurs) => bool) */
+  bindConditional(form, fields) {
+    const apply = () => { const v = UI.readForm(form, fields); fields.filter(f => f.showIf).forEach(f => { const el = form.querySelector(`[data-k="${f.k}"]`); if (el) el.style.display = f.showIf(v) ? '' : 'none'; }); };
+    form.addEventListener('change', apply); form.addEventListener('input', apply); apply();
   },
   readForm(form, fields) {
     const o = {};

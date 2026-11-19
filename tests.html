@@ -71,6 +71,22 @@
   t('Décollage chez le client : pas de mairie', !C.some(c => c.actions.some(a => a.template === 'mairie')));
   t('Chaque contrainte à traiter indique comment la lever', run({ category: 'A2', maxHeight: 60, zone: turf.circle([4.93, 45.715], 0.05) }, { restrictions: agglo }).filter(c => c.level === 'bad' || c.level === 'warn').every(c => c.fix));
 
+  // Certificats détectés par leur date de validité (sans n° d'attestation)
+  t('A1/A3 reconnu avec la seule date de validité', Fleet.certs({ a1a3Exp: '2031-01-25' }).a1a3Ok);
+  t('Certificat expiré non valide', !Fleet.certs({ a2Exp: '2020-01-01' }).a2Ok);
+  const pil = Store.upsert('pilots', { firstName: 'T', lastName: 'P', a1a3Exp: '2031-01-25', a2Exp: '2031-03-05' });
+  C = run({ category: 'A2', pilotId: pil.id }, { pilot: pil });
+  t('Pilote avec dates A1/A3 et A2 : aucune alerte de certificat', !C.some(c => /A1\/A3 manquante|A2 manquant/.test(c.title)), C.map(c => c.title));
+  // Assurance à reconduction tacite
+  Store.setOperator({ insurer: 'AXA', insuranceTacit: true });
+  t('Assurance tacite : pas d\'échéance, assureur de l\'exploitant', Fleet.insurance({}).insurer === 'AXA' && !Fleet.insurance({}).exp);
+  t('Contrat propre au drone expiré détecté', Fleet.insurance({ ownInsurance: true, insurer: 'X', insuranceExp: '2020-01-01' }).exp === '2020-01-01');
+  // Dates incohérentes
+  t('Heure de fin avant le début : erreur', Regulation.whenErrors({ date: '2026-12-01', startTime: '10:00', endTime: '09:00' }).length === 1);
+  t('Date de report avant la date du vol : erreur', Regulation.whenErrors({ date: '2026-12-10', altDate: '2026-12-01' }).length === 1);
+  t('Vol sur plusieurs jours : heure de fin libre', Regulation.whenErrors({ date: '2026-12-01', endDate: '2026-12-03', startTime: '10:00', endTime: '09:00' }).length === 0);
+  t('Analyse : dates incohérentes = bloquant', run({ category: 'A2', startTime: '11:00', endTime: '10:00' }).some(c => /incohérents/.test(c.title) && c.blocking));
+
   // Cerfa officiel
   Store.setOperator({ legalType: 'morale', company: 'Test SARL', siret: '1', address: 'a', zip: '69000', city: 'Lyon', email: 'a@b.c', mobile: '06', managerLastName: 'N', managerFirstName: 'P', managerBirth: 'x', managerRole: 'Gérant', managerAddress: 'a', managerEmail: 'a@b.c', insurer: 'X' });
   const p = Store.upsert('pilots', { firstName: 'A', lastName: 'B', phone: '06', email: 'p@b.c', birthDate: '1990-01-01', birthPlace: 'Lyon', address: 'a', independent: 'Oui' });

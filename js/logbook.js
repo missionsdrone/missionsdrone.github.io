@@ -52,7 +52,8 @@ const Logbook = (() => {
       const info = () => {
         const o = UI.readForm(form, F); const min = minutesOf(o);
         const inc = o.incident && o.incident !== 'Aucun' && o.incident !== 'Anomalie technique';
-        UI.$('#lfInfo', root).innerHTML = `Durée retenue : <b>${hm(min)}</b>` + (inc ? `<div class="alert" style="margin-top:8px">${o.incident === 'Incident' ? 'Les incidents sont à signaler' : 'Signalement obligatoire'} dans les 72 h (règlement (UE) 376/2014) via le <a href="https://aviationreporting.eu/" target="_blank" rel="noopener">portail européen de notification d'événements</a>${/grave|Accident/.test(o.incident) ? ' ; accident ou incident grave : informez aussi le BEA sans délai' : ''}.</div>` : '');
+        const overnight = o.takeoff && o.landing && o.landing < o.takeoff;
+        UI.$('#lfInfo', root).innerHTML = `Durée retenue : <b>${hm(min)}</b>` + (overnight ? ' <span class="field-warn">⚠ atterrissage avant le décollage : compté comme un vol se terminant le lendemain. Vérifiez les heures.</span>' : '') + (inc ? `<div class="alert" style="margin-top:8px">${o.incident === 'Incident' ? 'Les incidents sont à signaler' : 'Signalement obligatoire'} dans les 72 h (règlement (UE) 376/2014) via le <a href="https://aviationreporting.eu/" target="_blank" rel="noopener">portail européen de notification d'événements</a>${/grave|Accident/.test(o.incident) ? ' ; accident ou incident grave : informez aussi le BEA sans délai' : ''}.</div>` : '');
       };
       form.oninput = form.onchange = (e) => {
         if (e && e.target.name === 'missionId' && e.target.value) { // préremplissage depuis la mission

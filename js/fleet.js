@@ -5,40 +5,49 @@ const Fleet = (() => {
   // Catégories alignées sur les pièces justificatives de la notice 52053#04 §7
   const DOC_CATEGORIES = ['Pièce d\'identité', 'Accusé de déclaration d\'exploitant (DGAC)', 'Extrait registre AlphaTango', 'Attestation d\'assurance',
     'Certificat télépilote (A1/A3, A2, STS)', 'Attestation de formation pratique', 'Déclaration STS (accusé DSAC)', 'Autorisation / LUC',
-    'Bon de commande / contrat client', 'Manuel d\'exploitation (MANEX)', 'Documentation drone', 'Protocole ATC / militaire', 'Réglementation', 'Autre'];
+    'Bon de commande / contrat client', 'Justificatif d\'activité (avis SIRENE / Kbis)', 'Manuel d\'exploitation (MANEX)', 'Documentation drone', 'Protocole ATC / militaire', 'Réglementation', 'Autre'];
 
   const PILOT_FIELDS = [
+    { type: 'section', l: 'Identité', hint: 'demandée par le Cerfa préfecture' },
     { k: 'lastName', l: 'Nom' }, { k: 'firstName', l: 'Prénom' },
-    { k: 'email', l: 'E-mail', type: 'email' }, { k: 'phone', l: 'Téléphone', type: 'tel' },
+    { k: 'email', l: 'E-mail', type: 'email' }, { k: 'phone', l: 'Téléphone portable', type: 'tel' },
     { k: 'birthDate', l: 'Date de naissance', type: 'date' }, { k: 'birthPlace', l: 'Lieu de naissance (ville, pays)' },
     { k: 'address', l: 'Adresse postale', full: true },
-    { k: 'employer', l: 'Employeur (si salarié)' }, { k: 'independent', l: 'Indépendant', type: 'select', opts: ['Non', 'Oui'] },
-    { k: 'pilotId', l: 'N° télépilote (AlphaTango / FRA-RP-…)' },
-    { k: 'a1a3', l: 'Formation A1/A3 – n° attestation' }, { k: 'a1a3Exp', l: 'A1/A3 – expiration', type: 'date' },
-    { k: 'a2', l: 'Brevet A2 (CATT) – n°' }, { k: 'a2Exp', l: 'A2 – expiration', type: 'date' },
-    { k: 'sts', l: 'Certificat STS / CATS – n°' }, { k: 'stsExp', l: 'STS – expiration', type: 'date' },
-    { k: 'nationalCert', l: 'Ancien certificat théorique national (CATT)' },
-    { k: 'practical', l: 'Attestation formation pratique (STS-01/02)' }, { k: 'practicalDate', l: 'Date attestation pratique', type: 'date' },
+    { k: 'independent', l: 'Statut', type: 'select', opts: [['Oui', 'Indépendant / dirigeant de l\'exploitant'], ['Non', 'Salarié']] },
+    { k: 'employer', l: 'Employeur', showIf: (v) => v.independent === 'Non' },
+    { type: 'section', l: 'Certificats', hint: 'laissez vide ce que vous n\'avez pas' },
+    { k: 'pilotId', l: 'N° de télépilote', ph: 'FRA-RP-…', hint: 'figure sur vos attestations A1/A3 et A2' },
+    { k: 'a1a3Exp', l: 'A1/A3 – fin de validité', type: 'date' },
+    { k: 'a2Exp', l: 'Brevet A2 – fin de validité', type: 'date', hint: 'même n° de télépilote, pas de n° séparé' },
+    { k: 'sts', l: 'Certificat STS – n°', ph: 'FRA-RP-… ou NLD-RP-…', hint: 'si délivré par un autre pays, son n° propre' },
+    { k: 'stsExp', l: 'Certificat STS – fin de validité', type: 'date' },
+    { k: 'practicalDate', l: 'Formation pratique STS – date', type: 'date', hint: 'requise pour voler en STS' },
+    { k: 'practicalBy', l: 'Formation pratique délivrée par', type: 'select', opts: [['', '—'], ['exploitant', 'L\'exploitant (auto-déclaration)'], ['organisme', 'Un organisme de formation']] },
     { k: 'medical', l: 'Autres qualifications (nuit, BVLOS…)', full: true },
     { k: 'notes', l: 'Notes', type: 'textarea' }
   ];
 
   const DRONE_FIELDS = [
+    { type: 'section', l: 'Identification' },
     { k: 'name', l: 'Nom / surnom' }, { k: 'maker', l: 'Constructeur' }, { k: 'model', l: 'Modèle' },
     { k: 'serial', l: 'N° de série' },
     { k: 'type', l: 'Type', type: 'select', opts: ['Multirotors', 'Voilure fixe', 'Hélicoptère', 'Ballon', 'Captif dirigeable', 'Autre'] },
-    { k: 'captive', l: 'Aéronef captif', type: 'checkbox' },
-    { k: 'classMark', l: 'Marquage de classe', type: 'select', opts: [['', '— aucun (legacy / construction privée)'], 'C0', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6'] },
+    { k: 'classMark', l: 'Marquage de classe', type: 'select', opts: [['', '— aucun (drone sans classe)'], 'C0', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6'] },
     { k: 'mtom', l: 'Masse max. au décollage (g)', type: 'number' },
-    { k: 'registration', l: "N° d'enregistrement AlphaTango (UAS-FR-…)" },
-    { k: 'remoteId', l: 'Identifiant signalement électronique / Remote ID' },
+    { k: 'registration', l: 'N° d\'enregistrement du drone', ph: 'UAS-FR-…', hint: 'obligatoire dès 800 g (AlphaTango)' },
+    { k: 'remoteId', l: 'N° de signalement électronique', hint: 'si le drone en a un (souvent = n° de série)' },
+    { k: 'captive', l: 'Aéronef captif', type: 'checkbox' },
+    { type: 'section', l: 'Performances et équipements' },
     { k: 'maxWind', l: 'Vent max. supporté (km/h)', type: 'number' },
     { k: 'endurance', l: 'Autonomie (min)', type: 'number' },
     { k: 'parachute', l: 'Parachute / limiteur d\'énergie', type: 'checkbox' },
     { k: 'lightGreen', l: 'Feu vert clignotant (vol de nuit)', type: 'checkbox' },
-    { k: 'insurer', l: 'Assureur' }, { k: 'insuranceExp', l: 'Assurance – expiration', type: 'date' },
+    { type: 'section', l: 'Assurance', hint: 'par défaut, celle de l\'exploitant' },
+    { k: 'ownInsurance', l: 'Contrat spécifique à ce drone (différent de celui de l\'exploitant)', type: 'checkbox', full: true },
+    { k: 'insurer', l: 'Assureur', showIf: (v) => v.ownInsurance }, { k: 'insuranceExp', l: 'Échéance', type: 'date', showIf: (v) => v.ownInsurance },
+    { type: 'section', l: 'Suivi' },
     { k: 'lastMaintenance', l: 'Dernière maintenance', type: 'date' }, { k: 'flightHours', l: 'Heures de vol antérieures au carnet', type: 'number', step: '0.1' },
-    { k: 'maintenanceEvery', l: 'Maintenance toutes les … heures de vol', type: 'number' },
+    { k: 'maintenanceEvery', l: 'Maintenance toutes les … heures de vol', type: 'number', hint: 'facultatif' },
     { k: 'status', l: 'Statut', type: 'select', opts: ['Opérationnel', 'En maintenance', 'Hors service'] },
     { k: 'notes', l: 'Notes', type: 'textarea' }
   ];
@@ -61,20 +70,70 @@ const Fleet = (() => {
   ];
 
   const OPERATOR_FIELDS = [
-    { k: 'legalType', l: 'Statut de l\'exploitant', type: 'select', opts: [['morale', 'Personne morale (société, association…)'], ['physique', 'Personne physique (auto-entrepreneur…)']] },
-    { k: 'company', l: 'Raison sociale (ou nom si personne physique)' }, { k: 'siret', l: 'SIREN / SIRET / RCS / RNE' },
-    { k: 'operatorId', l: "N° d'exploitant UAS (FRA…)" }, { k: 'subcontractor', l: 'Si sous-traitant : SIRET du donneur d\'ordre' },
-    { k: 'address', l: 'Adresse du siège / postale', full: true }, { k: 'zip', l: 'Code postal' }, { k: 'city', l: 'Ville' },
-    { k: 'email', l: 'E-mail', type: 'email' }, { k: 'phone', l: 'Téléphone fixe' }, { k: 'mobile', l: 'Téléphone portable' },
-    { k: 'managerLastName', l: 'Dirigeant / déclarant – nom' }, { k: 'managerFirstName', l: 'Dirigeant / déclarant – prénom' },
-    { k: 'managerBirth', l: 'Dirigeant – date et lieu de naissance', ph: '01/01/1980, Lyon (France)' }, { k: 'managerRole', l: 'Qualité / fonction', ph: 'Gérant' },
-    { k: 'managerAddress', l: 'Dirigeant – adresse postale', full: true },
-    { k: 'managerEmail', l: 'Dirigeant – e-mail', type: 'email' }, { k: 'managerMobile', l: 'Dirigeant – portable' },
-    { k: 'insurer', l: 'Assureur RC' }, { k: 'policy', l: 'N° de police' },
-    { k: 'stsDecl', l: 'Déclaration STS (n° / date)' }, { k: 'authorization', l: 'Autorisation catégorie spécifique (n°)' },
-    { k: 'signature', l: 'Signature (nom pour les courriers)', full: true },
-    { k: 'openaipKey', l: 'Clé API OpenAIP (optionnelle : affiche et analyse les CTR, TMA, zones P/R/D – compte gratuit sur openaip.net)', full: true }
+    { type: 'section', l: 'Exploitant' },
+    { k: 'legalType', l: 'Statut de l\'exploitant', type: 'select', opts: [['morale', 'Personne morale (société, association…)'], ['physique', 'Personne physique (micro-entrepreneur…)']] },
+    { k: 'company', l: 'Raison sociale (ou nom si personne physique)' }, { k: 'siret', l: 'SIRET' },
+    { k: 'operatorId', l: 'N° d\'exploitant UAS', ph: 'FRA…', hint: 'celui apposé sur vos drones (AlphaTango › Exploitant)' },
+    { k: 'subcontractor', l: 'Si sous-traitant : SIRET du donneur d\'ordre', hint: 'facultatif' },
+    { k: 'address', l: 'Adresse du siège', full: true }, { k: 'zip', l: 'Code postal' }, { k: 'city', l: 'Ville' },
+    { k: 'email', l: 'E-mail', type: 'email' }, { k: 'mobile', l: 'Téléphone portable' }, { k: 'phone', l: 'Téléphone fixe', hint: 'facultatif' },
+    { type: 'section', l: 'Dirigeant / déclarant', hint: 'signe le Cerfa' },
+    { k: 'managerLastName', l: 'Nom' }, { k: 'managerFirstName', l: 'Prénom' },
+    { k: 'managerBirth', l: 'Date et lieu de naissance', ph: '01/01/1980, Lyon (France)' }, { k: 'managerRole', l: 'Qualité / fonction', ph: 'Gérant' },
+    { k: 'managerAddress', l: 'Adresse postale', full: true, hint: 'vide = adresse du siège' },
+    { k: 'managerEmail', l: 'E-mail', type: 'email', hint: 'vide = e-mail de l\'exploitant' }, { k: 'managerMobile', l: 'Portable', hint: 'vide = portable de l\'exploitant' },
+    { type: 'section', l: 'Assurance responsabilité civile drone' },
+    { k: 'insurer', l: 'Assureur' }, { k: 'policy', l: 'N° de police', hint: 'facultatif' },
+    { k: 'insuranceTacit', l: 'Contrat à reconduction tacite (sans date de fin)', type: 'checkbox', full: true, def: true },
+    { k: 'insuranceExp', l: 'Date de fin du contrat', type: 'date', showIf: (v) => !v.insuranceTacit },
+    { type: 'section', l: 'Catégorie spécifique', hint: 'uniquement si vous volez en STS ou avec une autorisation' },
+    { k: 'stsDecl', l: 'Déclaration d\'exploitation STS – n° d\'accusé de réception / date', hint: 'déclaration de l\'exploitant à la DSAC, différente du certificat du télépilote' },
+    { k: 'authorization', l: 'Autorisation d\'exploitation / LUC – n°', hint: 'seulement si la DSAC vous en a délivré une (SORA/PDRA)' },
+    { type: 'section', l: 'Courriers et options' },
+    { k: 'signature', l: 'Signature (nom pour les courriers)', full: true, hint: 'vide = prénom et nom du dirigeant' },
+    { k: 'openaipKey', l: 'Clé API OpenAIP', full: true, hint: 'facultatif : affiche les CTR, TMA, zones P/R/D (compte gratuit sur openaip.net)' }
   ];
+
+  /* Certificats détenus : une date de validité OU un ancien n° saisi suffit */
+  const certs = (p) => {
+    p = p || {}; const valid = (d) => !d || UI.daysUntil(d) >= 0;
+    return { a1a3: !!(p.a1a3Exp || p.a1a3), a1a3Ok: !!(p.a1a3Exp || p.a1a3) && valid(p.a1a3Exp),
+      a2: !!(p.a2Exp || p.a2), a2Ok: !!(p.a2Exp || p.a2) && valid(p.a2Exp),
+      sts: !!(p.stsExp || p.sts), stsOk: !!(p.stsExp || p.sts) && valid(p.stsExp),
+      practical: !!(p.practicalDate || p.practical) };
+  };
+  /* Assurance effective d'un drone : son contrat propre, sinon celui de l'exploitant */
+  const insurance = (d) => {
+    const op = Store.operator(); const own = d && (d.ownInsurance || (d.ownInsurance === undefined && d.insuranceExp));
+    if (own) return { insurer: d.insurer || op.insurer, exp: d.insuranceExp || '', tacit: false, own: true };
+    return { insurer: op.insurer || '', exp: op.insuranceTacit === false ? (op.insuranceExp || '') : '', tacit: op.insuranceTacit !== false, own: false };
+  };
+  const insuranceBadge = (d) => { const i = insurance(d); if (!i.insurer) return '<span class="badge warn">non renseignée</span>'; if (i.exp) return UI.expiryBadge(i.exp); return `<span class="badge ok">${UI.esc(i.insurer)}${i.tacit ? ' · reconduction tacite' : ''}</span>`; };
+
+  /* Correspondances exploitant ⇄ télépilote (évite de ressaisir les mêmes informations) */
+  const splitBirth = (s) => { const m = (s || '').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})\s*,?\s*(.*)/); return m ? { date: `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`, place: m[4].trim() } : { date: '', place: s || '' }; };
+  const pilotFromOperator = (op) => { const b = splitBirth(op.managerBirth); return { lastName: op.managerLastName, firstName: op.managerFirstName, email: op.managerEmail || op.email, phone: op.managerMobile || op.mobile, birthDate: b.date, birthPlace: b.place, address: op.managerAddress || [op.address, op.zip, op.city].filter(Boolean).join(', '), independent: 'Oui' }; };
+  const operatorFromPilot = (p) => ({ managerLastName: p.lastName, managerFirstName: p.firstName, managerBirth: [p.birthDate ? p.birthDate.split('-').reverse().join('/') : '', p.birthPlace].filter(Boolean).join(', '), managerEmail: p.email, managerMobile: p.phone, managerAddress: p.address });
+  // Remplit seulement les champs vides
+  const fill = (form, vals) => Object.entries(vals).forEach(([k, v]) => { const el = form.elements[k]; if (el && v && !el.value) { el.value = v; el.dispatchEvent(new Event('change', { bubbles: true })); } });
+  /* Contrôle de format des numéros faciles à confondre */
+  function checkFormats(form) {
+    const RULES = {
+      operatorId: (v) => /^UAS-?FR/i.test(v) ? 'Ce format (UAS-FR-…) est celui d\'un drone. Le n° d\'exploitant commence par FRA (voir AlphaTango › Exploitant).' : v && !/^FRA/i.test(v) ? 'Le n° d\'exploitant commence normalement par FRA.' : '',
+      authorization: (v) => /-RP-/i.test(v) ? 'Ceci ressemble à un n° de télépilote (…-RP-…), pas à une autorisation DSAC. Laissez vide si vous n\'avez pas d\'autorisation.' : '',
+      stsDecl: (v) => /-RP-/i.test(v) ? 'Ceci est un n° de télépilote. Ici : l\'accusé de réception de la déclaration STS de l\'exploitant.' : '',
+      registration: (v) => /^FRA/i.test(v) ? 'Le n° FRA… est celui de l\'exploitant. Le n° d\'enregistrement du drone est du type UAS-FR-…' : '',
+      pilotId: (v) => v && !/-RP-/i.test(v) ? 'Le n° de télépilote est du type FRA-RP-…' : ''
+    };
+    const run = () => Object.entries(RULES).forEach(([k, rule]) => {
+      const el = form.elements[k]; if (!el) return;
+      const lab = el.closest('label'); let w = lab.querySelector('.field-warn');
+      const msg = rule(el.value.trim());
+      if (msg && !w) { w = document.createElement('span'); w.className = 'field-warn'; lab.appendChild(w); }
+      if (w) { w.textContent = msg ? '⚠ ' + msg : ''; }
+    });
+    form.addEventListener('input', run); run();
+  }
 
   const pilotName = (p) => p ? `${p.firstName || ''} ${p.lastName || ''}`.trim() || 'Sans nom' : '—';
   const droneName = (d) => d ? `${d.name || d.model || 'Drone'}${d.classMark ? ' (' + d.classMark + ')' : ''}` : '—';
@@ -98,6 +157,8 @@ const Fleet = (() => {
     const open = (obj = {}) => {
       UI.modal(`<h2>${obj.id ? 'Modifier' : 'Ajouter'}</h2><form id="f"><div class="fields">${UI.formFields(fields, obj)}</div>${extraFormHtml ? extraFormHtml(obj) : ''}
         <div class="row" style="margin-top:16px;justify-content:flex-end"><button type="button" class="btn" onclick="UI.closeModal()">Annuler</button><button class="btn primary">Enregistrer</button></div></form>`, (root) => {
+        UI.bindConditional(UI.$('#f', root), fields);
+        checkFormats(UI.$('#f', root));
         afterRenderForm && afterRenderForm(root, obj);
         UI.$('#f', root).onsubmit = async (e) => {
           e.preventDefault();
@@ -122,12 +183,18 @@ const Fleet = (() => {
   function pilots() {
     crudPage({
       col: 'pilots', title: 'Télépilotes', sub: 'Identité, formations, brevets et dates de validité.', fields: PILOT_FIELDS, addLabel: 'Télépilote',
+      afterRenderForm: (root) => {
+        const op = Store.operator(); if (!op.managerLastName) return;
+        const f = UI.$('#f', root);
+        UI.$('.fields', f).insertAdjacentHTML('beforebegin', `<div class="prefill">👤 Vous êtes aussi le dirigeant de ${esc(op.company || 'l\'exploitant')} ? <button type="button" class="btn sm" id="fromOp">Reprendre mes informations d'exploitant</button></div>`);
+        UI.$('#fromOp', root).onclick = () => { fill(f, pilotFromOperator(op)); UI.toast('Informations reprises : complétez les certificats'); };
+      },
       emptyText: 'Aucun télépilote. Ajoutez-en un pour l\'associer à vos missions.',
       columns: [
         { l: 'Nom', r: p => `<b>${esc(pilotName(p))}</b><div class="legend">${esc(p.email || '')} ${esc(p.phone || '')}</div>` },
         { l: 'N° télépilote', r: p => esc(p.pilotId || '—') },
-        { l: 'A1/A3', r: p => p.a1a3 ? UI.expiryBadge(p.a1a3Exp) : '<span class="badge">—</span>' },
-        { l: 'A2', r: p => p.a2 ? UI.expiryBadge(p.a2Exp) : '<span class="badge">—</span>' },
+        { l: 'A1/A3', r: p => certs(p).a1a3 ? UI.expiryBadge(p.a1a3Exp) : '<span class="badge">—</span>' },
+        { l: 'A2', r: p => certs(p).a2 ? UI.expiryBadge(p.a2Exp) : '<span class="badge">—</span>' },
         { l: 'STS', r: p => p.sts ? UI.expiryBadge(p.stsExp) : '<span class="badge">—</span>' }
       ]
     });
@@ -142,7 +209,7 @@ const Fleet = (() => {
         { l: 'Masse', r: d => d.mtom ? `${d.mtom} g` : '—' },
         { l: 'Enregistrement', r: d => `<span class="mono">${esc(d.registration || '—')}</span>` },
         { l: 'Heures de vol', r: d => { const s = Logbook.droneStats(d); return `${Logbook.hm(s.totalMin)}${s.due ? ' <span class="badge bad">maintenance due</span>' : s.soon ? ' <span class="badge warn">maintenance bientôt</span>' : ''}`; } },
-        { l: 'Assurance', r: d => UI.expiryBadge(d.insuranceExp) },
+        { l: 'Assurance', r: d => insuranceBadge(d) },
         { l: 'Statut', r: d => `<span class="badge ${d.status === 'Opérationnel' || !d.status ? 'ok' : d.status === 'Hors service' ? 'bad' : 'warn'}">${esc(d.status || 'Opérationnel')}</span>` }
       ]
     });
@@ -202,7 +269,15 @@ const Fleet = (() => {
       <div class="row" style="margin-top:16px"><button class="btn primary">Enregistrer</button></div></form></div>
       <div class="card"><h2>Sauvegarde</h2><p class="legend">Toutes les données sont stockées dans ce navigateur. Exportez-les régulièrement (la sauvegarde inclut les documents joints).</p>
       <div class="row"><button class="btn" id="exp">⬇ Exporter (JSON)</button><label class="btn">⬆ Importer<input type="file" id="imp" accept=".json" hidden></label></div></div>`;
-    UI.$('#opf').onsubmit = (e) => { e.preventDefault(); Store.setOperator(UI.readForm(e.target, OPERATOR_FIELDS)); UI.toast('Exploitant enregistré'); };
+    const opf = UI.$('#opf');
+    UI.bindConditional(opf, OPERATOR_FIELDS); checkFormats(opf);
+    const P = Store.all('pilots').filter(p => !p.demo);
+    if (P.length) {
+      UI.$('.fields', opf).insertAdjacentHTML('beforebegin', `<div class="prefill">👤 Le dirigeant est aussi télépilote ? <select id="pPick" style="width:auto">${P.map(p => `<option value="${p.id}">${esc(pilotName(p))}</option>`).join('')}</select><button type="button" class="btn sm" id="fromPilot">Reprendre ses informations</button></div>`);
+      UI.$('#fromPilot').onclick = () => { fill(opf, operatorFromPilot(Store.get('pilots', UI.$('#pPick').value))); UI.toast('Informations reprises dans « Dirigeant »'); };
+    }
+    // Valeurs reprises automatiquement si vides : adresse, e-mail, portable du dirigeant ; signature
+    opf.onsubmit = (e) => { e.preventDefault(); Store.setOperator(UI.readForm(e.target, OPERATOR_FIELDS)); UI.toast('Exploitant enregistré'); };
     UI.$('#exp').onclick = async () => { UI.toast('Préparation de la sauvegarde…'); UI.download(`sauvegarde-drone-${new Date().toISOString().slice(0, 10)}.json`, await Store.exportFull()); try { localStorage.setItem('osd-last-backup', new Date().toISOString()); } catch (e) { } };
     UI.$('#imp').onchange = async (e) => {
       const f = e.target.files[0]; if (!f) return;
@@ -211,5 +286,5 @@ const Fleet = (() => {
     };
   }
 
-  return { pilots, drones, docs, contacts, settings, openFile, pilotName, droneName, DOC_CATEGORIES };
+  return { pilots, drones, docs, contacts, settings, openFile, pilotName, droneName, DOC_CATEGORIES, certs, insurance };
 })();
