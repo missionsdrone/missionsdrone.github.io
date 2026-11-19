@@ -6,14 +6,15 @@ const App = (() => {
     const P = Store.all('pilots'), D = Store.all('drones'), M = Store.all('missions'), DOC = Store.all('docs');
     const today = new Date().toISOString().slice(0, 10);
     const upcoming = M.filter(m => m.date >= today && m.status !== 'Annulée').sort((a, b) => a.date.localeCompare(b.date)).slice(0, 6);
+    const op = Store.operator();
     const alerts = [];
     const chk = (d, label) => { if (!d) return; const n = UI.daysUntil(d); if (n <= 60) alerts.push({ n, label, d }); };
     P.forEach(p => { chk(p.a1a3Exp, `A1/A3 – ${Fleet.pilotName(p)}`); chk(p.a2Exp, `A2 – ${Fleet.pilotName(p)}`); chk(p.stsExp, `STS – ${Fleet.pilotName(p)}`); });
-    D.forEach(d => chk(d.insuranceExp, `Assurance – ${Fleet.droneName(d)}`));
+    D.forEach(d => { const i = Fleet.insurance(d); if (i.own) chk(i.exp, `Assurance – ${Fleet.droneName(d)}`); });
+    if (op.insuranceTacit === false) chk(op.insuranceExp, 'Assurance RC de l\'exploitant');
     DOC.forEach(d => chk(d.expiry, `Document – ${d.title}`));
     const maint = D.map(d => [d, Logbook.droneStats(d)]).filter(([, s]) => s.soon);
     alerts.sort((a, b) => a.n - b.n);
-    const op = Store.operator();
     // Mise en route : 4 étapes pour que les courriers et le Cerfa soient complets
     const setup = [
       ['Exploitant', !!(op.company && op.managerLastName && op.city), '#/settings'],

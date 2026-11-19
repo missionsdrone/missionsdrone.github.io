@@ -258,6 +258,15 @@ const Regulation = (() => {
     const m = limite.match(/(\d+)\s*m/); return m ? Number(m[1]) : null;
   }
 
+  /* Cohérence des dates et horaires d'une mission → liste de messages */
+  function whenErrors(m) {
+    const E = [];
+    if (m.endDate && m.date && m.endDate < m.date) E.push('La date de fin est antérieure à la date du vol.');
+    if (m.altDate && m.date && m.altDate < m.date) E.push('La date de report est antérieure à la date du vol.');
+    if (m.startTime && m.endTime && (!m.endDate || m.endDate === m.date) && m.endTime <= m.startTime) E.push('L\'heure de fin doit être après l\'heure de début.');
+    return E;
+  }
+
   /* ---------- Règles ----------
    * Contrainte : { level: bad|warn|info|ok, title, text, contact?, actions: [{type:'dossier'|'mail'|'link', template?, label, target?, url?}] }
    * Les actions de même destinataire (template + cible) sont regroupées en une seule démarche dans l'onglet 3.
@@ -270,6 +279,10 @@ const Regulation = (() => {
     const fmtD = (d) => d == null ? 'à proximité' : d === 0 ? 'dans la zone' : `à ${d < 1 ? Math.round(d * 1000) + ' m' : d.toFixed(1) + ' km'}`;
     const restr = ctx.restrictions || [];
     const aeros = S.filter(o => o.kind === 'aerodrome' || o.kind === 'heliport').sort((a, b) => (a.d ?? 99) - (b.d ?? 99));
+
+    /* 0. Dates incohérentes */
+    const we = whenErrors(m);
+    if (we.length) add({ level: 'bad', blocking: true, title: 'Dates ou horaires incohérents', text: we.join(' '), fix: 'Corriger la date / les heures dans l\'onglet Informations.' });
 
     /* 1. Zone peuplée → déclaration préalable préfecture (art. 6 1° arrêté espace) — UNE seule contrainte */
     const agglo = restr.some(f => /agglom/i.test(f.properties.remarque || ''));
@@ -437,16 +450,20 @@ const Regulation = (() => {
     if (!pilot) add({ level: 'warn', title: 'Aucun télépilote affecté', text: 'Affectez un télépilote pour vérifier ses qualifications.' });
     else {
       const exp = (d) => d && UI.daysUntil(d) < 0, nm = Fleet.pilotName(pilot);
-      if (isOpen && (!pilot.a1a3 || exp(pilot.a1a3Exp))) add({ level: 'bad', title: 'Attestation A1/A3 manquante ou expirée', text: nm });
-      if (cat === 'A2' && (!pilot.a2 || exp(pilot.a2Exp))) add({ level: 'bad', title: 'Brevet A2 manquant ou expiré', text: nm });
-      if (cat.startsWith('STS') && (!pilot.sts || exp(pilot.stsExp) || !pilot.practical)) add({ level: 'bad', title: 'Certificat STS ou attestation pratique manquant', text: `${nm} : certificat théorique STS + attestation de formation pratique requis.` });
+      const cc = Fleet.certs(pilot);
+      // A2 ou STS incluent les connaissances A1/A3
+      if (isOpen && !cc.a1a3Ok && !cc.a2Ok && !cc.stsOk) add({ level: 'bad', title: 'Attestation A1/A3 manquante ou expirée', text: `${nm} : renseignez la date de fin de validité dans la fiche Télépilote.` });
+      if (cat === 'A2' && !cc.a2Ok) add({ level: 'bad', title: 'Brevet A2 manquant ou expiré', text: `${nm} : renseignez la date de fin de validité du brevet A2 dans la fiche Télépilote.` });
+      if (cat.startsWith('STS') && (!cc.stsOk || !cc.practical)) add({ level: 'bad', title: 'Certificat STS ou attestation pratique manquant', text: `${nm} : certificat théorique STS + attestation de formation pratique requis.` });
     }
     if (!drone) add({ level: 'warn', title: 'Aucun drone affecté', text: 'Affectez un drone pour vérifier sa classe et son assurance.' });
     else {
       const need = { A2: ['C2'], 'STS-01': ['C5'], 'STS-02': ['C6'], A1: ['C0', 'C1'] }[cat];
       const legacyOk = cat === 'A1' && Number(drone.mtom) < 250;
       if (need && !need.includes(drone.classMark) && !legacyOk) add({ level: 'bad', title: `Classe ${drone.classMark || 'non marquée'} incompatible avec ${cat}`, text: `Classe attendue : ${need.join(' ou ')}${cat === 'A1' ? ' (ou drone < 250 g sans marquage)' : ''}.` });
-      if (drone.insuranceExp && UI.daysUntil(drone.insuranceExp) < 0) add({ level: 'bad', title: 'Assurance expirée', text: Fleet.droneName(drone) });
+      const ins = Fleet.insurance(drone);
+      if (!ins.insurer) add({ level: 'warn', title: 'Assurance non renseignée', text: 'Renseignez votre assureur RC drone dans la fiche Exploitant (obligatoire pour la déclaration préfecture).' });
+      else if (ins.exp && UI.daysUntil(ins.exp) < 0) add({ level: 'bad', title: 'Assurance expirée', text: `${Fleet.droneName(drone)} – contrat ${ins.own ? 'du drone' : 'de l\'exploitant'} échu le ${UI.fmtDate(ins.exp)}.` });
       if (Number(drone.mtom) >= 800 && !drone.registration) add({ level: 'warn', title: 'Enregistrement AlphaTango manquant', text: 'Drones ≥ 800 g : enregistrement et signalement électronique obligatoires (n° UAS-FR-… demandé dans le Cerfa).' });
       if (drone.status && drone.status !== 'Opérationnel') add({ level: 'bad', title: 'Drone non opérationnel', text: `Statut : ${drone.status}` });
     }
@@ -484,6 +501,7 @@ const Regulation = (() => {
       [/Rafales|Vent soutenu|précipitations/, () => 'Décaler l\'heure ou la date du vol.'],
       [/Aucun télépilote|Certificat|Brevet|Attestation A1/, () => 'Affecter un télépilote qualifié (fiche Télépilotes).'],
       [/Aucun drone|Classe .* incompatible/, () => 'Choisir un drone de la bonne classe ou changer de catégorie.'],
+      [/Assurance non renseignée/, () => 'Compléter l\'assureur dans la fiche Exploitant.'],
       [/Assurance expirée/, () => 'Renouveler l\'assurance et mettre à jour la fiche du drone.'],
       [/Enregistrement AlphaTango/, () => 'Enregistrer le drone sur AlphaTango et reporter le n° UAS-FR dans sa fiche.'],
       [/non opérationnel/, () => 'Remettre le drone en service ou en choisir un autre.'],
@@ -496,5 +514,5 @@ const Regulation = (() => {
     return C.sort((a, b) => order[a.level] - order[b.level]);
   }
 
-  return { LINKS, NATIONAL_CONTACTS, CATEGORIES, SIA, airac, aipInfo, aipReady, aipStale, prefReady, prefDrone, prefSaved, ctrName, ctrReady, ctrsAt, CTRS: () => CTRS, MIL_CTR, AIPDIR: () => AIPDIR, fetchAirspaces, notice, fetchRestrictions, fetchSensitive, fetchCommune, fetchAdminContacts, fetchWeather, buildConstraints, parseLimit };
+  return { LINKS, NATIONAL_CONTACTS, CATEGORIES, SIA, airac, whenErrors, aipInfo, aipReady, aipStale, prefReady, prefDrone, prefSaved, ctrName, ctrReady, ctrsAt, CTRS: () => CTRS, MIL_CTR, AIPDIR: () => AIPDIR, fetchAirspaces, notice, fetchRestrictions, fetchSensitive, fetchCommune, fetchAdminContacts, fetchWeather, buildConstraints, parseLimit };
 })();

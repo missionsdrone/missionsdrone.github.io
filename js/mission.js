@@ -118,6 +118,16 @@ const Mission = (() => {
     const save = (quiet) => { collect(); m = Store.upsert('missions', m); if (id === 'new') history.replaceState(null, '', '#/mission/' + m.id); id = m.id; if (!quiet) UI.toast('Mission enregistrée'); };
     UI.$('#saveBtn').onclick = () => save();
     UI.$('#logBtn').onclick = () => { save(true); const c = m.analysis && m.analysis.commune; Logbook.open({ missionId: m.id, pilotId: m.pilotId, droneId: m.droneId, category: m.category, date: m.date, takeoff: m.startTime, landing: m.endTime, place: c ? c.nom : (m.address || ''), sorties: 1 }); };
+    // Contrôle immédiat des dates / heures
+    const whenCheck = () => {
+      const f = UI.$('#mf'); const v = UI.readForm(f, FIELDS);
+      if (f.elements.altDate) f.elements.altDate.min = v.date || '';
+      const errs = Regulation.whenErrors(v);
+      ['endTime', 'altDate'].forEach(k => f.elements[k] && f.elements[k].classList.toggle('invalid', errs.some(e => (k === 'endTime' && /heure/.test(e)) || (k === 'altDate' && /report/.test(e)))));
+      let box = UI.$('#whenErr'); if (!box) { f.insertAdjacentHTML('afterbegin', '<div id="whenErr" class="alert" hidden></div>'); box = UI.$('#whenErr'); }
+      box.hidden = !errs.length; box.textContent = errs.length ? '⚠ ' + errs.join(' ') : '';
+    };
+    UI.$('#mf').addEventListener('input', whenCheck); whenCheck();
     let lastWhen = m.date + m.startTime;
     UI.$('#mf').onchange = async () => {
       save(true);

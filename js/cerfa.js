@@ -113,6 +113,7 @@ const Cerfa = (() => {
     T['Le  JJMMAAAA'] = new Date().toLocaleDateString('fr-FR');
     T['Texte117'] = op.managerLastName || ''; T['Texte118'] = op.managerFirstName || ''; T['Texte119'] = morale ? (op.managerRole || '') : '';
     if (!op.insurer) missing.push({ label: 'Assureur RC de l\'exploitant', where: 'settings' });
+    Regulation.whenErrors(m).forEach(msg => missing.push({ label: msg, where: 'mission' }));
     return { T, X, R, missing };
   }
   const zoneRadius = (z) => { const c = turf.centroid(z); return Math.max(...turf.coordAll(z).map(p => turf.distance(c, turf.point(p), { units: 'meters' }))); };
@@ -186,18 +187,25 @@ const Cerfa = (() => {
 
   /* ---------- Pièces justificatives requises (notice §7) ---------- */
   function requiredPieces(m) {
-    const p = Store.get('pilots', m.pilotId), d = Store.get('drones', m.droneId), cat = m.category || '';
+    const p = Store.get('pilots', m.pilotId), d = Store.get('drones', m.droneId), cat = m.category || '', op = Store.operator();
+    const norm = (x) => (x || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
+    const samePerson = p && norm(p.lastName) === norm(op.managerLastName) && norm(p.firstName) === norm(op.managerFirstName);
+    const cert = /^A[13]$/.test(cat) ? 'attestation A1/A3' : cat === 'A2' ? 'brevet A2' : cat.startsWith('STS') ? 'certificat STS' : 'selon le régime';
     const L = [
-      { key: 'id-declarant', label: 'Pièce d\'identité recto/verso du déclarant', cat: 'Pièce d\'identité' },
-      { key: 'id-pilot', label: `Pièce d'identité recto/verso du télépilote${p ? ' (' + Fleet.pilotName(p) + ')' : ''}`, cat: 'Pièce d\'identité', link: p && 'pilot:' + p.id, optionalIfSame: true },
+      { key: 'id-declarant', label: samePerson ? 'Pièce d\'identité recto/verso du déclarant (et télépilote)' : 'Pièce d\'identité recto/verso du déclarant', cat: 'Pièce d\'identité' },
+      ...(samePerson ? [] : [{ key: 'id-pilot', label: `Pièce d'identité recto/verso du télépilote${p ? ' (' + Fleet.pilotName(p) + ')' : ''}`, cat: 'Pièce d\'identité', link: p && 'pilot:' + p.id }]),
       { key: 'decl-exploitant', label: 'Accusé de réception de déclaration d\'exploitant (ou relevé de situation DGAC)', cat: 'Accusé de déclaration d\'exploitant (DGAC)' },
       { key: 'registre', label: 'Extrait du registre AlphaTango du drone', cat: 'Extrait registre AlphaTango', link: d && 'drone:' + d.id },
-      { key: 'assurance', label: 'Attestation d\'assurance professionnelle drone en cours de validité', cat: 'Attestation d\'assurance' },
-      { key: 'formation', label: `Attestation de formation télépilote (${/^A[13]$/.test(cat) ? 'certificat A1/A3' : cat === 'A2' ? 'brevet A2' : cat === 'STS-01' ? 'certificat STS' : 'selon régime'})`, cat: 'Certificat télépilote (A1/A3, A2, STS)', link: p && 'pilot:' + p.id },
+      { key: 'assurance', label: 'Attestation d\'assurance responsabilité civile drone', cat: 'Attestation d\'assurance' },
+      { key: 'formation', label: `Certificat du télépilote (${cert})`, cat: 'Certificat télépilote (A1/A3, A2, STS)', link: p && 'pilot:' + p.id,
+        words: cat === 'A2' ? /a2|brevet|aptitude|competency/ : cat.startsWith('STS') ? /sts|theori|license|licence|cats/ : /a1|a3|attestation/ },
       { key: 'commande', label: 'Justificatif de la raison professionnelle daté et signé (bon de commande, lettre de mission, contrat) mentionnant la date de l\'opération', cat: 'Bon de commande / contrat client' }
     ];
-    if (cat === 'STS-01') L.push({ key: 'pratique', label: 'Attestation de formation pratique STS-01', cat: 'Attestation de formation pratique', link: p && 'pilot:' + p.id }, { key: 'sts', label: 'Accusé de réception de la déclaration STS-01 (DGAC)', cat: 'Déclaration STS (accusé DSAC)' });
+    if (cat === 'STS-01') L.push(
+      { key: 'pratique', label: p && p.practicalBy === 'exploitant' ? 'Attestation de formation pratique STS-01 (délivrée par l\'exploitant)' : 'Attestation de formation pratique STS-01', cat: 'Attestation de formation pratique', link: p && 'pilot:' + p.id },
+      { key: 'sts', label: 'Accusé de réception de la déclaration d\'exploitation STS-01 (DSAC)', cat: 'Déclaration STS (accusé DSAC)' });
     if (cat === 'PDRA' || cat === 'STS-02') L.push({ key: 'autorisation', label: 'Copie de l\'autorisation d\'exploitation / LUC', cat: 'Autorisation / LUC' });
+    L.push({ key: 'activite', optional: true, label: 'Justificatif d\'activité : avis de situation SIRENE (INSEE) ou extrait Kbis — conseillé, parfois demandé', cat: 'Justificatif d\'activité (avis SIRENE / Kbis)' });
     return L;
   }
 
@@ -219,7 +227,7 @@ const Cerfa = (() => {
       { k: 'hoursReason', l: 'Raisons des horaires de survol déclarés', type: 'textarea', def: 'Horaires définis avec le commanditaire en fonction de la lumière et de la moindre fréquentation du site.' },
       { k: 'siteDescription', l: 'Description du site (zone d\'évolution, zone de sécurité au sol, points de décollage)', type: 'textarea' },
       { k: 'maxDistance', l: 'Éloignement maximal télépilote ↔ drone (m)', type: 'number' },
-      { k: 'endDate', l: 'Date de fin (si plage de dates)', type: 'date' },
+      { k: 'endDate', l: 'Date de fin (si plage de dates, sinon vide)', type: 'date' },
       { k: 'outsidePublic', l: 'Vols et zone de sécurité exclusivement hors espace public', type: 'checkbox' },
       { k: 'siteRestrictions', l: 'Prescriptions restrictives imposées par les gestionnaires des sites (sinon « Néant »)' },
       { k: 'crowdDesc', l: 'Rassemblement de personnes à proximité (décrire)', show: m.crowd },
@@ -245,6 +253,7 @@ const Cerfa = (() => {
       <p class="legend" id="dxState" style="text-align:right"></p>
       <p class="legend">Le fichier .eml s'ouvre dans Outlook, Apple Mail ou Thunderbird avec toutes les pièces jointes. Alternative : déclaration en ligne sur <a href="https://alphatango.aviation-civile.gouv.fr/" target="_blank" rel="noopener">AlphaTango</a>.</p>`, (root) => {
       const f = UI.$('#dxf', root);
+      if (f.elements.endDate) f.elements.endDate.min = m.date || '';
       const op = Store.operator();
       const subj = UI.$('#dxSubj', root), body = UI.$('#dxBody', root);
       const defaultMail = () => {
@@ -277,19 +286,28 @@ ${[op.phone, op.mobile, op.email].filter(Boolean).join(' – ')}`;
         const cur = m.pieces[pc.key];
         return `<select data-piece="${pc.key}" style="max-width:280px"><option value="">— choisir dans la Documentation —</option>${cands.map(dc => `<option value="${dc.id}" ${cur === dc.id ? 'selected' : ''}>${esc(dc.title)}${dc.expiry && UI.daysUntil(dc.expiry) < 0 ? ' (expiré)' : ''}</option>`).join('')}</select>`;
       };
-      const auto = (pc) => { if (!m.pieces[pc.key]) { const c = docs.filter(dc => dc.fileId && dc.category === pc.cat); const best = c.find(dc => pc.link && dc.linkedTo === pc.link) || (c.length === 1 ? c[0] : null); if (best) m.pieces[pc.key] = best.id; } };
+      // Choix automatique : document de la bonne catégorie, lié à la bonne personne / au bon drone, et dont le titre correspond (A2, STS…)
+      const auto = (pc) => {
+        if (m.pieces[pc.key] && Store.get('docs', m.pieces[pc.key])) return;
+        const txt = (dc) => (dc.title + ' ' + (dc.fileName || '')).toLowerCase();
+        const valid = (dc) => !dc.expiry || UI.daysUntil(dc.expiry) >= 0;
+        let c = docs.filter(dc => dc.fileId && dc.category === pc.cat && valid(dc));
+        if (pc.link && c.some(dc => dc.linkedTo === pc.link)) c = c.filter(dc => dc.linkedTo === pc.link || !dc.linkedTo);
+        const best = (pc.words && c.find(dc => pc.words.test(txt(dc)))) || c.find(dc => pc.link && dc.linkedTo === pc.link) || c[0];
+        if (best) m.pieces[pc.key] = best.id;
+      };
       pieces.forEach(auto);
       const renderPieces = () => {
         UI.$('#dxPieces', root).innerHTML = `<table><tbody>
           <tr><td>✅ Cerfa 15476*04 rempli</td><td class="legend">généré automatiquement</td></tr>
           <tr><td>✅ Plan de la zone de vol (carte)</td><td class="legend">généré automatiquement</td></tr>
-          ${pieces.map(pc => { const ok = m.pieces[pc.key] || extra[pc.key]; return `<tr><td>${ok ? '✅' : '❌'} ${esc(pc.label)}</td><td class="row">${sel(pc)}<label class="btn sm">⬆ Fichier<input type="file" hidden data-up="${pc.key}"></label>${extra[pc.key] ? `<span class="legend">${esc(extra[pc.key].name)}</span>` : ''}</td></tr>`; }).join('')}
+          ${pieces.map(pc => { const ok = m.pieces[pc.key] || extra[pc.key]; return `<tr><td>${ok ? '✅' : pc.optional ? '⚪' : '❌'} ${esc(pc.label)}</td><td class="row">${sel(pc)}<label class="btn sm">⬆ Fichier<input type="file" hidden data-up="${pc.key}"></label>${extra[pc.key] ? `<span class="legend">${esc(extra[pc.key].name)}</span>` : ''}</td></tr>`; }).join('')}
         </tbody></table><p class="legend">Ajoutez vos documents une fois pour toutes dans <a href="#/docs" onclick="UI.closeModal()">Documentation</a> avec la bonne catégorie : ils seront proposés automatiquement. Pensez aussi à mentionner les ZICAD éventuelles de la zone.</p>`;
       };
       const check = () => {
         Object.assign(m, UI.readForm(f, FIELDS)); onSave && onSave();
         const { missing } = build(m, ctx);
-        const pm = pieces.filter(pc => !m.pieces[pc.key] && !extra[pc.key]);
+        const pm = pieces.filter(pc => !pc.optional && !m.pieces[pc.key] && !extra[pc.key]);
         UI.$('#dxMissing', root).innerHTML = missing.length ? `<div class="alert">${missing.length} champ(s) à compléter :<ul style="margin:6px 0 0">${missing.map(x => `<li>${esc(x.label)} — ${WHERE[x.where][0] ? `<a href="${WHERE[x.where][0]}" onclick="UI.closeModal()">${WHERE[x.where][1]}</a>` : WHERE[x.where][1]}</li>`).join('')}</ul></div>` : '<p class="badge ok">Tous les champs obligatoires du Cerfa sont remplis</p>';
         const to = UI.$('#dxTo', root).value.trim();
         const ready = !missing.length && !pm.length && /@/.test(to);
