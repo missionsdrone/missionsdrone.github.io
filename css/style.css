@@ -150,3 +150,5 @@ pre.mail{white-space:pre-wrap;background:var(--bg);padding:12px;border-radius:8p
 a.pill{text-decoration:none;color:var(--ink)}a.pill:hover{border-color:var(--accent)}
 
 .pin{font-size:30px;line-height:1;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))}
+
+.next-step{justify-content:flex-end;margin-top:4px}

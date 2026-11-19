@@ -83,8 +83,9 @@ const Mission = (() => {
         <div class="row"><button class="btn desk" id="exportGeo">⬇ GeoJSON</button><button class="btn desk" id="exportKml">⬇ KML</button><button class="btn desk" id="exportPlan">⬇ Plan PNG</button><button class="btn" id="logBtn">📒 Ajouter au carnet de vol</button><button class="btn primary" id="saveBtn">Enregistrer</button></div></div>
       <div class="tabs" id="tabs"><button data-t="info" class="active">1. Informations</button><button data-t="zone">2. Zone & contraintes</button><button data-t="steps">3. Démarches & contacts</button><button data-t="check">4. Check-list</button></div>
       <a href="#" id="miniVerdict" class="mini-verdict" hidden></a>
-      ${isNew ? '<div class="alert info">👋 <b>Étape 1 :</b> cherchez l\'adresse et dessinez la zone de vol (cercle, rectangle ou polygone) : l\'analyse se lance toute seule. <b>Étape 2 :</b> complétez les informations (date, catégorie, hauteur) : les contraintes se mettent à jour.</div>' : ''}
-      <section data-p="info"><div class="card"><form id="mf"><div class="fields">${UI.formFields(FIELDS, m)}</div></form></div></section>
+      ${isNew ? '<div class="alert info" id="newHint">👋 <b>Étape 1 :</b> vérifiez les informations de la mission (date, catégorie, hauteur, télépilote, drone). <b>Étape 2 :</b> cherchez l\'adresse et dessinez la zone : l\'analyse se lance toute seule. Les informations restent modifiables à tout moment.</div>' : ''}
+      <section data-p="info"><div class="card"><form id="mf"><div class="fields">${UI.formFields(FIELDS, m)}</div></form>
+        <div class="row next-step"><button class="btn primary" data-go="zone">Étape suivante : la zone de vol →</button></div></div></section>
       <section data-p="zone" hidden>
         <div class="card">
           <div class="map-tools">
@@ -100,9 +101,10 @@ const Mission = (() => {
           <div><div class="card"><h2>Météo à l'heure prévue</h2><div id="weather"><p class="legend">Renseignez la date (≤ 16 jours) et l'heure, puis analysez.</p></div></div>
           <div class="card"><h2>Sources</h2><p class="legend">Zones UAS : DGAC, diffusées par l'IGN (Géoplateforme). Aérodromes, sites militaires, établissements pénitentiaires, espaces protégés, forces de l'ordre : BD TOPO IGN. Contacts : Annuaire de l'administration. Météo : Open-Meteo. Règles : arrêté espace du 3/12/2020, Cerfa 15476*04 et notice 52053#04, règlement (UE) 2019/947. <b>Aide à la préparation : ne remplace pas la consultation du SIA (NOTAM, AIP, VAC).</b></p></div></div>
         </div>
+        <div class="row next-step"><button class="btn" data-go="info">← Informations</button><button class="btn primary" data-go="steps">Étape suivante : démarches et courriers →</button></div>
       </section>
-      <section data-p="steps" hidden><div id="stepsPane"></div></section>
-      <section data-p="check" hidden><div class="card"><h2>Check-list prévol</h2><div class="checklist" id="checklist"></div></div></section>`;
+      <section data-p="steps" hidden><div id="stepsPane"></div><div class="row next-step"><button class="btn" data-go="zone">← Zone & contraintes</button><button class="btn primary" data-go="check">Étape suivante : la check-list →</button></div></section>
+      <section data-p="check" hidden><div class="card"><h2>Check-list prévol</h2><div class="checklist" id="checklist"></div></div><div class="row next-step"><button class="btn" data-go="steps">← Démarches</button></div></section>`;
 
     UI.$('#tabs').onclick = (e) => {
       const t = e.target.dataset.t; if (!t) return;
@@ -136,7 +138,10 @@ const Mission = (() => {
     cl.onchange = (e) => { m.checklist = m.checklist || {}; m.checklist[e.target.dataset.i] = e.target.checked; save(true); };
 
     Mission._current = { m: () => collect(), save };
-    if (isNew || tab === 'zone' || (m.zone && !tab && !m.analysis)) UI.$('[data-t=zone]').click();
+    // Navigation « étape suivante »
+    UI.view().onclick = (e) => { const g = e.target.dataset && e.target.dataset.go; if (!g) return; UI.$(`[data-t=${g}]`).click(); window.scrollTo(0, 0); UI.view().scrollTop = 0; if (UI.$('#newHint')) UI.$('#newHint').remove(); };
+    // Nouvelle mission : on commence par l'étape 1 (Informations) ; la démo et les liens directs ouvrent la zone
+    if (tab === 'zone' || (!isNew && m.zone && !tab && !m.analysis)) UI.$('[data-t=zone]').click();
     else if (tab && UI.$(`[data-t=${tab}]`)) UI.$(`[data-t=${tab}]`).click();
   }
 
