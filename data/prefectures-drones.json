@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-19",
+"updated": "2026-11-23",
 "note": "Sources : liste DGAC « Aéronefs télépilotés : contacts dans les préfectures » (25/04/2025), sites des préfectures, retours d'utilisateurs. À vérifier avant envoi.",
 "departements": {
 "01": {
@@ -222,11 +222,10 @@
 "33": {
 "prefecture": "Gironde",
 "site": "https://www.gironde.gouv.fr/",
-"email": "sp-arcachon@gironde.gouv.fr",
-"source": "https://www.gironde.gouv.fr/Services-de-l-Etat/Prefecture-et-sous-prefectures/Les-sous-prefectures/Sous-prefectures",
-"sourceLabel": "Sous-préfecture d'Arcachon – contact de la Gironde pour les activités aériennes (liste DGAC janvier 2026), confirmé par un utilisateur",
-"alt": "pref-declaration-drones@gironde.gouv.fr",
-"service": "Sous-préfecture d'Arcachon (activités aériennes de la Gironde)"
+"email": "pref-declaration-drones@gironde.gouv.fr",
+"source": "https://www.ecologie.gouv.fr/sites/default/files/documents/Contacts_drones_pr%C3%A9fectures_0.pdf",
+"sourceLabel": "Liste DGAC des contacts drones (25/04/2025) et site de la préfecture, confirmé par téléphone auprès de la préfecture (23/11/2026)",
+"service": "Préfecture de la Gironde – déclarations drones"
 },
 "34": {
 "prefecture": "Hérault",

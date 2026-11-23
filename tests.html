@@ -73,7 +73,7 @@
 
   // Annuaire des préfectures (liste DGAC)
   t('Adresse « drones » connue pour au moins 100 départements', Object.values(Regulation.PREFS ? Regulation.PREFS().departements : {}).filter(x => x.email).length >= 100);
-  t('Gironde : sous-préfecture d\'Arcachon', (Regulation.prefDrone('33') || {}).email === 'sp-arcachon@gironde.gouv.fr');
+  t('Gironde : adresse « déclarations drones » de la préfecture', (Regulation.prefDrone('33') || {}).email === 'pref-declaration-drones@gironde.gouv.fr');
   t('Isère : adresse dédiée drones', (Regulation.prefDrone('38') || {}).email === 'pref-declaration-drones@isere.gouv.fr');
 
   // Certificats détectés par leur date de validité (sans n° d'attestation)
