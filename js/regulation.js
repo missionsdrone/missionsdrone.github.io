@@ -64,7 +64,7 @@ const Regulation = (() => {
   // Adresse mémorisée par l'utilisateur : seulement si c'est une adresse .gouv.fr ET qu'aucune adresse officielle n'est connue
   const prefSaved = (dep, arr) => { const L = Store.all('contacts').filter(c => c.type === 'Préfecture' && c.drones && c.dep === dep && isGovMail(c.email)); return L.find(c => arr && c.arr === arr) || L.find(c => !c.arr); };
   // Nettoyage : supprime les adresses non officielles mémorisées par erreur (ex. son propre e-mail)
-  try { Store.all('contacts').filter(c => c.type === 'Préfecture' && c.drones && !isGovMail(c.email)).forEach(c => Store.remove('contacts', c.id)); } catch (e) { }
+  try { Store.all('contacts').filter(c => c.type === 'Préfecture' && c.email && !isGovMail(c.email)).forEach(c => Store.remove('contacts', c.id)); } catch (e) { }
   let CTRS = { features: [] };
   const ctrReady = fetch('data/aip-ctr.geojson').then(r => r.json()).then(d => (CTRS = d)).catch(() => CTRS);
   const ctrsAt = (zone) => { const seen = new Set(); return CTRS.features.filter(f => { try { if (seen.has(f.properties.name) || !turf.booleanIntersects(f, zone)) return false; seen.add(f.properties.name); return true; } catch (e) { return false; } }); };

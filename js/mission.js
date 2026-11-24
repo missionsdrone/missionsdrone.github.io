@@ -74,6 +74,17 @@ const Mission = (() => {
       pilotId: P0.length === 1 ? P0[0].id : '', droneId: D0.length === 1 ? D0[0].id : '', steps: {}, checklist: {}, pieces: {} } : Store.get('missions', id);
     if (!m) { location.hash = '#/missions'; return; }
     if (m.analysis && !m.analysis.v2) delete m.analysis; // anciennes analyses : à relancer
+    // Contacts enregistrés dans l'analyse : une préfecture ne peut avoir qu'une adresse officielle (.gouv.fr)
+    if (m.analysis && m.analysis.contacts) {
+      const dep = m.analysis.commune && m.analysis.commune.codeDepartement; let changed = false;
+      m.analysis.contacts.forEach(c => {
+        if (c.type !== 'Préfecture') return;
+        const pd = Regulation.prefDrone(c.dep || dep);
+        const good = (pd && pd.email) || (Regulation.isGovMail(c.email) ? c.email : '');
+        if (c.email !== good || (pd && pd.service && c.name !== pd.service)) { c.email = good; c.emailSource = pd ? pd.sourceLabel : ''; if (pd && pd.service) c.name = pd.service; changed = true; }
+      });
+      if (changed && m.id) Store.upsert('missions', m);
+    }
     ctx = ctxOf(m);
     FIELDS.find(f => f.k === 'pilotId').opts = [['', '— aucun —'], ...Store.all('pilots').map(p => [p.id, Fleet.pilotName(p)])];
     FIELDS.find(f => f.k === 'droneId').opts = [['', '— aucun —'], ...Store.all('drones').map(d => [d.id, Fleet.droneName(d)])];
