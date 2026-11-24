@@ -165,3 +165,7 @@ input.invalid{border-color:var(--bad);background:var(--bad-soft)}
 .sig-wrap{position:relative;max-width:600px;border:2px dashed var(--line);border-radius:10px;background:#fff}
 #sigPad{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair}
 .sig-hint{position:absolute;inset:0;display:grid;place-items:center;color:#c5ccd8;font-size:22px;pointer-events:none}
+.send-card{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:12px;background:var(--bg);margin-bottom:12px}
+.send-title{font-weight:700}
+.send-to{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px;word-break:break-all}
+.send-to b{color:var(--accent)}.send-to b.missing{color:var(--bad)}
