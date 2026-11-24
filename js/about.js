@@ -16,7 +16,7 @@ const About = (() => {
   ];
 
   function page() {
-    const P = APP.publisher, missing = !P.name || !P.email || !P.host || (P.status !== 'particulier' && (!P.address || !P.siret));
+    const P = APP.publisher, missing = !P.name || !P.host || (P.status !== 'particulier' && (!P.address || !P.siret || !P.email));
     const airac = Regulation.AIPDIR().airac;
     UI.view().innerHTML = `<div class="prose"><h1>À propos de ${esc(APP.name)}</h1><p class="sub">Version ${esc(APP.version)}${airac ? ` · données AIP du cycle du ${UI.fmtDate(airac)}` : ''}</p>
       <div class="alert"><b>Avertissement.</b> ${esc(APP.name)} est une aide à la préparation des vols. Il ne délivre aucune autorisation et ne remplace ni la réglementation, ni la consultation de l'information aéronautique officielle (AIP, NOTAM, SUP AIP, cartes VAC), ni le jugement du télépilote et de l'exploitant, qui restent seuls responsables du vol. Les données proviennent de sources publiques qui peuvent comporter des erreurs ou des retards de mise à jour. Vérifiez toujours avant d'envoyer une demande ou de voler.</div>
@@ -33,7 +33,7 @@ const About = (() => {
 
       <h2>Mentions légales</h2>
       ${missing ? '<div class="alert">⚠️ À compléter par l\'éditeur avant publication (fichier <code>js/config.js</code>).</div>' : ''}
-      <p><b>Éditeur :</b> ${esc(P.name || '[raison sociale]')}${P.status === 'particulier' ? ', particulier (éditeur non professionnel)' : ''}${P.siret ? ' – SIRET ' + esc(P.siret) : ''}<br>${P.address ? esc(P.address) : P.status === 'particulier' ? 'Coordonnées postales communiquées à l\'hébergeur (art. 6 III-2 de la loi n° 2004-575 du 21 juin 2004)' : '[adresse]'}<br>Contact : ${P.email ? `<a href="mailto:${esc(P.email)}">${esc(P.email)}</a>` : '[e-mail]'}<br>
+      <p><b>Éditeur :</b> ${esc(P.name || '[raison sociale]')}${P.status === 'particulier' ? ', particulier (éditeur non professionnel)' : ''}${P.siret ? ' – SIRET ' + esc(P.siret) : ''}<br>${P.address ? esc(P.address) : P.status === 'particulier' ? 'Coordonnées postales communiquées à l\'hébergeur (art. 6 III-2 de la loi n° 2004-575 du 21 juin 2004)' : '[adresse]'}<br>Contact : ${P.email ? `<a href="mailto:${esc(P.email)}">${esc(P.email)}</a>` : P.status === 'particulier' ? 'coordonnées communiquées à l\'hébergeur' : '[e-mail]'}<br>
       <b>Directeur de la publication :</b> ${esc(P.director || '[nom]')}<br><b>Hébergeur :</b> ${esc(P.host || '[nom, adresse et téléphone de l\'hébergeur]')}</p>
       <p>${esc(APP.name)} est un outil indépendant. Il n'est ni affilié ni approuvé par la DGAC, la DSNA, le SIA, l'IGN, les préfectures ou les armées.</p>
 

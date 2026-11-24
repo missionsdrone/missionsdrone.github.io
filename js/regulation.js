@@ -59,7 +59,12 @@ const Regulation = (() => {
   const prefDrone = (dep) => (dep && PREFS.departements[dep]) || null;
   // Adresse mémorisée par l'utilisateur pour ce département (prioritaire)
   // Adresse mémorisée : d'abord pour l'arrondissement exact, sinon pour le département
-  const prefSaved = (dep, arr) => { const L = Store.all('contacts').filter(c => c.type === 'Préfecture' && c.email && c.dep === dep && c.drones); return L.find(c => arr && c.arr === arr) || L.find(c => !c.arr); };
+  // Adresse officielle d'une administration (préfecture, sous-préfecture) uniquement
+  const isGovMail = (e) => /^[^@\s]+@([\w-]+\.)*(gouv\.fr|pref\.gouv\.fr|interieur\.gouv\.fr)$/i.test((e || '').trim());
+  // Adresse mémorisée par l'utilisateur : seulement si c'est une adresse .gouv.fr ET qu'aucune adresse officielle n'est connue
+  const prefSaved = (dep, arr) => { const L = Store.all('contacts').filter(c => c.type === 'Préfecture' && c.drones && c.dep === dep && isGovMail(c.email)); return L.find(c => arr && c.arr === arr) || L.find(c => !c.arr); };
+  // Nettoyage : supprime les adresses non officielles mémorisées par erreur (ex. son propre e-mail)
+  try { Store.all('contacts').filter(c => c.type === 'Préfecture' && c.drones && !isGovMail(c.email)).forEach(c => Store.remove('contacts', c.id)); } catch (e) { }
   let CTRS = { features: [] };
   const ctrReady = fetch('data/aip-ctr.geojson').then(r => r.json()).then(d => (CTRS = d)).catch(() => CTRS);
   const ctrsAt = (zone) => { const seen = new Set(); return CTRS.features.filter(f => { try { if (seen.has(f.properties.name) || !turf.booleanIntersects(f, zone)) return false; seen.add(f.properties.name); return true; } catch (e) { return false; } }); };
@@ -217,7 +222,8 @@ const Regulation = (() => {
         const sub = pd && pd.arrondissements && pd.arrondissements[arr];
         c.dep = dep; c.arr = sub ? arr : '';
         if (sub) { c.name = sub.service; c.website = sub.source || c.website; }
-        if (saved) { c.email = saved.email; c.emailSource = 'votre annuaire'; c.drones = true; if (saved.service) c.name = saved.service; }
+        const official = (sub && sub.email) || (pd && pd.email);
+        if (saved && !official) { c.email = saved.email; c.emailSource = 'votre annuaire'; c.drones = true; if (saved.service) c.name = saved.service; }
         else if (sub && sub.email) { c.email = sub.email; c.emailSource = sub.service; c.drones = true; }
         else if (pd && pd.email) { c.email = pd.email; c.emailSource = pd.sourceLabel || 'site de la préfecture'; c.drones = true; c.website = pd.source || c.website; c.altEmail = pd.alt || ''; if (pd.service) c.name = pd.service; }
         else { c.genericEmail = c.email; c.email = ''; c.website = (pd && pd.site ? pd.site.replace(/\/$/, '') + '/content/search?SearchText=drone' : c.website); }
@@ -520,5 +526,5 @@ const Regulation = (() => {
     return C.sort((a, b) => order[a.level] - order[b.level]);
   }
 
-  return { LINKS, NATIONAL_CONTACTS, CATEGORIES, SIA, airac, whenErrors, aipInfo, aipReady, aipStale, prefReady, prefDrone, prefSaved, PREFS: () => PREFS, ctrName, ctrReady, ctrsAt, CTRS: () => CTRS, MIL_CTR, AIPDIR: () => AIPDIR, fetchAirspaces, notice, fetchRestrictions, fetchSensitive, fetchCommune, fetchAdminContacts, fetchWeather, buildConstraints, parseLimit };
+  return { LINKS, NATIONAL_CONTACTS, CATEGORIES, SIA, airac, whenErrors, aipInfo, aipReady, aipStale, prefReady, prefDrone, prefSaved, isGovMail, PREFS: () => PREFS, ctrName, ctrReady, ctrsAt, CTRS: () => CTRS, MIL_CTR, AIPDIR: () => AIPDIR, fetchAirspaces, notice, fetchRestrictions, fetchSensitive, fetchCommune, fetchAdminContacts, fetchWeather, buildConstraints, parseLimit };
 })();

@@ -307,11 +307,15 @@ const Cerfa = (() => {
 
   /* ---------- Dialogue « Dossier préfecture » ---------- */
   async function openDossier(m, ctx, onSave) {
-    const pref = (ctx.contacts || []).find(c => c.type === 'Préfecture') || {};
+    let pref = Object.assign({}, (ctx.contacts || []).find(c => c.type === 'Préfecture') || {});
     const dep = ctx.commune && ctx.commune.codeDepartement;
+    // L'adresse officielle de l'annuaire passe toujours avant une adresse mémorisée ou ancienne
+    const pdd = Regulation.prefDrone(dep);
+    if (pdd && pdd.email && pref.email !== pdd.email && (!Regulation.isGovMail(pref.email) || pref.emailSource === 'votre annuaire' || !pref.emailSource))
+      pref = Object.assign(pref, { email: pdd.email, emailSource: pdd.sourceLabel || 'liste officielle', altEmail: pdd.alt || '', drones: true, name: pdd.service || pref.name || pdd.prefecture });
     // Mémorise l'adresse « drones » saisie pour ce département (annuaire personnel)
     const rememberPref = (email) => {
-      if (!dep || !/@/.test(email) || email === pref.email) return;
+      if (!dep || !Regulation.isGovMail(email) || email === pref.email) return; // jamais d'adresse personnelle mémorisée
       const arr = pref.arr || '';
       const ex = Store.all('contacts').find(c => c.type === 'Préfecture' && c.dep === dep && c.drones && (c.arr || '') === arr);
       Store.upsert('contacts', Object.assign(ex || {}, { name: `${pref.name || 'Préfecture'} – déclarations drones`, service: pref.name, type: 'Préfecture', email, dep, arr, drones: true, area: dep + (arr ? ' (arr. ' + arr + ')' : ''), website: pref.website || '' }));
@@ -482,7 +486,11 @@ ${[op.phone, op.mobile, op.email].filter(Boolean).join(' – ')}`;
       const markReady = () => { m.steps = m.steps || {}; if (m.steps.prefecture !== 'Accordé' && m.steps.prefecture !== 'Envoyé') m.steps.prefecture = 'Prêt à envoyer'; onSave && onSave(); };
       const to = () => UI.$('#dxTo', root).value.trim();
       // Adresse de la préfecture affichée en clair dans les deux parties, mise à jour en direct
-      const showTo = () => root.querySelectorAll('.dxToShow').forEach(el => { el.textContent = to() || '⚠️ adresse de la préfecture à renseigner (section 4)'; el.classList.toggle('missing', !to()); });
+      const showTo = () => root.querySelectorAll('.dxToShow').forEach(el => {
+        const t = to(), gov = Regulation.isGovMail(t);
+        el.textContent = !t ? '⚠️ adresse de la préfecture à renseigner (section 4)' : gov ? t : `${t} ⚠️ ce n'est pas une adresse officielle (.gouv.fr)`;
+        el.classList.toggle('missing', !gov);
+      });
       UI.$('#dxTo', root).addEventListener('input', showTo); showTo();
       const cerfaName = `Cerfa_15476-04_signe_${safeName(slug)}.pdf`, piecesName = `Justificatifs_declaration_drone_${safeName(slug)}.pdf`;
       const ftNote = `\n\nLes pièces justificatives (${pieces.filter(pc => m.pieces[pc.key] || extra[pc.key]).length} documents) vous sont transmises séparément via France Transfert, à cette même adresse, dans le fichier « ${piecesName} ».`;
