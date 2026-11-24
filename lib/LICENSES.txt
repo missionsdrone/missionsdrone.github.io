@@ -3,4 +3,5 @@ Bibliothèques tierces incluses dans ce site
 - Leaflet-Geoman Free 2.17.0 — MIT — © Sumit Kumar, Geoman.io — https://geoman.io
 - Turf.js 6.5.0 — MIT — © Morgan Herlocker et contributeurs — https://turfjs.org
 - pdf-lib 1.17.1 — MIT — © Andrew Dillon — https://pdf-lib.js.org
+- pdf.js 3.11.174 — Apache 2.0 — © Mozilla Foundation — https://mozilla.github.io/pdf.js/ (chargé uniquement pour compresser les PDF lourds)
 Les textes complets des licences sont disponibles sur les sites des projets.

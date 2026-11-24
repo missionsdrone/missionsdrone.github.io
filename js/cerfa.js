@@ -118,7 +118,7 @@ const Cerfa = (() => {
   }
   const zoneRadius = (z) => { const c = turf.centroid(z); return Math.max(...turf.coordAll(z).map(p => turf.distance(c, turf.point(p), { units: 'meters' }))); };
 
-  async function fillPdf(m, ctx) {
+  async function fillPdf(m, ctx, opts = {}) {
     const { T, X, R } = build(m, ctx);
     const bytes = await fetch(PDF_URL).then(r => r.arrayBuffer());
     const doc = await PDFLib.PDFDocument.load(bytes);
@@ -129,8 +129,42 @@ const Cerfa = (() => {
     for (const [k, v] of Object.entries(R)) { try { const g = form.getRadioGroup(k); const opts = g.getOptions(); g.select(typeof v === 'number' ? opts[v] : v); } catch (e) { console.warn('radio', k, e.message); } }
     try { form.getRadioGroup('Groupe51').clear(); } catch (e) { } // site n°2 non utilisé (pré-coché dans le formulaire vierge)
     form.updateFieldAppearances(font);
+    if (opts.flatten) form.flatten(); // champs figés : indispensable pour fusionner dans un seul PDF
     return new Blob([await doc.save()], { type: 'application/pdf' });
   }
+
+  /* ---------- Dossier complet en un seul PDF ---------- */
+  async function toJpeg(blob) {
+    const bmp = await createImageBitmap(blob); const cv = document.createElement('canvas'); cv.width = bmp.width; cv.height = bmp.height;
+    const g = cv.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, cv.width, cv.height); g.drawImage(bmp, 0, 0);
+    return new Promise(r => cv.toBlob(r, 'image/jpeg', 0.85));
+  }
+  async function mergePdf(files) {
+    const out = await PDFLib.PDFDocument.create(); const skipped = [];
+    for (const f of files) {
+      try {
+        if (/pdf/.test(f.blob.type) || /\.pdf$/i.test(f.name)) {
+          const src = await PDFLib.PDFDocument.load(await f.blob.arrayBuffer(), { ignoreEncryption: true });
+          (await out.copyPages(src, src.getPageIndices())).forEach(p => out.addPage(p));
+        } else if (/^image\//.test(f.blob.type)) {
+          const jpg = /jpe?g/.test(f.blob.type) ? f.blob : await toJpeg(f.blob);
+          const img = await out.embedJpg(await jpg.arrayBuffer());
+          const page = out.addPage([595.28, 841.89]); const k = Math.min(555 / img.width, 802 / img.height, 1);
+          page.drawImage(img, { x: (595.28 - img.width * k) / 2, y: (841.89 - img.height * k) / 2, width: img.width * k, height: img.height * k });
+        } else skipped.push(f.name);
+      } catch (e) { skipped.push(f.name); }
+    }
+    return { blob: new Blob([await out.save()], { type: 'application/pdf' }), skipped };
+  }
+
+  /* ---------- Ouverture de la messagerie de l'utilisateur ---------- */
+  const MAILERS = {
+    app: { label: 'Messagerie de l\'ordinateur (Mail, Outlook, Thunderbird…)', url: (to, s, b) => `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}` },
+    gmail: { label: 'Gmail', url: (to, s, b) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}` },
+    outlook: { label: 'Outlook.com / Hotmail', url: (to, s, b) => `https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(to)}&subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}` },
+    office: { label: 'Outlook Microsoft 365 (professionnel)', url: (to, s, b) => `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(to)}&subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}` },
+    yahoo: { label: 'Yahoo Mail', url: (to, s, b) => `https://compose.mail.yahoo.com/?to=${encodeURIComponent(to)}&subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}` }
+  };
 
   /* ---------- Plan de la zone (PNG) à partir des fonds IGN ---------- */
   async function renderPlan(m, title) {
@@ -197,6 +231,36 @@ const Cerfa = (() => {
       return out && out.size < blob.size ? { blob: out, name: name.replace(/\.\w+$/, '') + '.jpg' } : { blob, name };
     } catch (e) { return { blob, name }; }
   }
+  /* Compression des PDF lourds (scans) : pages re-rendues en JPEG à ~150 dpi, qualité « document » */
+  let pdfjsP = null;
+  const loadPdfJs = () => pdfjsP || (pdfjsP = new Promise((res, rej) => {
+    if (window.pdfjsLib) return res(window.pdfjsLib);
+    const s = document.createElement('script'); s.src = 'lib/pdfjs/pdf.min.js';
+    s.onload = () => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'lib/pdfjs/pdf.worker.min.js'; res(window.pdfjsLib); };
+    s.onerror = rej; document.head.appendChild(s);
+  }));
+  async function shrinkPdf(blob, name) {
+    if (blob.size < 1.2 * 1048576) return { blob, name };
+    try {
+      const pdfjs = await loadPdfJs();
+      const src = await pdfjs.getDocument({ data: new Uint8Array(await blob.arrayBuffer()) }).promise;
+      const out = await PDFLib.PDFDocument.create();
+      for (let i = 1; i <= src.numPages; i++) {
+        const page = await src.getPage(i); const vp1 = page.getViewport({ scale: 1 });
+        const scale = Math.min(2.2, 1240 / Math.max(vp1.width, vp1.height) * 1.414); // ≈ 150 dpi sur un A4
+        const vp = page.getViewport({ scale });
+        const cv = document.createElement('canvas'); cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+        const g = cv.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, cv.width, cv.height);
+        await page.render({ canvasContext: g, viewport: vp }).promise;
+        const jpg = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.72));
+        const img = await out.embedJpg(await jpg.arrayBuffer());
+        out.addPage([vp1.width, vp1.height]).drawImage(img, { x: 0, y: 0, width: vp1.width, height: vp1.height });
+      }
+      const res = new Blob([await out.save()], { type: 'application/pdf' });
+      return res.size < blob.size * 0.9 ? { blob: res, name, compressed: true } : { blob, name };
+    } catch (e) { console.warn('compression PDF impossible', name, e); return { blob, name }; }
+  }
+
   // Répartit les fichiers en envois de moins de LIMIT (le Cerfa et le plan restent dans le 1er envoi)
   function splitBatches(files) {
     const batches = [[]]; let size = 0;
@@ -272,12 +336,25 @@ const Cerfa = (() => {
       <label>Objet<input id="dxSubj"></label><label>Message<textarea id="dxBody" style="min-height:220px"></textarea></label></div>
       ${pref.email && pref.altEmail ? `<p class="legend">Autre adresse connue pour ce département : <a href="#" data-alt="${esc(pref.altEmail)}">${esc(pref.altEmail)}</a> (cliquer pour l'utiliser). N'envoyez le dossier qu'à une seule adresse.</p>` : ''}
       ${pref.email ? '' : `<div class="alert">⚠️ L'adresse « drones » de cette préfecture n'est pas encore connue. <a href="${esc(pref.website || '#')}" target="_blank" rel="noopener">Ouvrir le site de la préfecture (recherche « drone »)</a>, copiez l'adresse indiquée dans la rubrique Drones / Activités aériennes et collez-la ci-dessus : elle sera mémorisée pour vos prochaines missions dans ce département.${pref.genericEmail ? ` <br>Adresse générale (accueil, à éviter) : ${esc(pref.genericEmail)}` : ''}</div>`}
-      <div class="row" style="justify-content:space-between;margin-top:14px">
-        <div class="row"><button class="btn" id="dxPdf">👁 Aperçu du Cerfa</button><button class="btn" id="dxPlan">🗺 Plan de zone</button></div>
-        <div class="row"><button class="btn" id="dxSep" disabled>⬇ Pièces + ouvrir la messagerie</button><button class="btn primary" id="dxEml" disabled>✉️ Télécharger le mail prêt à envoyer (.eml)</button></div></div>
-      <p class="legend" id="dxState" style="text-align:right"></p>
-      <p class="legend" id="dxSize">📦 <button type="button" class="btn sm" id="dxSizeBtn">Calculer la taille du dossier</button> (calculée aussi à l'envoi ; au-delà de ${mo(LIMIT)}, le dossier est découpé en plusieurs mails).</p>
-      <p class="legend">Le fichier .eml s'ouvre dans Outlook, Apple Mail ou Thunderbird avec toutes les pièces jointes. Alternative : déclaration en ligne sur <a href="https://alphatango.aviation-civile.gouv.fr/" target="_blank" rel="noopener">AlphaTango</a>.</p>`, (root) => {
+      <div class="row" style="margin-top:12px"><button class="btn" id="dxPdf">👁 Aperçu du Cerfa</button><button class="btn" id="dxPlan">🗺 Plan de zone</button></div>
+      <h3>5. Envoyer le dossier</h3>
+      <p class="legend" id="dxState"></p>
+      <div class="send-box">
+        <div class="send-step" id="dxShareBox" hidden><b>En un clic :</b> <button class="btn primary" id="dxShare" disabled>📤 Envoyer avec ma messagerie</button>
+          <div class="legend">Ouvre votre application de messagerie avec le dossier déjà en pièce jointe. L'adresse de la préfecture est copiée : collez-la dans « À » (Cmd + V), puis cliquez sur Envoyer.</div></div>
+        <div class="send-step"><span class="num">1</span><div><button class="btn primary" id="dxDl" disabled>⬇ Télécharger le dossier complet (1 PDF)</button>
+          <div class="legend">Cerfa rempli, plan de zone et pièces justificatives réunis dans un seul fichier, enregistré dans « Téléchargements ».</div></div></div>
+        <div class="send-step"><span class="num">2</span><div><select id="dxMailer" style="width:auto;max-width:100%">${Object.entries(MAILERS).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select>
+          <button class="btn primary" id="dxOpen" disabled>✉️ Ouvrir le mail prêt à envoyer</button>
+          <div class="legend">Destinataire, objet et message sont déjà remplis.</div></div></div>
+        <div class="send-step"><span class="num">3</span><div><b>Glissez le PDF téléchargé dans le mail</b> (ou bouton « Pièce jointe » 📎), puis cliquez sur <b>Envoyer</b>.</div></div>
+      </div>
+      <p class="legend" id="dxSize">📦 <button type="button" class="btn sm" id="dxSizeBtn">Calculer la taille du dossier</button> Au-delà de ${mo(LIMIT)}, le dossier est découpé en plusieurs PDF à envoyer dans des mails séparés.</p>
+      <details class="legend"><summary>Autres options d'envoi</summary>
+        <div class="row" style="margin:8px 0"><button class="btn sm" id="dxSep" disabled>⬇ Pièces séparées (un fichier par document)</button><button class="btn sm" id="dxEml" disabled>⬇ Fichier mail .eml</button></div>
+        <p>Le fichier <b>.eml</b> est un mail complet avec ses pièces jointes. <b>Outlook</b> l'ouvre directement en brouillon : cliquez sur Envoyer. <b>Apple Mail</b> l'ouvre comme un message reçu : faites alors <i>Message › Envoyer à nouveau</i> (Maj + Cmd + D) pour obtenir le brouillon, puis Envoyer.</p>
+        <p>Vous pouvez aussi déclarer en ligne sur <a href="https://alphatango.aviation-civile.gouv.fr/" target="_blank" rel="noopener">AlphaTango</a>.</p>
+      </details>`, (root) => {
       const f = UI.$('#dxf', root);
       if (f.elements.endDate) f.elements.endDate.min = m.date || '';
       const op = Store.operator();
@@ -337,7 +414,7 @@ ${[op.phone, op.mobile, op.email].filter(Boolean).join(' – ')}`;
         UI.$('#dxMissing', root).innerHTML = missing.length ? `<div class="alert">${missing.length} champ(s) à compléter :<ul style="margin:6px 0 0">${missing.map(x => `<li>${esc(x.label)} — ${WHERE[x.where][0] ? `<a href="${WHERE[x.where][0]}" onclick="UI.closeModal()">${WHERE[x.where][1]}</a>` : WHERE[x.where][1]}</li>`).join('')}</ul></div>` : '<p class="badge ok">Tous les champs obligatoires du Cerfa sont remplis</p>';
         const to = UI.$('#dxTo', root).value.trim();
         const ready = !missing.length && !pm.length && /@/.test(to);
-        UI.$('#dxEml', root).disabled = UI.$('#dxSep', root).disabled = !ready;
+        ['#dxEml', '#dxSep', '#dxDl', '#dxOpen', '#dxShare'].forEach(id => { const b = UI.$(id, root); if (b) b.disabled = !ready; });
         UI.$('#dxState', root).textContent = ready ? 'Dossier complet ✔' : `Envoi bloqué : ${[missing.length && missing.length + ' champ(s)', pm.length && pm.length + ' pièce(s) manquante(s)', !/@/.test(to) && 'destinataire'].filter(Boolean).join(', ')}`;
         return ready;
       };
@@ -362,20 +439,78 @@ ${[op.phone, op.mobile, op.email].filter(Boolean).join(' – ')}`;
           if (extra[pc.key]) files.push({ name: pc.key + '_' + extra[pc.key].name, blob: extra[pc.key] });
           else { const dc = Store.get('docs', m.pieces[pc.key]); const b = dc && await Store.getFile(dc.fileId); if (b) files.push({ name: pc.key + '_' + (dc.fileName || 'document'), blob: b }); }
         }
-        for (let i = 0; i < files.length; i++) files[i] = Object.assign(files[i], await shrinkImage(files[i].blob, files[i].name));
+        for (let i = 0; i < files.length; i++) {
+          files[i] = Object.assign(files[i], await shrinkImage(files[i].blob, files[i].name));
+          if (i > 0 && /pdf/.test(files[i].blob.type)) files[i] = Object.assign(files[i], await shrinkPdf(files[i].blob, files[i].name)); // le Cerfa (i = 0) n'est jamais modifié
+        }
         return files;
       };
       // Taille du dossier et conseils
       const sizeInfo = async () => {
         const files = await collect(); const total = files.reduce((s, f) => s + f.blob.size, 0); const heavy = files.filter(f => f.blob.size > 2 * 1048576);
         const n = splitBatches(files).length;
-        UI.$('#dxSize', root).innerHTML = `📦 Taille du dossier : <b>${mo(total)}</b> (${files.length} fichiers, images allégées automatiquement). ` + (n > 1
+        UI.$('#dxSize', root).innerHTML = `📦 Taille du dossier : <b>${mo(total)}</b> (${files.length} fichiers, photos et PDF lourds compressés automatiquement${files.some(f => f.compressed) ? ' ✔' : ''}). ` + (n > 1
           ? `<span class="field-warn">Trop lourd pour un seul mail : il sera découpé en <b>${n} mails</b> de moins de ${mo(LIMIT)} (« envoi 1/${n} »…). Autre solution : <a href="https://francetransfert.numerique.gouv.fr/" target="_blank" rel="noopener">France Transfert</a>, le service gratuit de l'État pour envoyer de gros fichiers à une adresse en .gouv.fr.</span>`
           : '✅ Taille compatible avec les messageries de l\'État.') +
           (heavy.length ? `<br><span class="field-warn">Fichiers lourds : ${heavy.map(f => esc(f.name) + ' (' + mo(f.blob.size) + ')').join(', ')}. Pour un PDF scanné, réenregistrez-le en qualité « standard » (environ 150 dpi) : il passera souvent sous 1 Mo.</span>` : '');
         return files;
       };
       UI.$('#dxSizeBtn', root).onclick = () => sizeInfo();
+
+      /* --- Envoi simplifié : un PDF + la messagerie de l'utilisateur --- */
+      const mailer = UI.$('#dxMailer', root);
+      try { mailer.value = localStorage.getItem('osd-mailer') || 'app'; } catch (e) { }
+      mailer.onchange = () => { try { localStorage.setItem('osd-mailer', mailer.value); } catch (e) { } };
+      const markReady = () => { m.steps = m.steps || {}; if (m.steps.prefecture !== 'Accordé' && m.steps.prefecture !== 'Envoyé') m.steps.prefecture = 'Prêt à envoyer'; onSave && onSave(); };
+      let parts = null;
+      const buildDossier = async () => {
+        const files = await sizeInfo();
+        files[0] = Object.assign({}, files[0], { blob: await fillPdf(m, ctx, { flatten: true }) });
+        const batches = splitBatches(files), n = batches.length, out = [];
+        for (let i = 0; i < n; i++) { const r = await mergePdf(batches[i]); out.push({ name: `Dossier_declaration_drone_${safeName(slug)}${n > 1 ? '_' + (i + 1) + 'sur' + n : ''}.pdf`, blob: r.blob, skipped: r.skipped }); }
+        return out;
+      };
+      const mailFor = (i, n) => ({
+        subject: subj.value + (n > 1 ? ` (envoi ${i + 1}/${n})` : ''),
+        body: (i === 0 ? body.value : `Madame, Monsieur,\n\nSuite de notre déclaration préalable « ${subj.value} ».`) +
+          (n > 1 ? `\n\n[Dossier envoyé en ${n} messages en raison de la taille des pièces jointes : merci de les considérer ensemble.]` : '') +
+          `\n\nPièce jointe : ${parts ? parts[i].name : 'dossier complet (PDF)'}`
+      });
+      const openMail = (i = 0) => {
+        const to = UI.$('#dxTo', root).value.trim(), n = parts ? parts.length : 1, mm = mailFor(i, n);
+        const url = MAILERS[mailer.value].url(to, mm.subject, mm.body.slice(0, 1800));
+        rememberPref(to); markReady();
+        if (mailer.value === 'app') location.href = url; else window.open(url, '_blank', 'noopener');
+      };
+      const showParts = () => {
+        let box = UI.$('#dxParts', root); if (!box) { UI.$('.send-box', root).insertAdjacentHTML('beforeend', '<div id="dxParts" class="send-step"></div>'); box = UI.$('#dxParts', root); }
+        const sk = parts.flatMap(p => p.skipped);
+        box.innerHTML = (parts.length > 1 ? `<div><b>Dossier découpé en ${parts.length} PDF</b> (taille) : envoyez un mail par PDF.<div class="row" style="margin-top:6px">${parts.map((p, i) => `<button class="btn sm" data-part="${i}">✉️ Ouvrir le mail ${i + 1}/${parts.length}</button>`).join('')}</div></div>` : `<div>✅ <b>${esc(parts[0].name)}</b> téléchargé (${mo(parts[0].blob.size)}).</div>`)
+          + (sk.length ? `<div class="field-warn">Non intégrés au PDF (format non pris en charge ou fichier illisible), à joindre à part : ${sk.map(esc).join(', ')}</div>` : '');
+        box.querySelectorAll('[data-part]').forEach(b => b.onclick = () => openMail(Number(b.dataset.part)));
+      };
+      UI.$('#dxDl', root).onclick = async () => {
+        if (!check()) return; UI.toast('Assemblage du dossier…');
+        parts = await buildDossier(); parts.forEach(p => UI.download(p.name, p.blob, 'application/pdf'));
+        showParts(); markReady(); UI.toast('Dossier téléchargé : étape 2, ouvrez le mail');
+      };
+      UI.$('#dxOpen', root).onclick = () => { if (!check()) return; if (!parts) UI.toast('Pensez à télécharger le dossier (étape 1) pour le joindre au mail'); openMail(0); };
+      // Partage natif avec pièce jointe (Safari, Edge, téléphones…) : préparation puis partage (le navigateur exige un clic direct)
+      try {
+        const probe = new File(['x'], 'test.pdf', { type: 'application/pdf' });
+        if (navigator.canShare && navigator.canShare({ files: [probe] })) {
+          UI.$('#dxShareBox', root).hidden = false;
+          let ready = false; const btn = UI.$('#dxShare', root);
+          btn.onclick = async () => {
+            if (!check()) return;
+            if (!ready) { btn.disabled = true; btn.textContent = '⏳ Préparation…'; parts = await buildDossier(); showParts(); ready = true; btn.disabled = false; btn.textContent = '📤 Partager maintenant vers ma messagerie'; return; }
+            const to = UI.$('#dxTo', root).value.trim(); try { await navigator.clipboard.writeText(to); } catch (e) { }
+            const mm = mailFor(0, parts.length);
+            try { await navigator.share({ files: [new File([parts[0].blob], parts[0].name, { type: 'application/pdf' })], title: mm.subject, text: mm.body }); rememberPref(to); markReady(); UI.toast('Collez l\'adresse de la préfecture dans « À » puis Envoyer'); }
+            catch (e) { if (e.name !== 'AbortError') UI.toast('Partage impossible ici : utilisez les étapes 1 à 3'); }
+          };
+        }
+      } catch (e) { }
       UI.$('#dxEml', root).onclick = async () => {
         if (!check()) return; UI.toast('Préparation du mail…');
         const files = await sizeInfo(); const batches = splitBatches(files), n = batches.length;

@@ -1,8 +1,8 @@
 /* Service worker : l'application s'ouvre même sans réseau (sur le terrain).
    Stratégie : réseau d'abord, cache en secours (hors connexion). Services externes : jamais mis en cache ici. */
-const VERSION = 'osd-1.0.10';
+const VERSION = 'osd-1.0.11';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'css/style.css', 'icons/icon.svg', 'icons/icon-192.png',
-  'lib/leaflet/leaflet.js', 'lib/leaflet/leaflet.css', 'lib/geoman/leaflet-geoman.js', 'lib/geoman/leaflet-geoman.css', 'lib/turf.min.js', 'lib/pdf-lib.min.js',
+  'lib/leaflet/leaflet.js', 'lib/leaflet/leaflet.css', 'lib/geoman/leaflet-geoman.js', 'lib/geoman/leaflet-geoman.css', 'lib/turf.min.js', 'lib/pdf-lib.min.js', 'lib/pdfjs/pdf.min.js', 'lib/pdfjs/pdf.worker.min.js',
   'js/config.js', 'js/store.js', 'js/ui.js', 'js/fleet.js', 'js/regulation.js', 'js/documents.js', 'js/cerfa.js', 'js/mission.js', 'js/logbook.js', 'js/guide.js', 'js/about.js', 'js/onboarding.js', 'js/app.js',
   'data/aip-aerodromes.json', 'data/aip-ctr.geojson', 'data/prefectures-drones.json', 'assets/cerfa_15476-04.pdf'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });

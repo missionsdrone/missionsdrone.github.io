@@ -158,3 +158,7 @@ label .hint{font-weight:400;font-size:11px;color:var(--muted)}
 .field-warn{color:var(--warn);font-size:11px;font-weight:400}
 
 input.invalid{border-color:var(--bad);background:var(--bad-soft)}
+.send-box{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:12px;background:var(--bg)}
+.send-step{display:flex;gap:10px;align-items:flex-start}
+.send-step .num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+#dxShareBox:not([hidden]){background:var(--accent-soft);border-radius:8px;padding:10px;display:block}
