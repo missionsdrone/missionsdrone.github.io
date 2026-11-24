@@ -129,6 +129,15 @@ const Cerfa = (() => {
     for (const [k, v] of Object.entries(R)) { try { const g = form.getRadioGroup(k); const opts = g.getOptions(); g.select(typeof v === 'number' ? opts[v] : v); } catch (e) { console.warn('radio', k, e.message); } }
     try { form.getRadioGroup('Groupe51').clear(); } catch (e) { } // site n°2 non utilisé (pré-coché dans le formulaire vierge)
     form.updateFieldAppearances(font);
+    // Signature de l'exploitant (fiche Exploitant) dans la case « Signature : » de la page 4
+    const sig = Store.operator().signatureImg;
+    if (sig && opts.sign !== false) {
+      try {
+        const img = await doc.embedPng(sig); const box = { x: 477, y: 287, w: 95, h: 40 };
+        const k = Math.min(box.w / img.width, box.h / img.height);
+        doc.getPage(3).drawImage(img, { x: box.x, y: box.y + (box.h - img.height * k) / 2, width: img.width * k, height: img.height * k });
+      } catch (e) { console.warn('signature', e); }
+    }
     if (opts.flatten) form.flatten(); // champs figés : indispensable pour fusionner dans un seul PDF
     return new Blob([await doc.save()], { type: 'application/pdf' });
   }
@@ -330,6 +339,7 @@ const Cerfa = (() => {
       À adresser à <b>${esc(pref.name || 'la préfecture du département')}</b>${nt ? ` – ${nt.ok ? `préavis OK, envoi au plus tard le <b>${UI.fmtDate(nt.latest)}</b>` : `<b>préavis de 10 jours ouvrables non respecté</b> (${nt.full} j.) : motif obligatoire, vol soumis à l'accord de la préfecture`}` : ''}.</div>
       <h3>1. Compléments pour le formulaire</h3><form id="dxf"><div class="fields">${UI.formFields(FIELDS, m)}</div></form>
       <h3>2. Champs obligatoires</h3><div id="dxMissing"></div>
+      <p class="legend">${Store.operator().signatureImg ? '✍️ Votre signature sera apposée automatiquement sur le Cerfa.' : '✍️ Pas encore de signature : <a href="#/settings" onclick="UI.closeModal()">ajoutez-la dans la fiche Exploitant</a> pour qu\'elle soit apposée automatiquement (sinon, imprimez et signez à la main).'}</p>
       <h3>3. Pièces justificatives (notice 52053#04 §7)</h3><div id="dxPieces"></div>
       <h3>4. Mail à la préfecture</h3>
       <div class="fields" style="display:grid;gap:10px"><label>Destinataire${pref.email ? ` <span class="legend">(adresse « drones » – source : ${esc(pref.emailSource || 'préfecture')} – vérifiez avant envoi)</span>` : ''}<input id="dxTo" value="${esc(pref.email || '')}" placeholder="Adresse « drones » de la préfecture"></label>

@@ -262,11 +262,52 @@ const Fleet = (() => {
       </tbody></table></div></div>`);
   }
 
+  /* ---------- Signature : dessin ou image, fond rendu transparent ---------- */
+  function signaturePad(op) {
+    const cv = UI.$('#sigPad'), g = cv.getContext('2d'); let drawing = false, dirty = false, last = null;
+    const show = (src) => { const im = new Image(); im.onload = () => { g.clearRect(0, 0, cv.width, cv.height); const k = Math.min(cv.width / im.width, cv.height / im.height) * 0.9; g.drawImage(im, (cv.width - im.width * k) / 2, (cv.height - im.height * k) / 2, im.width * k, im.height * k); UI.$('#sigHint').hidden = true; }; im.src = src; };
+    if (op.signatureImg) show(op.signatureImg);
+    const pos = (e) => { const r = cv.getBoundingClientRect(); const t = e.touches ? e.touches[0] : e; return [(t.clientX - r.left) * cv.width / r.width, (t.clientY - r.top) * cv.height / r.height]; };
+    const start = (e) => { e.preventDefault(); drawing = true; last = pos(e); UI.$('#sigHint').hidden = true; };
+    const move = (e) => { if (!drawing) return; e.preventDefault(); const p = pos(e); g.strokeStyle = '#0b1f4d'; g.lineWidth = 3.2; g.lineCap = g.lineJoin = 'round'; g.beginPath(); g.moveTo(...last); g.lineTo(...p); g.stroke(); last = p; dirty = true; };
+    const end = () => { drawing = false; };
+    cv.addEventListener('mousedown', start); cv.addEventListener('mousemove', move); window.addEventListener('mouseup', end);
+    cv.addEventListener('touchstart', start, { passive: false }); cv.addEventListener('touchmove', move, { passive: false }); cv.addEventListener('touchend', end);
+    UI.$('#sigClear').onclick = () => { g.clearRect(0, 0, cv.width, cv.height); dirty = false; UI.$('#sigHint').hidden = false; };
+    // Image importée : fond clair rendu transparent, encre assombrie, recadrage
+    UI.$('#sigFile').onchange = async (e) => {
+      const f = e.target.files[0]; if (!f) return;
+      const bmp = await createImageBitmap(f); const k = Math.min(1, 1200 / bmp.width);
+      const c = document.createElement('canvas'); c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+      const x = c.getContext('2d'); x.drawImage(bmp, 0, 0, c.width, c.height);
+      const im = x.getImageData(0, 0, c.width, c.height), d = im.data;
+      for (let i = 0; i < d.length; i += 4) { const l = 0.3 * d[i] + 0.59 * d[i + 1] + 0.11 * d[i + 2]; if (l > 170) d[i + 3] = 0; else { d[i] = 11; d[i + 1] = 31; d[i + 2] = 77; d[i + 3] = Math.min(255, (170 - l) * 3); } }
+      x.putImageData(im, 0, 0); show(c.toDataURL('image/png')); dirty = true;
+    };
+    UI.$('#sigSave').onclick = () => {
+      if (!dirty && !op.signatureImg) return UI.toast('Signez d\'abord dans le cadre');
+      Store.setOperator(Object.assign({}, Store.operator(), { signatureImg: trimCanvas(cv) })); UI.toast('Signature enregistrée'); App.route();
+    };
+    const del = UI.$('#sigDel'); if (del) del.onclick = () => { const o = Store.operator(); delete o.signatureImg; Store.setOperator(o); UI.toast('Signature supprimée'); App.route(); };
+  }
+  // Recadre la signature au plus juste (PNG transparent)
+  function trimCanvas(cv) {
+    const g = cv.getContext('2d'), d = g.getImageData(0, 0, cv.width, cv.height).data; let x0 = cv.width, y0 = cv.height, x1 = 0, y1 = 0;
+    for (let y = 0; y < cv.height; y++) for (let x = 0; x < cv.width; x++) if (d[(y * cv.width + x) * 4 + 3] > 20) { if (x < x0) x0 = x; if (y < y0) y0 = y; if (x > x1) x1 = x; if (y > y1) y1 = y; }
+    if (x1 <= x0) return cv.toDataURL('image/png');
+    const w = x1 - x0 + 8, h = y1 - y0 + 8, c = document.createElement('canvas'); c.width = w; c.height = h;
+    c.getContext('2d').drawImage(cv, x0 - 4, y0 - 4, w, h, 0, 0, w, h); return c.toDataURL('image/png');
+  }
+
   function settings() {
     const op = Store.operator();
     UI.view().innerHTML = `<h1>Exploitant</h1><p class="sub">Ces informations servent à préremplir les formulaires et courriers.</p>
       <div class="card"><form id="opf"><div class="fields">${UI.formFields(OPERATOR_FIELDS, op)}</div>
       <div class="row" style="margin-top:16px"><button class="btn primary">Enregistrer</button></div></form></div>
+      <div class="card"><h2>✍️ Signature pour le Cerfa</h2>
+        <p class="legend">Signez dans le cadre avec la souris, le pavé tactile ou le doigt, ou importez une photo de votre signature (sur papier blanc). Elle sera apposée automatiquement en bas du Cerfa 15476*04.</p>
+        <div class="sig-wrap"><canvas id="sigPad" width="600" height="200"></canvas><span class="sig-hint" id="sigHint">Signez ici</span></div>
+        <div class="row" style="margin-top:8px"><button type="button" class="btn sm" id="sigClear">Effacer</button><label class="btn sm">📷 Importer une image<input type="file" id="sigFile" accept="image/*" hidden></label><button type="button" class="btn sm primary" id="sigSave">Enregistrer la signature</button><span class="legend" id="sigState">${op.signatureImg ? '✅ Signature enregistrée' : 'Aucune signature enregistrée'}</span>${op.signatureImg ? '<button type="button" class="btn sm danger" id="sigDel">Supprimer</button>' : ''}</div></div>
       <div class="card"><h2>Sauvegarde</h2><p class="legend">Toutes les données sont stockées dans ce navigateur. Exportez-les régulièrement (la sauvegarde inclut les documents joints).</p>
       <div class="row"><button class="btn" id="exp">⬇ Exporter (JSON)</button><label class="btn">⬆ Importer<input type="file" id="imp" accept=".json" hidden></label></div></div>`;
     const opf = UI.$('#opf');
@@ -277,7 +318,9 @@ const Fleet = (() => {
       UI.$('#fromPilot').onclick = () => { fill(opf, operatorFromPilot(Store.get('pilots', UI.$('#pPick').value))); UI.toast('Informations reprises dans « Dirigeant »'); };
     }
     // Valeurs reprises automatiquement si vides : adresse, e-mail, portable du dirigeant ; signature
-    opf.onsubmit = (e) => { e.preventDefault(); Store.setOperator(UI.readForm(e.target, OPERATOR_FIELDS)); UI.toast('Exploitant enregistré'); };
+    // On conserve les données hors formulaire (signature…)
+    opf.onsubmit = (e) => { e.preventDefault(); Store.setOperator(Object.assign({}, Store.operator(), UI.readForm(e.target, OPERATOR_FIELDS))); UI.toast('Exploitant enregistré'); };
+    signaturePad(op);
     UI.$('#exp').onclick = async () => { UI.toast('Préparation de la sauvegarde…'); UI.download(`sauvegarde-drone-${new Date().toISOString().slice(0, 10)}.json`, await Store.exportFull()); try { localStorage.setItem('osd-last-backup', new Date().toISOString()); } catch (e) { } };
     UI.$('#imp').onchange = async (e) => {
       const f = e.target.files[0]; if (!f) return;

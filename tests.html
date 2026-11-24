@@ -106,6 +106,13 @@
   t('PDF : sous-catégorie A1 cochée', f.getCheckBox('Souscatégorie A1').isChecked());
   t('PDF : « en agglomération » coché', f.getCheckBox('Site n 1').isChecked());
   t('PDF : masse en kg (0,5)', f.getTextField('Texte64').getText() === '0,5');
+  // Signature apposée sur le Cerfa
+  const sc = document.createElement('canvas'); sc.width = 200; sc.height = 60; const sg = sc.getContext('2d'); sg.strokeStyle = '#0b1f4d'; sg.lineWidth = 3; sg.beginPath(); sg.moveTo(10, 40); sg.bezierCurveTo(60, 0, 120, 60, 190, 20); sg.stroke();
+  Store.setOperator(Object.assign({}, Store.operator(), { signatureImg: sc.toDataURL('image/png') }));
+  const withSig = await Cerfa.fillPdf(m, ctx), noSig = await Cerfa.fillPdf(m, ctx, { sign: false });
+  t('Cerfa : signature apposée (PDF contient l\'image)', withSig.size > noSig.size + 500, withSig.size + ' vs ' + noSig.size);
+  const flat = await PDFLib.PDFDocument.load(await (await Cerfa.fillPdf(m, ctx, { flatten: true })).arrayBuffer());
+  t('Cerfa aplati pour le dossier unique (plus de champs modifiables)', flat.getForm().getFields().length === 0);
   localStorage.removeItem('osd-tests');
 
   document.getElementById('sum').textContent = ko ? `❌ ${ko} échec(s), ${ok} réussite(s)` : `✅ ${ok} tests réussis`;
