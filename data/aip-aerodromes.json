@@ -1,5 +1,5 @@
 {
-"airac": "2026-10-29",
+"airac": "2026-11-26",
 "source": "SIA – eAIP France (licence ouverte)",
 "aerodromes": {
 "LFAC": {
@@ -286,8 +286,7 @@
 "name": "MONT DE MARSAN",
 "admin": "MINISTERE DES ARMEES (FAF)",
 "emails": [
-"ba118-ops-esca-secops.contact.fct@intradef.gouv.fr",
-"ba118.esca-bia.fct@intradef.gouv.fr"
+"ba118-ops-esca-secops.contact.fct@intradef.gouv.fr"
 ],
 "bestEmail": "ba118-ops-esca-secops.contact.fct@intradef.gouv.fr",
 "phones": [
@@ -1182,8 +1181,7 @@
 ],
 "bestEmail": "operations@valenceaeroport.fr",
 "phones": [
-"04 75 85 26 26",
-"04 75 85 27 23"
+"04 75 85 26 26"
 ],
 "airspaces": [
 "RMZ VALENCE"
@@ -1290,16 +1288,18 @@
 "name": "LE LUC LE CANNET",
 "admin": "MINISTERE DES ARMEES (ALAT)",
 "emails": [
-"be-2rhc-operations.resp.fct@intradef.gouv.fr",
-"be-2rhc-ops-drones.resp.fct@intradef.gouv.fr",
 "begl-bia-chef.fct@intradef.gouv.fr",
 "begl-operations.resp.fct@intradef.gouv.fr",
 "begl-ops-drones.resp.fct@intradef.gouv.fr",
-"begl.chef-cont-aerodrome.fct@intradef.gouv.fr",
-"ealat-le-luc.bia-chef.fct@intradef.gouv.fr",
-"ealat-le-luc.cla-chef.fct@intradef.gouv.fr"
+"begl.chef-cont-aerodrome.fct@intradef.gouv.fr"
 ],
 "bestEmail": "be-2rhc-ops-drones.resp.fct@intradef.gouv.fr",
+"otherEmails": [
+"be-2rhc-operations.resp.fct@intradef.gouv.fr",
+"be-2rhc-ops-drones.resp.fct@intradef.gouv.fr",
+"begl-operations.resp.fct@intradef.gouv.frbe-2rhc-operations.resp.fct",
+"begl-ops-drones.resp.fct@intradef.gouv"
+],
 "phones": [
 "04 98 11 72 44",
 "04 98 11 73 55",
@@ -1309,8 +1309,8 @@
 "military": true,
 "heliport": false,
 "drone": [
-"il opérations (PPR) : be-2rhc-operations.resp.fct@intradef.gouv.fr Email opérations (PPR) : begl-operations.resp.fct@intradef.gouv.fr Email opérations (vol drone) : be-2rhc-ops-drones.resp.fct@intradef.gouv.fr Email opérations (vol drone) : begl-ops-drones.resp.fct@intradef.gouv.fr Email ATS : ealat-le-luc.cla-chef.fct@intradef.gouv.fr Email ATS : begl.chef-cont-aerodrome.fct@intradef.gouv.fr Email AIS : ealat-le-luc.bia-chef.fct@intradef.gouv.fr Email AIS : begl-bia-chef.fct@intra",
-"be-2rhc-operations.resp.fct@intradef.gouv.fr Email opérations (PPR) : begl-operations.resp.fct@intradef.gouv.fr Email opérations (vol drone) : be-2rhc-ops-drones.resp.fct@intradef.gouv.fr Email opérations (vol drone) : begl-ops-drones.resp.fct@intradef.gouv.fr Email ATS : ealat-le-luc.cla-chef.fct@intradef.gouv.fr Email ATS : begl.chef-cont-aerodrome.fct@intradef.gouv.fr Email AIS : ealat-le-luc.bia-chef.fct@intradef.gouv.fr Email AIS : begl-bia-chef.fct@intradef.gouv.fr DV Hors"
+"e trafic / Type of traffic IFR, VFR 8 Observations / Remarks Email opérations (PPR) : begl-operations.resp.fct@intradef.gouv.fr Email opérations (vol drone) : begl-ops-drones.resp.fct@intradef.gouv.fr Email ATS : begl.chef-cont-aerodrome.fct@intradef.gouv.fr Email AIS : begl-bia-chef.fct@intradef.gouv.fr DV Hors ATS : HIV/WIN : 1600/0700 ; ETE/SUM : 1500/0600 / Flight director outside SKED : 06.14.63.62.69 CDT CLA : 04.98.11.74.51 (ligne TPH enregistrée / recorded TPH line) AD 2 L",
+"f traffic IFR, VFR 8 Observations / Remarks Email opérations (PPR) : begl-operations.resp.fct@intradef.gouv.fr Email opérations (vol drone) : begl-ops-drones.resp.fct@intradef.gouv.fr Email ATS : begl.chef-cont-aerodrome.fct@intradef.gouv.fr Email AIS : begl-bia-chef.fct@intradef.gouv.fr DV Hors ATS : HIV/WIN : 1600/0700 ; ETE/SUM : 1500/0600 / Flight director outside SKED : 06.14.63.62.69 CDT CLA : 04.98.11.74.51 (ligne TPH enregistrée / recorded TPH line) AD 2 LFMC.AD 2.3 Horai"
 ]
 },
 "LFMD": {
@@ -2671,7 +2671,7 @@
 "military": true,
 "heliport": false,
 "drone": [
-"D 2 LFTH.AD 2.23 Renseignements supplémentaires Additional information - Vols d’ACFT télépilotés non habités dans les CTR et CTA (AEM NR 9525) Vols de drones dans la CTR et CTA et activité de parachutage. Information connue des services ATS. - UAV flights in CTR and CTA (AEM NR 9525) and airdropping activity. Information given by ATS. AERODROMES AERODROMES L'aérodrome d'Hyères-le-Palyvestre est un terrain mixte ou l’activité militaire est prioritaire. L'aérodrome de Cuers"
+"culated considering mean wind) : -25kts on dry RWY -20kts on wet RWY AD 2 LFTH.AD 2.23 Renseignements supplémentaires Additional information - Vols de drones dans la CTR et CTA et activité de parachutage. Information connue des services ATS. - UAV flights in CTR and CTA and airdropping activity. Information given by ATS. AERODROMES AERODROMES L'aérodrome d'Hyères-le-Palyvestre est un terrain mixte ou l’activité militaire est prioritaire. L'aérodrome de Cuers-Pierrefeu est situ"
 ]
 },
 "LFTW": {
